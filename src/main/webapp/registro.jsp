@@ -7,6 +7,8 @@
 <title>Registro Suscriptor</title>
 </head>
 <body>
+	<h2>Nueva Suscripción</h2>
+	<a href="registro-centro.jsp">Soy Centro Educativo</a>
 	<form action="registro" method="post" class="">
 		<input type="text" name="nombre" placeholder="Nombre">
 		<input type="text" name="usuario" placeholder="Nombre de Usuario">

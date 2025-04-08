@@ -1,15 +1,39 @@
 package com.asej.model;
 
+import java.time.LocalDate;
+
 public class Centro extends Suscriptor {
 
 	private int id_centro;
-	private String nombre, localidad;
+	private String nombre_centro, localidad;
 	private int etapas_educativas, num_alumnado;
 	
 	public Centro(int id_centro, String nombre, String localidad, int etapas_educativas, int num_alumnado) {
 		super();
 		this.id_centro = id_centro;
-		this.nombre = nombre;
+		this.nombre_centro = nombre;
+		this.localidad = localidad;
+		this.etapas_educativas = etapas_educativas;
+		this.num_alumnado = num_alumnado;
+	}
+
+
+	public Centro(String nombre, String usuario, String contrasena, String email,
+			int id_centro, String nombre_centro, String localidad, int etapas_educativas,
+			int num_alumnado) {
+		super(nombre, usuario, contrasena, email);
+		this.id_centro = id_centro;
+		this.nombre_centro = nombre_centro;
+		this.localidad = localidad;
+		this.etapas_educativas = etapas_educativas;
+		this.num_alumnado = num_alumnado;
+	}
+
+	public Centro(String nombre, String usuario, String contrasena, String email,
+			 String nombre_centro, String localidad, int etapas_educativas,
+			int num_alumnado) {
+		super(nombre, usuario, contrasena, email); 
+		this.nombre_centro = nombre_centro;
 		this.localidad = localidad;
 		this.etapas_educativas = etapas_educativas;
 		this.num_alumnado = num_alumnado;
@@ -23,12 +47,12 @@ public class Centro extends Suscriptor {
 		this.id_centro = id_centro;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombre_centro() {
+		return nombre_centro;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre_centro(String nombre) {
+		this.nombre_centro = nombre;
 	}
 
 	public String getLocalidad() {

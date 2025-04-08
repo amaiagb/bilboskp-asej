@@ -7,10 +7,7 @@ public class Suscriptor {
 
 	private int id;
 	private String nombre, usuario, contrasena, email;
-	private int num_cupones;
 	private LocalDate fecha_alta;
-	
-	
 	
 	public Suscriptor() {
 		super();
@@ -30,7 +27,7 @@ public class Suscriptor {
 		this.email = email;
 	}
 
-	public Suscriptor(int id, String nombre, String usuario, String contrasena, String email, int num_cupones,
+	public Suscriptor(int id, String nombre, String usuario, String contrasena, String email, 
 			LocalDate fecha_alta) {
 		super();
 		this.id = id;
@@ -38,7 +35,6 @@ public class Suscriptor {
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.email = email;
-		this.num_cupones = num_cupones;
 		this.fecha_alta = fecha_alta;
 	}
 	
@@ -72,12 +68,7 @@ public class Suscriptor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getNum_cupones() {
-		return num_cupones;
-	}
-	public void setNum_cupones(int num_cupones) {
-		this.num_cupones = num_cupones;
-	}
+ 
 	public LocalDate getFecha_alta() {
 		return fecha_alta;
 	}
@@ -88,7 +79,7 @@ public class Suscriptor {
 	@Override
 	public String toString() {
 		return "Suscriptor [id=" + id + ", nombre=" + nombre + ", usuario=" + usuario + ", contrasena=" + contrasena
-				+ ", email=" + email + ", num_cupones=" + num_cupones + ", fecha_alta=" + fecha_alta + "]";
+				+ ", email=" + email + ", num_cupones=" +  ", fecha_alta=" + fecha_alta + "]";
 	}
 	
 	

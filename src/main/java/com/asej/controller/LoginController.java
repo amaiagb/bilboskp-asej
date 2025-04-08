@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
 			System.out.println(request.getSession().getAttribute("suscriptor"));
 			request.getRequestDispatcher("private/index.jsp").forward(request, response);
 		} else {
-			response.sendRedirect("login.jsp&error=1");
+			response.sendRedirect("login.jsp?error=1");
 		}
 		
 	}
