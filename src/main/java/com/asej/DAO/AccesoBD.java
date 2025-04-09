@@ -15,7 +15,7 @@ public class AccesoBD {
 	public static Connection getConnection() {
 		Connection con = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 		}catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
