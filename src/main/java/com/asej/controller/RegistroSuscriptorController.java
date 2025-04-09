@@ -33,15 +33,17 @@ public class RegistroSuscriptorController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//1. Recoger datos del formulario
 		String nombre = request.getParameter("nombre");
 		String usuario = request.getParameter("usuario");
 		String contrasena = request.getParameter("contrasena");
 		String email = request.getParameter("email");
 		
+		//2. Crear instancia
 		Suscriptor nuevoSuscriptor = new Suscriptor(nombre, usuario, contrasena, email);
 		nuevoSuscriptor.setFecha_alta(LocalDate.now());
 		
-		// Comprobar si hay un suscriptor en la BD con ese usuario
+		//3. Comprobar si hay un suscriptor en la BD con ese usuario
 		/*
 		if(suscriptorService.getSuscriptorByUsuario(usuario) != null) {
 			
@@ -49,11 +51,10 @@ public class RegistroSuscriptorController extends HttpServlet {
 		}
 		*/
 		
-		if(suscriptorService.addSuscriptor(nuevoSuscriptor)) {
+		//4. Insertar en la BD
+		if(suscriptorService.addSuscriptor(nuevoSuscriptor) > 0) {
 			
-			System.out.println("usuario en la base de datos");
 			request.getSession().setAttribute("suscriptor", nuevoSuscriptor);
-			System.out.println(request.getSession().getAttribute("suscriptor"));
 			request.getRequestDispatcher("private/index.jsp").forward(request, response);
 			
 		} else {

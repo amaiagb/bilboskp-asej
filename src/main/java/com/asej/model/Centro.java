@@ -7,6 +7,7 @@ public class Centro extends Suscriptor {
 	private int id_centro;
 	private String nombre_centro, localidad;
 	private int etapas_educativas, num_alumnado;
+	private String estado; //pendiente, activo
 	
 	public Centro(int id_centro, String nombre, String localidad, int etapas_educativas, int num_alumnado) {
 		super();
@@ -77,6 +78,16 @@ public class Centro extends Suscriptor {
 
 	public void setNum_alumnado(int num_alumnado) {
 		this.num_alumnado = num_alumnado;
+	}
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 	

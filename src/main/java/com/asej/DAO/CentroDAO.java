@@ -20,12 +20,9 @@ public class CentroDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		int id_suscriptor = suscriptorDAO.addSuscriptor(nuevoCentro);
-		System.out.println(id_suscriptor);
-		
-		if(id_suscriptor > 0 ) {
+		if( nuevoCentro.getId() > 0 ) {
 			
-			String sql = "INSERT INTO centro_educativo (nombre, localidad, etapas_educativas, num_alumnado, id_suscriptor) VALUES (?,?,?,?,?);";		
+			String sql = "INSERT INTO centro_educativo (nombre_centro, localidad, etapas_educativas, num_alumnado, id_suscriptor, estado) VALUES (?,?,?,?,?, ?);";		
 			
 			try {
 				ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -33,7 +30,8 @@ public class CentroDAO {
 				ps.setString(2, nuevoCentro.getLocalidad());
 				ps.setInt(3, nuevoCentro.getEtapas_educativas());
 				ps.setInt(4, nuevoCentro.getNum_alumnado());
-				ps.setInt(5, id_suscriptor);
+				ps.setInt(5, nuevoCentro.getId());
+				ps.setString(6, "pendiente");
 				
 				if(ps.executeUpdate() > 0) {
 					return true;
@@ -47,12 +45,38 @@ public class CentroDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 		}
 		
-		
-		
 		return false;
+	}
+
+	public Centro getCentroByName(String nombre_centro) {
+		 
+		Centro c = null;
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT nombre_centro, localidad, etapas_educativas, num_alumnado, id_suscriptor, estado FROM centro_educativo WHERE nombre_centro=?;";		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nombre_centro);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				c = new Centro(rs.getInt("id_centro"), rs.getString("nombre_centro"), rs.getString("localidad"), rs.getInt("etapas_educativas"), rs.getInt("num_alumnado"));
+				c.setId(rs.getInt("id_suscriptor"));
+				c.setEstado(rs.getString("estado"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return c;
 	}
 
 }

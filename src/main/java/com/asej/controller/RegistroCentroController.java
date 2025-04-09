@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.asej.model.Centro;
-import com.asej.model.Suscriptor;
 import com.asej.service.CentroService;
 import com.asej.service.SuscriptorService;
 
 @WebServlet(name = "registroCentro", urlPatterns = { "/registroCentro" })
 public class RegistroCentroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	CentroService centroService;   
+	CentroService centroService; 
+	SuscriptorService suscriptorService;
 	
     public RegistroCentroController() {
         super();
@@ -26,6 +26,7 @@ public class RegistroCentroController extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		centroService = new CentroService();
+		suscriptorService = new SuscriptorService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,30 +35,46 @@ public class RegistroCentroController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//1. Recoger datos del formulario
+		
 		String nombre = request.getParameter("nombre");
 		String usuario = request.getParameter("usuario");
 		String contrasena = request.getParameter("contrasena");
 		String email = request.getParameter("email");
-
 		LocalDate fecha_alta =LocalDate.now();
-		
 		String nombre_centro = request.getParameter("nombre_centro");
 		String localidad = request.getParameter("localidad");
 		int etapas_educativas = Integer.valueOf(request.getParameter("etapas_educativas"));
 		int num_alumnado = Integer.valueOf(request.getParameter("num_alumnado"));
 		
+		//2. Crear instancia de Centro 
+		
 		Centro nuevoCentro = new Centro(nombre, usuario, contrasena, email, nombre_centro, localidad, etapas_educativas, num_alumnado);
 		nuevoCentro.setFecha_alta(fecha_alta);
 		
+		//3. Comprobar que el suscriptor ni el centro está en la BD
+		if(suscriptorService.getSuscriptorByUsuario(usuario) != null & centroService.getCentroByName(nombre_centro) != null) {
+			
+			//3.1 ERROR -> Redirigir ?error=1 ya existe en la BD
+			
+		}
+		
+		//4. Insertar nuevoSuscriptor (Persona de contacto del centro) en tabla suscriptores y devolver su id
+		
+		int id_suscriptor = suscriptorService.addSuscriptor(nuevoCentro);
+		System.out.println(id_suscriptor);
+		nuevoCentro.setId(id_suscriptor);
+		
+		//5. Insertar nuevoCentro en tabla centro
+		
 		if(centroService.addCentro(nuevoCentro)) {
 			
-			System.out.println("centro en la base de datos");
+			//6. Inserción correcta -> Redirigir a index
 			request.getSession().setAttribute("suscriptor", nuevoCentro);
-			System.out.println(request.getSession().getAttribute("suscriptor"));
 			request.getRequestDispatcher("private/index.jsp").forward(request, response);
 			
 		} else {
-			
+			//7. Inserción incorrecta -> Borrar Suscriptor y Redirigir a registro?error=1
 			
 			
 		}

@@ -44,6 +44,70 @@ public class SuscriptorDAO {
 		
 		return s;
 	}
+	
+	public Suscriptor getSuscriptorById(int id) {
+		
+		Suscriptor s = null;
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT id_suscriptor, nombre, usuario, contrasena, email, fecha_alta FROM suscriptor WHERE id=?;";		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				s = new Suscriptor();
+				s.setId(rs.getInt("id_suscriptor"));
+				s.setNombre(rs.getString("nombre"));
+				s.setUsuario(rs.getString("usuario"));
+				s.setContrasena(rs.getString("contrasena"));
+				s.setEmail(rs.getString("email"));
+				s.setFecha_alta(rs.getDate("fecha_alta").toLocalDate());
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return s;
+	}
+	
+	public Suscriptor getSuscriptorByUsuario(String usuario) {
+		
+		Suscriptor s = null;
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT id_suscriptor, nombre, usuario, contrasena, email, fecha_alta FROM suscriptor WHERE usuario=?;";		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, usuario);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				s = new Suscriptor();
+				s.setId(rs.getInt("id_suscriptor"));
+				s.setNombre(rs.getString("nombre"));
+				s.setUsuario(rs.getString("usuario"));
+				s.setContrasena(rs.getString("contrasena"));
+				s.setEmail(rs.getString("email"));
+				s.setFecha_alta(rs.getDate("fecha_alta").toLocalDate());
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return s;
+	}
 
 	public int addSuscriptor(Suscriptor nuevoSuscriptor) {
 

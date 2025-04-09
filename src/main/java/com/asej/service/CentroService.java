@@ -13,5 +13,10 @@ public class CentroService {
 		return centroDAO.addCentro(nuevoCentro);
 	}
 
+	public Centro getCentroByName(String nombre_centro) {
+		
+ 		return centroDAO.getCentroByName(nombre_centro);
+	}
+
 
 }

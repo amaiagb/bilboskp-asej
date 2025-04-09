@@ -12,9 +12,14 @@ public class SuscriptorService {
 		return suscriptorDAO.login(suscriptor);
 	}
 
-	public boolean addSuscriptor(Suscriptor nuevoSuscriptor) {
+	public int addSuscriptor(Suscriptor nuevoSuscriptor) {
 		
 		return suscriptorDAO.addSuscriptor(nuevoSuscriptor);
+	}
+
+	public Suscriptor getSuscriptorByUsuario(String usuario) {
+		 
+		return suscriptorDAO.getSuscriptorByUsuario(usuario);
 	}
 
 }
