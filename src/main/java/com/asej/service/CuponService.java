@@ -18,7 +18,7 @@ private CuponDAO cuponDAO;
 		return cuponDAO.getCupones(usuario);
 	}
 
-	public boolean createCupones(int numeroCupones, String nombreRol) {
+	public List<Integer> createCupones(int numeroCupones, String nombreRol) {
 		return cuponDAO.createCupones(numeroCupones, nombreRol);
 	}
 	
@@ -26,8 +26,8 @@ private CuponDAO cuponDAO;
 		return cuponDAO.returnCupon(cupon);
 	}
 	
-	public boolean actualizarHistorialCupones(int numeroCupones, int id_suscriptor, int id_cupon) {
-		return cuponDAO.actualizarHistorialCupones(numeroCupones, id_suscriptor, id_cupon);
+	public boolean actualizarHistorialCupones(int id_suscriptor, int id_cupon) {
+		return cuponDAO.actualizarHistorialCupones(id_suscriptor, id_cupon);
 	}
 	
 	

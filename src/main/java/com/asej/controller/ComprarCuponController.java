@@ -1,6 +1,7 @@
 package com.asej.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,13 @@ public class ComprarCuponController extends HttpServlet{
 	
 	CuponService cuponService;
 	
+	@Override
+	public void init() throws ServletException {
+		
+		this.cuponService = new CuponService();
+		
+	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -24,18 +32,32 @@ public class ComprarCuponController extends HttpServlet{
         
         String nombreRol = request.getParameter("rol");
         
-        if (cuponService.createCupones(numeroCupones, nombreRol)) {
+        //Aqui hay que sacar el id_suscriptor de la información de la sesión.
+        int id_suscriptor = Integer.parseInt(request.getParameter("id_suscriptor"));
+        
+        List<Integer> id_cupones = cuponService.createCupones(numeroCupones, nombreRol);
         	
-	        	if (cuponService.actualizarHistorialCupones(numeroCupones, numeroCupones, numeroCupones)) {
-	        		
-	        		request.setAttribute("numeroCupones", numeroCupones);
-	        		request.getRequestDispatcher("compraConfirmada.jsp").forward(request, response);
-	        	}
+        	if (!id_cupones.isEmpty()) {
+        		
+        		boolean historialActualizado = true; //Inicializamos a true pero si "actualizarHistorialCupones" es false lo cambiamos a false
+        		
+        		for (int id_cupon : id_cupones){
+        			
+        		
+		        	if (cuponService.actualizarHistorialCupones(id_suscriptor, id_cupon)) {
+		        		
+		        		request.setAttribute("numeroCupones", numeroCupones);
+		        		request.getRequestDispatcher("private/compraConfirmada.jsp").forward(request, response);
+		        	} else {
+		        		historialActualizado = false;
+		                break;
+		        	}
+        		}
         	
-        } else {
+        	} else {
             
             response.sendRedirect("error.jsp");
-        }
+        	}	
     }
 	
 }

@@ -40,11 +40,13 @@
     <form action="comprarCupon" method="post">
         <label for="numeroCupones">Selecciona el número de cupones a comprar:</label><br>
         <input type="number" id="numeroCupones" name="numeroCupones" min="1" value="1" required><br><br>
-        <label for="rol">Selecciona el rol:</label><br>
+        <label for="rol">Selecciona el rol: (Implementarlo en sesión)</label><br>
         <select id="rol" name="rol" required>
             <option value="suscriptor">Suscriptor</option>
             <option value="centro">Centro</option>
         </select><br><br>
+        <label for="id_suscriptor">Id del suscriptor: (Implementarlo en sesión):</label><br>
+        <input type="number" id="id_suscriptor" name="id_suscriptor" min="1" required><br><br>
         <input type="submit" value="Comprar">
     </form>
 

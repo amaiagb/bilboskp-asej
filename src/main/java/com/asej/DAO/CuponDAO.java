@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,10 +97,13 @@ public class CuponDAO {
 	}
 
 	
-	public boolean createCupones(int numeroCupones, String nombreRol) {
+	public List<Integer> createCupones(int numeroCupones, String nombreRol) {
 		
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
+		ResultSet generatedKeys = null;
+		
+		List<Integer> id_cupones = new ArrayList<>();
 		
 
         LocalDate fechaCompra = LocalDate.now();
@@ -115,28 +119,34 @@ public class CuponDAO {
 		
 		
 		
-//		for (int i=0; i<numeroCupones; i++) {
+		
 		
 		try {
-			ps = con.prepareStatement(sql);
+			
+			for (int i=0; i<numeroCupones; i++) {
+			
+			ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setDate(1, sqlFechaCompra);
 			ps.setDate(2, sqlFechaCaducidad);
 			ps.setString(3, "disponible");
-			if (nombreRol == "suscriptor") {
+			if (nombreRol.equalsIgnoreCase("suscriptor")) {
 				ps.setFloat(4, (float)4.95);
 				ps.setString(6, nombreRol);
-			} else if(nombreRol == "centro") {
+			} else if(nombreRol.equalsIgnoreCase("centro")) {
 				ps.setFloat(4, (float)0);
 				ps.setString(6, nombreRol);
 			}
 			ps.setString(5, null);
 			
-			
-			if(ps.executeUpdate() > 0) {
-				return true;
-			}else {
-				return false;
+		
+		        if (ps.executeUpdate() > 0) { // Si el número de filas es mayor que 0
+		            generatedKeys = ps.getGeneratedKeys();
+		            if (generatedKeys.next()) {
+		                int idGenerado=  generatedKeys.getInt(1); // el id_cupon generado
+		                id_cupones.add(idGenerado);
+		            }
+		        }
 			}
 			
 		}catch(SQLException e) {
@@ -144,12 +154,11 @@ public class CuponDAO {
 		}finally {
 			AccesoBD.closeConnection(null, ps, con);
 		}
-//		}
 		
-		return false;
+		return id_cupones;
 	}
 	
-	public boolean actualizarHistorialCupones(int numeroCupones, int id_suscriptor, int id_cupon) {
+	public boolean actualizarHistorialCupones(int id_suscriptor, int id_cupon) {
 		
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
@@ -158,14 +167,12 @@ public class CuponDAO {
 		String sql = "INSERT INTO historial_cupones (id_suscriptor, id_cupon) VALUES (?,?)";
 		
 		
-		for (int i=0; i<numeroCupones; i++) {
 		
 		try {
 			ps = con.prepareStatement(sql);
 			
-//			ps.setInt(1, id_suscriptor);
-//			ps.setInt(2, id_cupon);
-			
+			ps.setInt(1, id_suscriptor);
+			ps.setInt(2, id_cupon);
 			
 			
 			if(ps.executeUpdate() > 0) {
@@ -178,7 +185,6 @@ public class CuponDAO {
 			e.printStackTrace();
 		}finally {
 			AccesoBD.closeConnection(null, ps, con);
-		}
 		}
 		
 		return false;
