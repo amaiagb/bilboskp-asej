@@ -19,13 +19,13 @@
      <aside>
 	<div>
 		<ol>
-			<li><a href="iniciarOrganizar"><button>organizar una partida</button></a></li>
+			<li><a href="iniciarOrganizarPartida"><button>organizar una partida</button></a></li>
 			<li><a href="listaPartidas"><button>Ver partidas</button></a></li>
 			<li><a href="JugarPartida.jsp"><button>jugar partida</button></a></li>
 			<br>
 			<br>
-			<li><a href="JugarPartida.jsp"><button>Crear sala</button></a></li>
-			<li><a href="JugarPartida.jsp"><button>Lista sala</button></a></li>
+			<li><a href="crearSala.jsp"><button>Crear sala</button></a></li>
+			<li><a href="listaSalas"><button>Lista sala</button></a></li>
 			<br>
 			<li><a href="login.jsp"><button>Login Adminisrador</button></a></li>
 			<li><a><button>tombola</button></a></li>
