@@ -49,6 +49,15 @@
         <input type="number" id="id_suscriptor" name="id_suscriptor" min="1" required><br><br>
         <input type="submit" value="Comprar">
     </form>
+    
+    <h1>Listado de Cupones</h1>
+    
+    <form action="listaCupones" method="get">
+        <label for="id_suscriptor">Id del suscriptor: (Implementarlo en sesión):</label><br>
+        <input type="number" id="id_suscriptor" name="id_suscriptor" min="1" required><br><br>
+        <input type="submit" value="Ver Listado de Cupones">
+    </form>
+    
 
 </body>
 </html>

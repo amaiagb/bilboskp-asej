@@ -19,6 +19,6 @@
     %>
     <p>Has comprado <%= numeroCupones %> cupones.</p>
     
-    <a href="index.jsp">Volver a comprar</a>
+    <a href="index.jsp">Volver a index</a>
 </body>
 </html>
