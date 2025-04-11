@@ -14,16 +14,16 @@ private CuponDAO cuponDAO;
 		cuponDAO = new CuponDAO();
 	}
 
-	public List<Cupon> getCupones(String usuario) {
-		return cuponDAO.getCupones(usuario);
+	public List<Cupon> getCupones(int id_suscriptor) {
+		return cuponDAO.getCupones(id_suscriptor);
 	}
 
 	public List<Integer> createCupones(int numeroCupones, String nombreRol) {
 		return cuponDAO.createCupones(numeroCupones, nombreRol);
 	}
 	
-	public boolean returnCupon(Cupon cupon) {
-		return cuponDAO.returnCupon(cupon);
+	public boolean returnCupon(int id_cupon) {
+		return cuponDAO.returnCupon(id_cupon);
 	}
 	
 	public boolean actualizarHistorialCupones(int id_suscriptor, int id_cupon) {

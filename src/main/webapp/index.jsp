@@ -1,5 +1,9 @@
+<%@ include file="/WEB-INF/includes/idioma.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
+
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -30,7 +34,7 @@
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Salas de Escape</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">Reviews</a></li>
   
-                        <li class="nav-item"><a class="nav-link" href="login.jsp">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.jsp">Iniciar Sesiï¿½n</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +44,7 @@
             <div class="container">
                 <div class="masthead-subheading">Las mejores salas de escape virtuales</div>
                 <div class="masthead-heading text-uppercase">Una experiencia inmersiva</div>
-                <a href="login.jsp" class="btn btn-primary btn-xl text-uppercase" type="submit">Iniciar Sesión</a>
+                <a href="login.jsp" class="btn btn-primary btn-xl text-uppercase" type="submit">Iniciar Sesiï¿½n</a>
             </div>
         </header>
        
@@ -532,4 +536,6 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
+
 </html>
+

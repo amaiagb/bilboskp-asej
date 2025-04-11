@@ -27,7 +27,7 @@ public class CuponDAO {
 	
 
 	//Devuelve todos los datos de los cupones de un suscriptor del cual sabemos el nombre de usuario
-	public List<Cupon> getCupones(String usuario) {
+	public List<Cupon> getCupones(int id_suscriptor) {
 		List<Cupon> cupones = new ArrayList<Cupon>();
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
@@ -36,12 +36,12 @@ public class CuponDAO {
 		String sql = "SELECT c.id_cupon, c.fecha_compra, c.fecha_caducidad, c.fecha_devolucion, c.estado, c.tipo, c.precio FROM cupon c "
 				+ "INNER JOIN historial_cupones hc ON c.id_cupon = hc.id_cupon "
 				+ "INNER JOIN suscriptor s ON hc.id_suscriptor = s.id_suscriptor "
-				+ "WHERE s.usuario = ?";
+				+ "WHERE s.id_suscriptor = ?";
 		
 		
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, usuario);
+			ps.setInt(1, id_suscriptor);
 			
 			rs = ps.executeQuery();
 			
@@ -62,7 +62,7 @@ public class CuponDAO {
 	}	
 	
 	//Devuelve el estado de un cupón a devuelto
-	public boolean returnCupon(Cupon cupon) {
+	public boolean returnCupon(int id_cupon) {
 		
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
@@ -78,7 +78,7 @@ public class CuponDAO {
 			ps = con.prepareStatement(sql);
 			
 			ps.setDate(1, sqlFechaDevolucion);
-			ps.setInt(2, cupon.getId_cupon());
+			ps.setInt(2, id_cupon);
 			
 			
 			if(ps.executeUpdate() > 0) {
