@@ -27,6 +27,7 @@ private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Suscriptor s = (Suscriptor) (req.getSession().getAttribute("suscriptor"));
 		int id_suscriptor = s.getId();
+		
 		List<Partida> listaPartidas = partidaService.getPartidasById(id_suscriptor);
 		
 		req.getSession().setAttribute("listaPartidas", listaPartidas);
@@ -36,6 +37,7 @@ private static final long serialVersionUID = 1L;
 //            req.getRequestDispatcher("/private/editarProducto.jsp").forward(req, resp);
 //        } else {
             //req.getRequestDispatcher("listaPartidas.jsp").forward(req, resp);
+		
             resp.sendRedirect("admin/listaPartidas.jsp");
 //        }
         

@@ -30,7 +30,7 @@
                         <li class="nav-item"><a class="nav-link" href="index.html#portfolio">Salas de Escape</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.html#about">Reviews</a></li>
   
-                        <li class="nav-item"><a class="nav-link" href="login.html">Iniciar SesiÃ³n</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -48,10 +48,10 @@
                 <label for="contrasena">Contraseña</label>
                 <input type="password" name="contrasena" required>
             </div>
-            <button type="submit" class="login-btn">Iniciar sesiÃ³n</button>
+            <button type="submit" class="login-btn">Iniciar sesión</button>
             <div class="signup-link">
-                <p class="link">Â¿No tienes cuenta? <a href="registro.jsp">RegÃ­strate</a></p>
-                <p class="link">Â¿Eres un centro? <a href="registro-centro.jsp">RegÃ­strate como centro</a></p>
+                <p class="link">¿No tienes cuenta? <a href="registro.jsp">Regístrate</a></p>
+                <p class="link">¿Eres un centro? <a href="registro-centro.jsp">Regístrate como centro</a></p>
             </div>
         </form>
     </div>

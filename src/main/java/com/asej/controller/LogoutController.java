@@ -77,7 +77,7 @@ public class LogoutController extends HttpServlet {
 			List<Partida> partidas = partidaService.getPartidasById(suscriptorLogin.getId());
 			request.getSession().setAttribute("partidas", partidas);
 			
-			List<Cupon> cupones = cuponService.getCupones(suscriptorLogin.getUsuario());
+			List<Cupon> cupones = cuponService.getCupones(suscriptorLogin.getId());
 			request.getSession().setAttribute("cupones", cupones);
 			
 			//6.Obtener Ultimas partidas jugadas

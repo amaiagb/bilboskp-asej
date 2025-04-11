@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/includes/idioma.jsp" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -132,7 +133,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach items="${ultimasPartidas}" var="partida">
+                                        	<c:forEach items="${sessionScope.ultimasPartidas}" var="partida" varStatus="loop">
 							        			<tr class="foreach">
 	                                                <td>${partida.fecha}</td>
 	                                                <td>${partida.descripcion}</td>
