@@ -21,6 +21,16 @@ public class PartidaService {
 		 
 		return PartidaDAO.getPartidas();
 	}
+	
+	public boolean deletePartida(Partida partida) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.deletePartida(partida);
+	}
+
+	public boolean updatePartida(Partida partida) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.updatePartida(partida);
+	}
 
 	public List<Partida> getPartidasById(int id_suscriptor) {
 		 
@@ -30,6 +40,10 @@ public class PartidaService {
 	public List<Partida> getUltimasPartidasJugadasById(int id) {
 		 
 		return PartidaDAO.getUltimasPartidasJugadasById(id);
+	}
+	public Partida getPartidaById(int id) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.getPartidabyId(id);
 	}
 
 }

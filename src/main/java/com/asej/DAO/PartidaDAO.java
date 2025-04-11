@@ -14,37 +14,6 @@ import com.asej.model.Sala;
 
 public class PartidaDAO {
 
-	public static boolean addPartida(Partida nuevaPartida) {
-		Connection con = AccesoBD.getConnection();
-		PreparedStatement ps = null;
-		
-		String sql = "INSERT INTO partida (fecha, jugadores, descripcion, estado, puntuacion, id_suscriptor, id_sala) VALUES (?,?,?,?,?,?,?)";
-		
-		try {
-			ps = con.prepareStatement(sql);
-			
-		    ps.setTimestamp(1, Timestamp.valueOf(nuevaPartida.getFecha()));			
-			ps.setInt(2, nuevaPartida.getJugadores());
-		    ps.setString(3, nuevaPartida.getDescripcion());
-		    ps.setString(4, "programado");
-		    ps.setInt(5, 0);
-		    ps.setInt(6, 1);
-		    ps.setInt(7, nuevaPartida.getSala().getId_sala());
-			
-		    if(ps.executeUpdate() > 0) {
-				return true;
-			}else {
-				return false;
-			}
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			AccesoBD.closeConnection(null, ps, con);
-		}
-		return false;		
-	}
-
 	public static List<Partida> getPartidas() {
 		List<Partida> productos = new ArrayList<Partida>();
 		Connection con = AccesoBD.getConnection();
@@ -84,6 +53,126 @@ public class PartidaDAO {
 		return productos;
 	}
 	
+	public static boolean addPartida(Partida nuevaPartida) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "INSERT INTO partida (fecha, jugadores, descripcion, estado, puntuacion, id_suscriptor, id_sala) VALUES (?,?,?,?,?,?,?)";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+		    ps.setTimestamp(1, Timestamp.valueOf(nuevaPartida.getFecha()));			
+			ps.setInt(2, nuevaPartida.getJugadores());
+		    ps.setString(3, nuevaPartida.getDescripcion());
+		    ps.setString(4, "programado");
+		    ps.setInt(5, 0);
+		    ps.setInt(6, 1);
+		    ps.setInt(7, nuevaPartida.getSala().getId_sala());
+			
+		    if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		return false;		
+	}
+	
+	public static boolean updatePartida(Partida partida) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "UPDATE partida SET fecha = ?, jugadores = ?, descripcion = ?, id_sala = ?, puntuacion =  ? WHERE id_partida = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+		    ps.setTimestamp(1, Timestamp.valueOf(partida.getFecha()));			
+			ps.setInt(2, partida.getJugadores());
+			ps.setString(3, partida.getDescripcion());
+		    ps.setInt(4, partida.getSala().getId_sala());
+		    ps.setInt(5, 0);
+		    ps.setInt(6, partida.getId_partida());
+
+						
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		return false;
+	}
+
+	public static boolean deletePartida(Partida partida) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM partida WHERE id_partida = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, partida.getId_partida());
+			
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		return false;
+	}
+	
+	public static Partida getPartidabyId(int id) {
+		 Connection con = AccesoBD.getConnection();
+		    PreparedStatement ps = null;
+		    ResultSet rs = null;
+		    Partida partida = null;
+
+		    String sql = "SELECT * FROM partida WHERE id_partida = ?";
+		    try {
+		        ps = con.prepareStatement(sql);
+		        ps.setInt(1, id);
+
+		        rs = ps.executeQuery();
+		        if (rs.next()) {
+		            partida = new Partida();
+		            partida.setId_partida(rs.getInt("id_partida"));
+		            partida.setFecha(rs.getObject("fecha", LocalDateTime.class));
+		            partida.setJugadores(rs.getInt("jugadores"));
+		            partida.setDescripcion(rs.getString("descripcion"));
+
+		            Sala sala = new Sala();
+		            sala.setId_sala(rs.getInt("id_sala"));
+		            partida.setSala(sala);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        AccesoBD.closeConnection(rs, ps, con);
+		    }
+
+		    return partida;
+	}
+	
+	
 	public static List<Partida> getPartidasById(int id) {
 		List<Partida> partidas = new ArrayList<Partida>();
 		Connection con = AccesoBD.getConnection();
@@ -109,7 +198,10 @@ public class PartidaDAO {
 				p.setEstado(rs.getString("estado"));
 				p.setPuntuacion(rs.getInt("puntuacion"));
 				
-				Sala sala = new Sala(rs.getInt("id_sala"), rs.getString("nombre_sala"), rs.getString("tipo"));
+				Sala sala = new Sala();
+				sala.setId_sala(rs.getInt("id_sala"));
+				sala.setNombre(rs.getString("nombre_sala"));
+				sala.setTipo(rs.getString("tipo"));
 				p.setSala(sala);
 				
 				partidas.add(p);
@@ -149,7 +241,11 @@ public class PartidaDAO {
 				p.setEstado(rs.getString("estado"));
 				p.setPuntuacion(rs.getInt("puntuacion"));
 				
-				Sala sala = new Sala(rs.getInt("id_sala"), rs.getString("nombre_sala"), rs.getString("tipo"));
+				Sala sala = new Sala();
+				sala.setId_sala(rs.getInt("id_sala"));
+				sala.setNombre(rs.getString("nombre_sala"));
+				sala.setTipo(rs.getString("tipo"));
+				
 				p.setSala(sala);
 				
 				partidas.add(p);
