@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 
+import com.asej.model.Rol;
 import com.asej.model.Suscriptor;
 
 public class SuscriptorDAO {
@@ -19,7 +19,7 @@ public class SuscriptorDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id_suscriptor, nombre, usuario, contrasena, email, fecha_alta FROM suscriptor WHERE usuario=? AND contrasena=?;";		
+		String sql = "SELECT su.id_suscriptor, su.nombre, su.usuario, su.contrasena, su.email, su.fecha_alta, su.id_rol, r.nombre AS nombre_rol FROM suscriptor su inner join roles r on r.id_rol=su.id_rol WHERE usuario=? AND contrasena=?;";		
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -36,6 +36,9 @@ public class SuscriptorDAO {
 				s.setContrasena(rs.getString("contrasena"));
 				s.setEmail(rs.getString("email"));
 				s.setFecha_alta(rs.getDate("fecha_alta").toLocalDate());
+				Rol rol = new Rol(rs.getInt("id_rol"), rs.getString("nombre_rol"));
+				s.setRol(rol);
+				
 			}
 			
 		} catch (SQLException e) {

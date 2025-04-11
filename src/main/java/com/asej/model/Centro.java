@@ -39,6 +39,17 @@ public class Centro extends Suscriptor {
 		this.etapas_educativas = etapas_educativas;
 		this.num_alumnado = num_alumnado;
 	}
+	
+	public Centro(Suscriptor suscriptor,
+			int id_centro, String nombre_centro, String localidad, int etapas_educativas,
+			int num_alumnado) {
+		super(suscriptor.getNombre(), suscriptor.getUsuario(), suscriptor.getContrasena(), suscriptor.getEmail(), suscriptor.getRol());
+		this.id_centro = id_centro;
+		this.nombre_centro = nombre_centro;
+		this.localidad = localidad;
+		this.etapas_educativas = etapas_educativas;
+		this.num_alumnado = num_alumnado;
+	}
 
 	public int getId_centro() {
 		return id_centro;
@@ -88,6 +99,14 @@ public class Centro extends Suscriptor {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Centro [id_centro=" + id_centro + ", nombre_centro=" + nombre_centro + ", localidad=" + localidad
+				+ ", etapas_educativas=" + etapas_educativas + ", num_alumnado=" + num_alumnado + ", estado=" + estado
+				+ "]";
 	}
 	
 	
