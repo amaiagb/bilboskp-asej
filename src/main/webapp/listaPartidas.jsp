@@ -32,13 +32,14 @@
 					
 					
 					<td>
-						<form action="editarPartida" method="get">
-							<input type="hidden" value="<%= p.getId_partida()%>" name="#">
-							<button type="submit">Editar Partida</button>
+						<form action="cargarEditarPartida" method="post">
+    						<input type="hidden" value="<%= p.getId_partida()%>" name="id_partida">
+    						<button type="submit">Editar Partida</button>
 						</form>
+
 						
-						<form action="eliminarPartida" method="post">
-							<input type="hidden" value="<%= p.getId_partida()%>" name="#">
+						<form action="borrarPartida" method="post">
+							<input type="hidden" value="<%= p.getId_partida()%>" name="partida">
 							<button type="submit">Borrar</button>
 						</form>
 					</td>
@@ -46,7 +47,7 @@
 			<%} %>
 		<%}else{ %>
 			<tr>
-				<td colspan="5">No hay productos</td>
+				<td colspan="5">No hay Partidas</td>
 			</tr>
 		<%} %>
 	</table>

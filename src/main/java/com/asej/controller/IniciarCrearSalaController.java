@@ -10,25 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.asej.model.Sala;
-import com.asej.model.Partida;
 import com.asej.service.SalaService;
-import com.asej.service.PartidaService;
 
-@WebServlet("/iniciarOrganizarPartida")
-public class IniciarOrganizarPartidaController extends HttpServlet{
-	
+@WebServlet("/iniciarCreacionSala")
+public class IniciarCrearSalaController extends HttpServlet{
+	//Enficado para el tipo de la sala, que creo que era para lo del si es centro o no, porpuesto
 	SalaService salaService;
-	PartidaService partidaService;
 	
 	@Override
 	public void init() throws ServletException {
 		salaService = new SalaService();
-		partidaService = new PartidaService();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String partida = request.getParameter("partida");
+		String sala = request.getParameter("sala");
 		
 //		if(usuario != null) {
 //			//quiero obtener el usuario de la BD
@@ -40,7 +36,7 @@ public class IniciarOrganizarPartidaController extends HttpServlet{
 		List<Sala> salas = salaService.getSalas();
 		request.setAttribute("salas", salas);
 		
-		request.getRequestDispatcher("organizarPartida.jsp").forward(request, response);
+		request.getRequestDispatcher("crearSala.jsp").forward(request, response);
 	}
 
 }

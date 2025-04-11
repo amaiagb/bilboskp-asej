@@ -1,5 +1,7 @@
 package com.asej.service;
 
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.asej.DAO.SalaDAO;
@@ -22,11 +24,24 @@ public class SalaService {
 	}
 	
 	public boolean updateSala(Sala sala) {
+		System.out.println("AAASAAA"+ sala.getId_sala());
 		if(sala.getId_sala()!=0){
+			System.out.println("BBBBBBBB");
 			return salaDAO.createOrUpdateSala(sala);
 		}else {
+			System.out.println("CCCCCCCCCC");
 			return false;
 		}
+	}
+
+	public boolean desactivarSala(Sala s) {
+		// TODO Auto-generated method stub
+		return salaDAO.desactivarSala(s);
+	}
+
+	public Sala getSalaById(int id) {
+		// TODO Auto-generated method stub
+		return salaDAO.getSalaById(id);
 	}
 
 }
