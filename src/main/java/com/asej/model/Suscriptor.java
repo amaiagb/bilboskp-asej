@@ -8,6 +8,7 @@ public class Suscriptor {
 	private int id;
 	private String nombre, usuario, contrasena, email;
 	private LocalDate fecha_alta;
+	private Rol rol;
 	
 	public Suscriptor() {
 		super();
@@ -26,6 +27,8 @@ public class Suscriptor {
 		this.contrasena = contrasena;
 		this.email = email;
 	}
+	
+	
 
 	public Suscriptor(int id, String nombre, String usuario, String contrasena, String email, 
 			LocalDate fecha_alta) {
@@ -36,6 +39,15 @@ public class Suscriptor {
 		this.contrasena = contrasena;
 		this.email = email;
 		this.fecha_alta = fecha_alta;
+	}
+	
+	public Suscriptor(String nombre, String usuario, String contrasena, String email, Rol rol) {
+		super();
+		this.nombre = nombre;
+		this.usuario = usuario;
+		this.contrasena = contrasena;
+		this.email = email;
+		this.rol = rol;
 	}
 	
 	public int getId() {
@@ -74,6 +86,14 @@ public class Suscriptor {
 	}
 	public void setFecha_alta(LocalDate fecha_alta) {
 		this.fecha_alta = fecha_alta;
+	}
+	
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	@Override

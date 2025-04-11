@@ -77,7 +77,7 @@ public class OrganizarPartidaController extends HttpServlet {
             Partida nuevaPartida = new Partida(jugadores, fecha, descripcion, sala);
 
             if (partidaService.addPartida(nuevaPartida)) {
-                resp.sendRedirect("index.jsp");
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
                 System.out.println("Partida creada correctamente.");
             } else {
             	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");

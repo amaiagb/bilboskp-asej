@@ -79,4 +79,32 @@ public class CentroDAO {
 		return c;
 	}
 
+	public Centro getCentroBySuscriptor(Suscriptor suscriptorLogin) {
+		Centro c = null;
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT id_centro, nombre_centro, localidad, etapas_educativas, num_alumnado, id_suscriptor, estado FROM centro_educativo WHERE id_suscriptor = ?;";		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, suscriptorLogin.getId());
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				c = new Centro(suscriptorLogin, rs.getInt("id_centro"), rs.getString("nombre_centro"), rs.getString("localidad"), rs.getInt("etapas_educativas"), rs.getInt("num_alumnado"));
+				c.setId(rs.getInt("id_suscriptor"));
+				c.setEstado(rs.getString("estado"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return c;
+	}
+
 }

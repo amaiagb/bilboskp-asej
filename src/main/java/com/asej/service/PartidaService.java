@@ -13,28 +13,23 @@ public class PartidaService {
 	}
 
 	public boolean addPartida(Partida nuevaPartida) {
-		// TODO Auto-generated method stub
+		 
 		return PartidaDAO.addPartida(nuevaPartida);
 	}
 
 	public List<Partida> getPartidas() {
-		// TODO Auto-generated method stub
+		 
 		return PartidaDAO.getPartidas();
 	}
 
-	public boolean deletePartida(Partida partida) {
-		// TODO Auto-generated method stub
-		return PartidaDAO.deletePartida(partida);
+	public List<Partida> getPartidasById(int id_suscriptor) {
+		 
+		return PartidaDAO.getPartidasById(id_suscriptor);
 	}
 
-	public boolean updatePartida(Partida partida) {
-		// TODO Auto-generated method stub
-		return PartidaDAO.updatePartida(partida);
-	}
-
-	public Partida getPartidaById(int id) {
-		// TODO Auto-generated method stub
-		return PartidaDAO.getPartidabyId(id);
+	public List<Partida> getUltimasPartidasJugadasById(int id) {
+		 
+		return PartidaDAO.getUltimasPartidasJugadasById(id);
 	}
 
 }

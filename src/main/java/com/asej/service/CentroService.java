@@ -18,5 +18,9 @@ public class CentroService {
  		return centroDAO.getCentroByName(nombre_centro);
 	}
 
+	public Centro getCentroBySuscriptor(Suscriptor suscriptorLogin) {
+		
+		return centroDAO.getCentroBySuscriptor(suscriptorLogin);
+	}
 
 }

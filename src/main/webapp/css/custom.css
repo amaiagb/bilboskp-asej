@@ -1,0 +1,55 @@
+
+
+#ImagenSchool{
+
+    width: 50%;
+    margin-bottom: 10%;
+
+}
+
+.desc-juego {
+	text-align: left;
+	margin-bottom: 2rem;
+}
+    
+.video2{
+    border-radius: 10px;
+    border: 10px solid #ffffff;
+     width: 500px;
+ }
+
+.left-column{
+    
+    width: 50%;
+   
+}
+
+.right-column{
+  
+    width: 40%;
+    margin-left: 10%;
+    min-width: 320px;
+}
+
+.containerColumnas{
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-section+p {
+    margin-top: 2rem;
+    color: #888;
+}
+
+#registro-centro {
+    align-self: flex-start;
+    margin-top: 10%;
+    margin-bottom: 2rem;
+}
+
+
+
+.h-auto{
+	height: auto;
+}

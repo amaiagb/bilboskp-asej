@@ -14,7 +14,7 @@ import com.asej.model.Partida;
 import com.asej.service.SalaService;
 import com.asej.service.PartidaService;
 
-@WebServlet("/iniciarOrganizarPartida")
+@WebServlet("/iniciarOrganizar")
 public class IniciarOrganizarPartidaController extends HttpServlet{
 	
 	SalaService salaService;
