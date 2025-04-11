@@ -115,7 +115,9 @@
           <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">${suscriptor.rol.id == '3' ? suscriptor.nombre_centro : suscriptor.nombre}</span>
+                  
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">${suscriptor.rol.nombre == 'centro' ? suscriptor.nombre_centro : suscriptor.nombre}</span>
+                   
                   <img class="img-profile rounded-circle"
                       src="img/undraw_profile.svg">
               </a>

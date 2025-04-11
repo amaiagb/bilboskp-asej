@@ -179,8 +179,8 @@ public class PartidaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id_partida, fecha, jugadores, descripcion, estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ?;";
-		
+		String sql = "SELECT id_partida, fecha, jugadores, descripcion, p.estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ?;";
+		//String sql = "SELECT * FROM partida p WHERE p.id_suscriptor = ?;";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
@@ -204,6 +204,7 @@ public class PartidaDAO {
 				sala.setTipo(rs.getString("tipo"));
 				p.setSala(sala);
 				
+				System.out.println("partida: "+p);
 				partidas.add(p);
 			}
 			
@@ -212,7 +213,7 @@ public class PartidaDAO {
 		}finally {
 			AccesoBD.closeConnection(null, ps, con);
 		}
-		
+		System.out.println("DAO partidas: "+partidas);
 		return partidas;
 	}
 
@@ -222,7 +223,7 @@ public class PartidaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id_partida, fecha, jugadores, descripcion, estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ? AND estado = 'terminada' ORDER BY fecha ASC;";
+		String sql = "SELECT id_partida, fecha, jugadores, descripcion, p.estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ? AND p.estado = 'terminada' ORDER BY fecha ASC;";
 		
 		try {
 			ps = con.prepareStatement(sql);
