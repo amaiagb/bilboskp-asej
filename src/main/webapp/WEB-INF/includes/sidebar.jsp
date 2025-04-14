@@ -40,8 +40,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Partida:</h6>
-                        <a class="collapse-item" href="organizarPartida.html">Organizar Partida</a>
-                        <a class="collapse-item" href="../listaPartidas">Lista de Partidas</a>
+                        <a class="collapse-item" href="/bilboskp-asej/iniciarOrganizar">Organizar Partida</a>
+                        <a class="collapse-item" href="/bilboskp-asej/listaPartidas">Lista de Partidas</a>
                         <a class="collapse-item" href="jugarPartida.html">Jugar Partidas</a>
                     </div>
                 </div>

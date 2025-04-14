@@ -57,7 +57,7 @@ public class PartidaDAO {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 		
-		String sql = "INSERT INTO partida (fecha, jugadores, descripcion, estado, puntuacion, id_suscriptor, id_sala) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO partida (fecha, jugadores, descripcion, estado, puntuacion, id_suscriptor, id_sala, codigo) VALUES (?,?,?,?,?,?,?,?)";
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -67,8 +67,9 @@ public class PartidaDAO {
 		    ps.setString(3, nuevaPartida.getDescripcion());
 		    ps.setString(4, "programado");
 		    ps.setInt(5, 0);
-		    ps.setInt(6, 1);
+		    ps.setInt(6, 8);
 		    ps.setInt(7, nuevaPartida.getSala().getId_sala());
+		    ps.setString(8, "aaa");
 			
 		    if(ps.executeUpdate() > 0) {
 				return true;

@@ -46,27 +46,27 @@ public class OrganizarPartidaController extends HttpServlet {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime fecha = LocalDateTime.parse(fechaStr, formatter);
             if (fecha.isBefore(LocalDateTime.now())) {
-                System.out.println("Fecha no válida: la fecha es en el pasado.");
+                System.out.println("Fecha no vï¿½lida: la fecha es en el pasado.");
             	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             int jugadores = Integer.parseInt(jugadoresStr);
             if (jugadores < 1 || jugadores > 99999) {
-                System.out.println("Número de jugadores no válido.");
+                System.out.println("Nï¿½mero de jugadores no vï¿½lido.");
             	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             if (descripcion.length() > 100) {
-                System.out.println("Descripción demasiado larga.");
+                System.out.println("Descripciï¿½n demasiado larga.");
             	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             int idSala = Integer.parseInt(idSalaStr);
             if (idSala <= 0) {
-                System.out.println("ID de sala no válido.");
+                System.out.println("ID de sala no vï¿½lido.");
             	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
@@ -77,7 +77,7 @@ public class OrganizarPartidaController extends HttpServlet {
             Partida nuevaPartida = new Partida(jugadores, fecha, descripcion, sala);
 
             if (partidaService.addPartida(nuevaPartida)) {
-                req.getRequestDispatcher("index.jsp").forward(req, resp);
+        		resp.sendRedirect(req.getContextPath() + "/admin/organizarPartida.jsp");
                 System.out.println("Partida creada correctamente.");
             } else {
             	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");

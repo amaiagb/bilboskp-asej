@@ -1,4 +1,10 @@
-<%@ include file="/WEB-INF/includes/idioma.jsp" %>
+<%@page import="com.asej.model.Sala"%>
+<%@page import="com.asej.model.Suscriptor"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%ArrayList<Sala> salas = (ArrayList<Sala>) request.getSession().getAttribute("salas"); %>
+<%Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor"); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Partidas - BilboSKP</title>
+    <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,7 +25,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/admin/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -30,12 +36,14 @@
 
         <!-- Sidebar -->
         <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
-        <!-- End of Sidebar -->
+        
        
         <div id="content-wrapper" class="d-flex flex-column">
+
            
             <div id="content">
 
+                
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     
@@ -174,57 +182,64 @@
                                 </a>
                             </div>
                         </li>
+
                     </ul>
+
                 </nav>
                 
                 <div class="container-fluid">
+
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Lista de Partidas</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
+                        <h1 class="h3 mb-0 text-gray-800">Organizar Partida</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
                     </div>
+                    <div>
+						<form action="/bilboskp-asej/organizar" method="post">
+							<input type="datetime-local" name="date" id="fecha" placeholder="Fecha y Hora" required>
+							<input type="number" name="jugadores" id="cantidad" min="1" max="999" value="1" placeholder="NÂº Jugadores" required>
+							<input type="text" name="descripcion" placeholder="DescripciÃ³n" maxlength="100">
+							<select id="sala" name="sala">
+							<% for(Sala sala : salas){ %>
+								<option value="<%= sala.getId_sala() %>"><%= sala.getNombre() %></option>
+							<%} %>
+							</select>
+							<button type="submit">Crear</button>
+						</form>
+						<a href="index.jsp">Volver</a>
+					</div>
+
                     
                     <div class="row">
-                        <!-- DataTables -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Listado de Partidas</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Fecha</th>
-                                                <th>Descripción</th>
-                                                <th>Jugadores</th>
-                                                <th>Estado</th>
-                                                <th>Puntuación</th>
-                                                <th>Sala</th>
-                                            </tr>
-                                        </thead>
-                                        
-                                        <tbody>
-                                        <c:forEach items="${listaPartidas}" var="partida">
-                                        	<tr>
-                                                <td>${partida.fecha}</td>
-                                                <td>${partida.descripcion}</td>
-                                                <td>${partida.jugadores}</td>
-                                                <td>${partida.estado}</td>
-                                                <td>${partida.puntuacion}</td>
-                                                <td>${partida.sala.nombre}</td>
-                                            </tr>
-                                        </c:forEach>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
+                    
+
+                      
+                    </div>
+
+                    
+
+                    <div class="row">
+
+                        
+
+                       
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                
                             </div>
                         </div>
-                    </div> <!-- end row -->
-               
-                </div> <!--  End container fluid -->
+                    </div>
+
+                   
+                    <div class="row">
+
+                       
+
+                      
+                
+
+            </div>
            
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -281,5 +296,18 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
+<script>
+    window.onload = function() {
+        const ahora = new Date();
+        // Asegurarse de formatear con ceros a la izquierda
+        const pad = num => String(num).padStart(2, '0');
+        const fechaMin = ahora.getFullYear() + "-" + 
+                         pad(ahora.getMonth()+1) + "-" +
+                         pad(ahora.getDate()) + "T" +
+                         pad(ahora.getHours()) + ":" +
+                         pad(ahora.getMinutes());
 
+        document.getElementById("fecha").min = fechaMin;
+    }
+</script>
 </html>

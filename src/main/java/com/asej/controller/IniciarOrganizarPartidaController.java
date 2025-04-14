@@ -33,14 +33,16 @@ public class IniciarOrganizarPartidaController extends HttpServlet{
 //		if(usuario != null) {
 //			//quiero obtener el usuario de la BD
 //			Partida p = partidaService.getC(partida);
-//			//quiero añadir ese usuario como atributo a la request
+//			//quiero aï¿½adir ese usuario como atributo a la request
 //			request.setAttribute("usuario", u);
 //		}
 		
 		List<Sala> salas = salaService.getSalas();
-		request.setAttribute("salas", salas);
+		request.getSession().setAttribute("salas", salas);;	
+		System.out.println("las salas disponibles son: " + request.getSession().getAttribute("salas"));
 		
-		request.getRequestDispatcher("organizarPartida.jsp").forward(request, response);
+//		request.getRequestDispatcher("/admin/organizarPartida.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/admin/organizarPartida.jsp");
 	}
 
 }
