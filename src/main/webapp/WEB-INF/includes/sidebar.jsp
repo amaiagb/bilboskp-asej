@@ -58,7 +58,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Cupones:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Comprar cupones</a>
+                        <a class="collapse-item" href="/bilboskp-asej/admin/comprarCupones.jsp">Comprar cupones</a>
                         <a class="collapse-item" href="utilities-border.html">Lista de Cupones</a>
                         
                     </div>
