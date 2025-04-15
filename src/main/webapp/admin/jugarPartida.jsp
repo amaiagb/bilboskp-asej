@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Partidas - BilboSKP</title>
+    <title>Jugar Partida - BilboSKP</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,11 +28,12 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
+         <!-- Sidebar -->
         <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
         <!-- End of Sidebar -->
        
         <div id="content-wrapper" class="d-flex flex-column">
+
            
             <div id="content">
 
@@ -41,53 +42,43 @@
                 <!-- End of Topbar -->
                 
                 <div class="container-fluid">
+
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Lista de Partidas</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
+                        <h1 class="h3 mb-0 text-gray-800">Jugar Partida</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
                     </div>
+
                     
                     <div class="row">
-                        <!-- DataTables -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Listado de Partidas</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Fecha</th>
-                                                <th>Descripción</th>
-                                                <th>Jugadores</th>
-                                                <th>Estado</th>
-                                                <th>Puntuación</th>
-                                                <th>Sala</th>
-                                            </tr>
-                                        </thead>
-                                        
-                                        <tbody>
-                                        <c:forEach items="${listaPartidas}" var="partida">
-                                        	<tr>
-                                                <td>${partida.fecha}</td>
-                                                <td>${partida.descripcion}</td>
-                                                <td>${partida.jugadores}</td>
-                                                <td>${partida.estado}</td>
-                                                <td>${partida.puntuacion}</td>
-                                                <td>${partida.sala.nombre}</td>
-                                            </tr>
-                                        </c:forEach>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                      
+                    </div>
+
+                    
+
+                    <div class="row">
+
+                        
+
+                       
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                
                             </div>
                         </div>
-                    </div> <!-- end row -->
-               
-                </div> <!--  End container fluid -->
+                    </div>
+
+                   
+                    <div class="row">
+
+                       
+
+                      
+                
+
+            </div>
            
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">

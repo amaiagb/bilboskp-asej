@@ -66,21 +66,31 @@ public class LoginController extends HttpServlet {
 		
 		if(suscriptorLogin != null) {
 			
-			//4. Comprobar si es un centro y en ese caso obtener sus datos
+			//4. Comprobar el rol que tiene el suscriptor
 			
+			//4.1 Es un suscriptor de tipo centro
 			if("centro".equals(suscriptorLogin.getRol().getNombre())) {
 				Centro centro = centroService.getCentroBySuscriptor(suscriptorLogin);
 				
-				//4.1. Añadir centro a la sesión
-				
+				//  Añadir centro a la sesión
 				request.getSession().setAttribute("suscriptor", centro);
 				System.out.println("centro: "+request.getSession().getAttribute("suscriptor"));
 				
-			} else {
-				//4.2. Añadir suscriptor a la sesión
+			} //4.2 Es un suscriptor estándar
+			else if("suscriptor".equals(suscriptorLogin.getRol().getNombre())) {
 				
+				// Añadir suscriptor a la sesión
 				request.getSession().setAttribute("suscriptor", suscriptorLogin);
 				System.out.println("suscriptor: "+request.getSession().getAttribute("suscriptor"));
+				
+			} //4.3 Es un admin
+			else if ("admin".equals(suscriptorLogin.getRol().getNombre())) {
+				
+				// Añadir admin a la sesión
+				request.getSession().setAttribute("suscriptor", suscriptorLogin);
+				System.out.println("admin: "+request.getSession().getAttribute("suscriptor"));
+				response.sendRedirect("/bilboskp-asej/admin/superadmin/admin.jsp");
+				return;
 			}
 			//5.Obtener info de partidas y cupones del suscriptor
 			
@@ -99,7 +109,7 @@ public class LoginController extends HttpServlet {
 			//7. Crear cookie de suscriptor
 			
 			Cookie cookie = new Cookie("suscriptor", suscriptorLogin.getUsuario());
-			cookie.setMaxAge(60*60*24*100);
+			cookie.setMaxAge(60*60*24*7);
 			response.addCookie(cookie);
 			
 			response.sendRedirect("admin/index.jsp");

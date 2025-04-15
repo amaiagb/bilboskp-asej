@@ -14,7 +14,7 @@ public class RolDAO {
 
 	//public Rol getRolById(int id)
 	public Rol getRolById(int id) {
-		Rol rol = new Rol();
+		Rol rol = null;
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -155,6 +155,31 @@ public class RolDAO {
 		
 		return false;
 	}
+
+	public Rol getRolByNombre(String nombre) {
+		Rol rol = null;
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT id_rol, nombre FROM roles WHERE nombre = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nombre);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				rol = new Rol(rs.getInt("id_rol"), rs.getString("nombre"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		
+		return rol;
+	}	
 
 	
 }
