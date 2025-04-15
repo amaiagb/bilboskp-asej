@@ -59,7 +59,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Cupones:</h6>
                         <a class="collapse-item" href="/bilboskp-asej/admin/comprarCupones.jsp">Comprar cupones</a>
-                        <a class="collapse-item" href="/bilboskp-asej/admin/listaCupones">Lista de Cupones</a>
+                        <a class="collapse-item" href="/bilboskp-asej/listaCupones">Lista de Cupones</a>
                         
                     </div>
                 </div>
@@ -85,7 +85,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/bilboskp-asej/admin/suscripcion.jsp">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Suscripción</span></a>
+                    <span>SuscripciÃ³n</span></a>
             </li>
 
             <!-- Divider -->
