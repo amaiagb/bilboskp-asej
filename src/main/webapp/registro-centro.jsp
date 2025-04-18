@@ -11,7 +11,7 @@
 <body class="h-auto">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-shrink fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="assets/img/logos/bilboSKP.png" alt="..." /></a>
+                <a class="navbar-brand" href="index.jsp"><img src="assets/img/logos/bilboSKP.png" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -42,12 +42,12 @@
                     <input type="text"  name="localidad" required>
                 </div>
                 <div class="input-group">
-                    <label for="etapas">Etapas Educativas</label>
-                    <input type="text"  name="etapas" required>
+                    <label for="etapas_educativas">Etapas Educativas</label>
+                    <input type="text"  name="etapas_educativas" required>
                 </div>
                 <div class="input-group">
-                    <label for="numAlum">Número de Alumnado</label>
-                    <input type="number" name="numAlum" required>
+                    <label for="num_alumnado">Número de Alumnado</label>
+                    <input type="number" name="num_alumnado" required>
                 </div>
             </div>
             <!-- Segundo bloque: Datos del personal de contacto -->

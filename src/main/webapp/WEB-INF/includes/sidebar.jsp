@@ -17,7 +17,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.jsp">
+                <a class="nav-link" href="/bilboskp-asej/admin/index.jsp">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Inicio</span></a>
             </li>
@@ -42,7 +42,7 @@
                         <h6 class="collapse-header">Partida:</h6>
                         <a class="collapse-item" href="/bilboskp-asej/iniciarOrganizar">Organizar Partida</a>
                         <a class="collapse-item" href="/bilboskp-asej/listaPartidas">Lista de Partidas</a>
-                        <a class="collapse-item" href="jugarPartida.html">Jugar Partidas</a>
+                        <a class="collapse-item" href="/bilboskp-asej/admin/jugarPartida.jsp">Jugar Partidas</a>
                     </div>
                 </div>
             </li>
@@ -58,15 +58,15 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Cupones:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Comprar cupones</a>
-                        <a class="collapse-item" href="utilities-border.html">Lista de Cupones</a>
+                        <a class="collapse-item" href="/bilboskp-asej/admin/comprarCupones.jsp">Comprar cupones</a>
+                        <a class="collapse-item" href="/bilboskp-asej/listaCupones">Lista de Cupones</a>
                         
                     </div>
                 </div>
             </li>
              <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/bilboskp-asej/ranking">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Ranking</span></a>
             </li>
@@ -80,15 +80,12 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            
-
-           
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="/bilboskp-asej/admin/suscripcion.jsp">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Suscripción</span></a>
+                    <span>SuscripciÃ³n</span></a>
             </li>
 
             <!-- Divider -->

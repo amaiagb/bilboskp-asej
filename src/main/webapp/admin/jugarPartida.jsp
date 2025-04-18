@@ -1,10 +1,4 @@
-<%@page import="com.asej.model.Sala"%>
-<%@page import="com.asej.model.Suscriptor"%>
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%ArrayList<Sala> salas = (ArrayList<Sala>) request.getSession().getAttribute("salas"); %>
-<%Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor"); %>
+<%@ include file="/WEB-INF/includes/idioma.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Organizar partida - BilboSKP</title>
+    <title>Jugar Partida - BilboSKP</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,7 +19,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="${pageContext.request.contextPath}/admin/css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -34,9 +28,9 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
+         <!-- Sidebar -->
         <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
-        
+        <!-- End of Sidebar -->
        
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -51,28 +45,13 @@
 
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Organizar Partida</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Jugar Partida</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
                     </div>
-                    <div>
-						<form action="/bilboskp-asej/organizar" method="post">
-							<input type="datetime-local" name="date" id="fecha" placeholder="Fecha y Hora" required>
-							<input type="number" name="jugadores" id="cantidad" min="1" max="999" value="1" placeholder="Nº Jugadores" required>
-							<input type="text" name="descripcion" placeholder="Descripción" maxlength="100">
-							<select id="sala" name="sala">
-							<% for(Sala sala : salas){ %>
-								<option value="<%= sala.getId_sala() %>"><%= sala.getNombre() %></option>
-							<%} %>
-							</select>
-							<button type="submit">Crear</button>
-						</form>
-						<a href="index.jsp">Volver</a>
-					</div>
 
                     
                     <div class="row">
-                    
 
                       
                     </div>
@@ -156,18 +135,5 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-<script>
-    window.onload = function() {
-        const ahora = new Date();
-        // Asegurarse de formatear con ceros a la izquierda
-        const pad = num => String(num).padStart(2, '0');
-        const fechaMin = ahora.getFullYear() + "-" + 
-                         pad(ahora.getMonth()+1) + "-" +
-                         pad(ahora.getDate()) + " T" +
-                         pad(ahora.getHours()) + ":" +
-                         pad(ahora.getMinutes());
 
-        document.getElementById("fecha").min = fechaMin;
-    }
-</script>
 </html>

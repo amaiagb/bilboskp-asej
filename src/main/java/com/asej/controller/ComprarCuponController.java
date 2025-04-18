@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +33,8 @@ public class ComprarCuponController extends HttpServlet{
         
         String nombreRol = request.getParameter("rol");
         
-        //Aqui hay que sacar el id_suscriptor de la información de la sesión.
-        int id_suscriptor = Integer.parseInt(request.getParameter("id_suscriptor"));
+        //Aqui hay que sacar el id_suscriptor de la informaciï¿½n de la sesiï¿½n.
+        int id_suscriptor = Integer.parseInt(obtenerIdSuscriptorDesdeCookie(request));
         
         List<Integer> id_cupones = cuponService.createCupones(numeroCupones, nombreRol);
         	
@@ -59,5 +60,36 @@ public class ComprarCuponController extends HttpServlet{
             response.sendRedirect("error.jsp");
         	}	
     }
+	
+	private String obtenerIdSuscriptorDesdeCookie(HttpServletRequest request) {
+	    Cookie[] cookies = request.getCookies();
+
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if ("suscriptor".equals(cookie.getName())) {
+	                try {
+	                    String value = java.net.URLDecoder.decode(cookie.getValue(), "UTF-8");
+
+	                    // Simple way to extract "id_suscriptor"
+	                    String key = "id_suscriptor";
+	                    int index = value.indexOf(key);
+	                    if (index != -1) {
+	                        int start = index + key.length();
+	                        int end = value.indexOf(",", start); // or end of string if it's the last field
+	                        if (end == -1) {
+	                            end = value.indexOf("}", start);
+	                        }
+
+	                        return value.substring(start, end).trim();
+	                    }
+
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	    }
+	    return null;
+	}
 	
 }

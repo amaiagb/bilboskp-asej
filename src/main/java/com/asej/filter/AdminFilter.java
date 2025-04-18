@@ -18,8 +18,8 @@ import com.asej.model.Suscriptor;
 import com.asej.service.CentroService;
 import com.asej.service.SuscriptorService;
 
-@WebFilter("/admin/*")
-public class AuthFilter implements Filter {
+@WebFilter("/superadmin/*")
+public class AdminFilter implements Filter {
 	
 	SuscriptorService suscriptorService;
 	CentroService centroService;
@@ -40,25 +40,18 @@ public class AuthFilter implements Filter {
 		//buscar la cookie usuario
 		for(Cookie c : cookies) {
 			
-			
 			if("suscriptor".equals(c.getName())) {
 				//si existe, buscar el usuario en la BD
 				Suscriptor s = suscriptorService.getSuscriptorByUsuario(c.getValue());
-				System.out.println("Cookie suscriptor "+s);
-				//si es un suscriptor estandar
-				if("suscriptor".equals(s.getRol().getNombre())) {
+				
+				//comprobar si tiene rol de admin
+				if("admin".equals(s.getRol().getNombre())) {
+					
 					//añadir a la sesion
 					req.getSession().setAttribute("suscriptor", s);
-				}//si es un suscriptor de tipo centro
-				else if("centro".equals(s.getRol().getNombre())) {
-					//recuperar datos del centro
-					Centro centro = centroService.getCentroBySuscriptor(s);
-					//añadir a la sesion
-					req.getSession().setAttribute("suscriptor", centro);
-				}
-				
+					
+				}				
 			}
-			
 		}
 
 		if(req.getSession().getAttribute("suscriptor")!=null) {

@@ -26,7 +26,6 @@
 <body id="page-top">
 	
 	<!-- Navbar -->
-        <%@ include file="/WEB-INF/includes/navbar.jsp" %>
         <!-- End of Navbar -->
 	
     <!-- Page Wrapper -->
@@ -113,7 +112,7 @@
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row ">
+                    <div class="row mx-1">
                     
                     	<!-- DataTables -->
                         <div class="card shadow mb-4 col-xl-9 col-md-6">

@@ -9,7 +9,6 @@ import com.asej.model.Rol;
 
 public class RolService {
 
-
 	private RolDAO rolDAO;
 	
 	public RolService() {
@@ -30,6 +29,11 @@ public class RolService {
 		}else {
 			return false;
 		}
+	}
+
+	public Rol getRolByNombre(String nombre) {
+		
+		return rolDAO.getRolByNombre(nombre);
 	}
 	
 }
