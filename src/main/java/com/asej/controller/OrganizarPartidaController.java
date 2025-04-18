@@ -20,7 +20,7 @@ public class OrganizarPartidaController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     PartidaService partidaService;
     SalaService salaService;
-    //poner para sacar el id de suscriptor
+    String codigo = generarCodigoAleatorio();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -39,54 +39,81 @@ public class OrganizarPartidaController extends HttpServlet {
 
             if (fechaStr == null || jugadoresStr == null || descripcion == null || idSalaStr == null ||
                 fechaStr.isEmpty() || jugadoresStr.isEmpty() || descripcion.isEmpty() || idSalaStr.isEmpty()) {
-            	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
+                resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime fecha = LocalDateTime.parse(fechaStr, formatter);
             if (fecha.isBefore(LocalDateTime.now())) {
-                System.out.println("Fecha no v�lida: la fecha es en el pasado.");
-            	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
+                System.out.println("Fecha inválida: la fecha es en el pasado.");
+                resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             int jugadores = Integer.parseInt(jugadoresStr);
             if (jugadores < 1 || jugadores > 99999) {
-                System.out.println("N�mero de jugadores no v�lido.");
-            	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
+                System.out.println("Número de jugadores no válido.");
+                resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             if (descripcion.length() > 100) {
-                System.out.println("Descripci�n demasiado larga.");
-            	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
+                System.out.println("Descripción demasiado larga.");
+                resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             int idSala = Integer.parseInt(idSalaStr);
             if (idSala <= 0) {
-                System.out.println("ID de sala no v�lido.");
-            	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
+                System.out.println("ID de sala no válido.");
+                resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
+
+            // recoge el id de la sesion, creo que esto le he duplicado, pero prefiero asegurarme en cad apaso
+            Integer idSuscriptor = (Integer) req.getSession().getAttribute("idSuscriptor");
+            if (idSuscriptor == null) {
+                System.out.println("No se encontró el suscriptor en la sesión.");
+                resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
+                return;
+            }
+            
+            
 
             Sala sala = new Sala();
             sala.setId_sala(idSala);
 
-            Partida nuevaPartida = new Partida(jugadores, fecha, descripcion, sala);
+            String codigo = generarCodigoAleatorio();
 
-            if (partidaService.addPartida(nuevaPartida)) {
-        		resp.sendRedirect(req.getContextPath() + "/admin/organizarPartida.jsp");
+            Partida nuevaPartida = new Partida(jugadores, fecha, descripcion, sala);
+            boolean success = partidaService.addPartida(nuevaPartida, idSuscriptor, codigo);
+
+
+            if (success) {
                 System.out.println("Partida creada correctamente.");
+                resp.sendRedirect(req.getContextPath() + "/admin/organizarPartida.jsp");
             } else {
-            	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 System.out.println("Error al crear la partida.");
+                resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        	resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
+            resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
         }
     }
+    
+    //metodo para crear el codigo, lo iba a poner en el service, pero me parece mejor aqui o pot lo menos mas facil pa mi:)
+    private String generarCodigoAleatorio() {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder codigo = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            int index = (int) (Math.random() * caracteres.length());
+            codigo.append(caracteres.charAt(index));
+        }
+        return codigo.toString();
+    }
+
+
 }

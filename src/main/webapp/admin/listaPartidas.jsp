@@ -214,6 +214,12 @@
                                                 <td>${partida.estado}</td>
                                                 <td>${partida.puntuacion}</td>
                                                 <td>${partida.sala.nombre}</td>
+                                                <td>
+	                                                <form action="/bilboskp-asej/borrarPartida" method="post">
+														<input type="hidden" value="${partida.id_partida}" name="partida">
+														<button type="submit">Borrar</button>
+													</form>
+												</td>
                                             </tr>
                                         </c:forEach>
                                             

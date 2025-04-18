@@ -12,9 +12,9 @@ public class PartidaService {
 		partidaDao = new PartidaDAO();
 	}
 
-	public boolean addPartida(Partida nuevaPartida) {
+	public boolean addPartida(Partida nuevaPartida, int idSuscriptor, String codigo) {
 		 
-		return PartidaDAO.addPartida(nuevaPartida);
+		return PartidaDAO.addPartida(nuevaPartida, idSuscriptor, codigo);
 	}
 
 	public List<Partida> getPartidas() {

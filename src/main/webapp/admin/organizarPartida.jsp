@@ -303,7 +303,7 @@
         const pad = num => String(num).padStart(2, '0');
         const fechaMin = ahora.getFullYear() + "-" + 
                          pad(ahora.getMonth()+1) + "-" +
-                         pad(ahora.getDate()) + "T" +
+                         pad(ahora.getDate()) + " T" +
                          pad(ahora.getHours()) + ":" +
                          pad(ahora.getMinutes());
 

@@ -53,37 +53,34 @@ public class PartidaDAO {
 		return productos;
 	}
 	
-	public static boolean addPartida(Partida nuevaPartida) {
-		Connection con = AccesoBD.getConnection();
-		PreparedStatement ps = null;
-		
-		String sql = "INSERT INTO partida (fecha, jugadores, descripcion, estado, puntuacion, id_suscriptor, id_sala, codigo) VALUES (?,?,?,?,?,?,?,?)";
-		
-		try {
-			ps = con.prepareStatement(sql);
-			
-		    ps.setTimestamp(1, Timestamp.valueOf(nuevaPartida.getFecha()));			
-			ps.setInt(2, nuevaPartida.getJugadores());
-		    ps.setString(3, nuevaPartida.getDescripcion());
-		    ps.setString(4, "programado");
-		    ps.setInt(5, 0);
-		    ps.setInt(6, 8);
-		    ps.setInt(7, nuevaPartida.getSala().getId_sala());
-		    ps.setString(8, "aaa");
-			
-		    if(ps.executeUpdate() > 0) {
-				return true;
-			}else {
-				return false;
-			}
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			AccesoBD.closeConnection(null, ps, con);
-		}
-		return false;		
+	public static boolean addPartida(Partida nuevaPartida, int idSuscriptor, String codigo) {
+	    Connection con = AccesoBD.getConnection();
+	    PreparedStatement ps = null;
+
+	    String sql = "INSERT INTO partida (fecha, jugadores, descripcion, estado, puntuacion, id_suscriptor, id_sala, codigo) VALUES (?,?,?,?,?,?,?,?)";
+
+	    try {
+	        ps = con.prepareStatement(sql);
+
+	        ps.setTimestamp(1, Timestamp.valueOf(nuevaPartida.getFecha()));			
+	        ps.setInt(2, nuevaPartida.getJugadores());
+	        ps.setString(3, nuevaPartida.getDescripcion());
+	        ps.setString(4, "programado");
+	        ps.setInt(5, 0);
+	        ps.setInt(6, idSuscriptor); 
+	        ps.setInt(7, nuevaPartida.getSala().getId_sala());
+	        ps.setString(8, codigo); 
+
+	        return ps.executeUpdate() > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        AccesoBD.closeConnection(null, ps, con);
+	    }
+	    return false;		
 	}
+
 	
 	public static boolean updatePartida(Partida partida) {
 		Connection con = AccesoBD.getConnection();

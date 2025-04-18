@@ -16,11 +16,11 @@ import com.asej.model.Rol;
 public class CuponDAO {
 
 	//Comprar cupones
-	//		crear el número de cupones que nos compra el suscriptor
-	//		insertar en la tabla de histórico la asociación de cupones con el suscriptor
+	//		crear el nï¿½mero de cupones que nos compra el suscriptor
+	//		insertar en la tabla de histï¿½rico la asociaciï¿½n de cupones con el suscriptor
 	
 	//Devolver cupones
-	//		Cambiar el estado del número de cupones que nos indica el suscriptor a estado "devuelto"
+	//		Cambiar el estado del nï¿½mero de cupones que nos indica el suscriptor a estado "devuelto"
 	
 	
 	
@@ -61,7 +61,7 @@ public class CuponDAO {
 		return cupones;
 	}	
 	
-	//Devuelve el estado de un cupón a devuelto
+	//Devuelve el estado de un cupï¿½n a devuelto
 	public boolean returnCupon(int id_cupon) {
 		
 		Connection con = AccesoBD.getConnection();
@@ -140,7 +140,7 @@ public class CuponDAO {
 			ps.setString(5, null);
 			
 		
-		        if (ps.executeUpdate() > 0) { // Si el número de filas es mayor que 0
+		        if (ps.executeUpdate() > 0) { // Si el nï¿½mero de filas es mayor que 0
 		            generatedKeys = ps.getGeneratedKeys();
 		            if (generatedKeys.next()) {
 		                int idGenerado=  generatedKeys.getInt(1); // el id_cupon generado
@@ -189,5 +189,7 @@ public class CuponDAO {
 		
 		return false;
 	}
+	
+	
 	
 }
