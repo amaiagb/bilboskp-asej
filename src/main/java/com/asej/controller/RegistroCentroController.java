@@ -2,6 +2,7 @@ package com.asej.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.asej.model.Centro;
 import com.asej.model.Rol;
 import com.asej.service.CentroService;
+import com.asej.service.CuponService;
 import com.asej.service.RolService;
 import com.asej.service.SuscriptorService;
 
@@ -22,6 +24,7 @@ public class RegistroCentroController extends HttpServlet {
 	CentroService centroService; 
 	SuscriptorService suscriptorService;
 	RolService rolService;
+	CuponService cuponService;
 	
     public RegistroCentroController() {
         super();
@@ -31,6 +34,7 @@ public class RegistroCentroController extends HttpServlet {
 		centroService = new CentroService();
 		suscriptorService = new SuscriptorService();
 		rolService = new RolService();
+		cuponService = new CuponService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,13 +78,10 @@ public class RegistroCentroController extends HttpServlet {
 		//5. Insertar nuevoCentro en tabla centro
 		
 		if(centroService.addCentro(nuevoCentro)) {
-			
-			//6. Inserción correcta -> Redirigir a index
-			request.getSession().setAttribute("suscriptor", nuevoCentro);
-			response.sendRedirect("bilboskp-asej/admin/index.jsp");
+					
+			response.sendRedirect("/bilboskp-asej/solicitudPendiente.jsp");
 			
 		} else {
-			//7. Inserción incorrecta -> Borrar Suscriptor y Redirigir a registro?error=1
 			
 			
 		}

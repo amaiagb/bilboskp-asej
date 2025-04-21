@@ -1,8 +1,9 @@
 package com.asej.controller;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.asej.model.Partida;
 import com.asej.model.Sala;
+import com.asej.model.Suscriptor;
 import com.asej.service.PartidaService;
 import com.asej.service.SalaService;
 
@@ -75,8 +77,10 @@ public class OrganizarPartidaController extends HttpServlet {
             sala.setId_sala(idSala);
 
             Partida nuevaPartida = new Partida(jugadores, fecha, descripcion, sala);
-
-            if (partidaService.addPartida(nuevaPartida)) {
+            
+            Suscriptor suscriptor = (Suscriptor) req.getSession().getAttribute("suscriptor"); 
+            
+            if (partidaService.addPartida(nuevaPartida, suscriptor.getId())) {
         		resp.sendRedirect(req.getContextPath() + "/admin/organizarPartida.jsp");
                 System.out.println("Partida creada correctamente.");
             } else {

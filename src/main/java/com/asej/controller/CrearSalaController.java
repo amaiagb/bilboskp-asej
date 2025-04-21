@@ -30,7 +30,10 @@ public class CrearSalaController extends HttpServlet {
         try {
             String nombre = req.getParameter("nombre");
             String tipo = req.getParameter("tipo");
-           
+            String estado = req.getParameter("estado");
+           System.out.println(nombre);
+           System.out.println(tipo);
+           System.out.println(estado);
 
             if (nombre == null || tipo == null || 
                 nombre.isEmpty() || tipo.isEmpty()) {
@@ -50,10 +53,10 @@ public class CrearSalaController extends HttpServlet {
                 return;
             }
 
-            Sala nuevaSala = new Sala(nombre, tipo);
+            Sala nuevaSala = new Sala(nombre, tipo, estado);
 
             if (salaService.addSala(nuevaSala)) {
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect("/bilboskp-asej/listaSalas");
                 System.out.println("Sala creada correctamente.");
             } else {
             	resp.sendRedirect("error.jsp?from=crearSala.jsp");

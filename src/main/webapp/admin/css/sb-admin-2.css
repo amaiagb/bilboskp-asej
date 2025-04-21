@@ -10440,7 +10440,18 @@ a:focus {
   width: 0 !important;
   overflow: hidden;
 }
-
+.sidebar .logo {
+	display:block;
+}
+.sidebar .logo_xs {
+	display:none;
+}
+.sidebar.toggled .logo {
+	display:none;
+}
+.sidebar.toggled .logo_xs {
+	display: block;
+}
 .sidebar.toggled #sidebarToggle::after {
   content: '\f105';
   font-family: 'Font Awesome 5 Free';

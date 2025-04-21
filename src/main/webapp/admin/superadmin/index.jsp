@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/includes/idioma.jsp" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -9,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/x-icon" href="/bilboskp-asej/assets/favicon.ico">
 
     <title>Admin - BilboSKP</title>
 
@@ -29,7 +31,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
+        <%@ include file="/WEB-INF/includes/sidebar_admin.jsp" %>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -46,7 +48,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Panel de Control</h1>
 
                 	<!-- Content Row -->
                     <div class="row">
@@ -59,7 +61,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary+ text-uppercase mb-1">
                                                Solicitudes pendientes</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${numSolicitudes}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
@@ -70,13 +72,13 @@
                         </div>
                          <!-- Card 2 -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-secondary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            <div class="text-xs font-weight-bold text-primary+ text-uppercase mb-1">
                                                Centros registrados</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">35</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${numCentros}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-school fa-2x text-gray-300"></i>
@@ -85,29 +87,52 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Card 3 -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-secondary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary+ text-uppercase mb-1">
+                                               Salas disponibles</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${numSalas}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-gamepad fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 
                  <div class="row mx-1">
-					<a href="listadoCentros" class="btn btn-primary mx-1">Ver Centros Pendientes de Aprobación</a>
+					<a href="/bilboskp-asej/centrosPendientes" class="btn btn-primary mx-1">Ver Centros Pendientes de Aprobación</a>
 					
-					<!-- Tabla con listado de Centros en estado "pendiente" -->
-					<!-- foreach -->
-					
-					<a href=" " class="btn btn-secondary mx-1">Dar de baja Centro</a>
-					<!-- Al clicar en el botón aparecer una tabla con el listado completo de centros activos y un search input encima para buscar por nombre -->
-					
-					<a href="" class="btn btn-secondary mx-1">Registrar un Centro manualmente</a>
-					<!-- Al clicar en el botón aparece el formulario para dar de alta un centro -->
-					
-					<a href="" class="btn btn-secondary mx-1">Crear nueva sala</a>
-					<!-- Al clicar en el botón aparece el formulario para dar de alta un centro -->
-					
-					<a href="" class="btn btn-secondary mx-1">Dar de baja sala</a>
-					<!-- Al clicar en el botón aparece el formulario para dar de alta un centro -->
-					</div>
 					
 					</div>
-                <!-- /.container-fluid -->
+					
+					                    <!-- Content Row -->
+                    <div class="row my-5">
+
+                        <!-- Donut Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tipos de Suscriptor</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+				</div>  <!-- /.container-fluid -->
            	</div>
             <!-- End of Main Content -->
 
@@ -153,14 +178,28 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/bilboskp-asej/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/bilboskp-asej/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/bilboskp-asej/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="/bilboskp-asej/admin/js/sb-admin-2.min.js"></script>
+
+    <script>
+    var donutLabels = ["Suscriptores", "Centros"];
+    var donutData = [${numSuscriptores}, ${numCentros}];
+
+
+	</script>
+	
+    <!-- Page level plugins -->
+    <script src="/bilboskp-asej/admin/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/bilboskp-asej/admin/js/demo/chart-demo.js"></script>
+
 
 </body>
 

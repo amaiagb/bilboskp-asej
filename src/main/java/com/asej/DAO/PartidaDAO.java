@@ -20,7 +20,7 @@ public class PartidaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id_partida, fecha, jugadores, descripcion, estado, puntuacion FROM partida";
+		String sql = "SELECT id_partida, fecha, jugadores, descripcion, estado, puntuacion FROM partida;";
 		try {
 			ps = con.prepareStatement(sql);
 			
@@ -37,10 +37,6 @@ public class PartidaDAO {
 				p.setEstado(rs.getString("estado"));
 				p.setPuntuacion(rs.getInt("puntuacion"));
 			
-
-				
-
-				
 				productos.add(p);
 			}
 			
@@ -53,7 +49,7 @@ public class PartidaDAO {
 		return productos;
 	}
 	
-	public static boolean addPartida(Partida nuevaPartida) {
+	public static boolean addPartida(Partida nuevaPartida, int id_suscriptor) {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 		
@@ -65,9 +61,9 @@ public class PartidaDAO {
 		    ps.setTimestamp(1, Timestamp.valueOf(nuevaPartida.getFecha()));			
 			ps.setInt(2, nuevaPartida.getJugadores());
 		    ps.setString(3, nuevaPartida.getDescripcion());
-		    ps.setString(4, "programado");
+		    ps.setString(4, "programada");
 		    ps.setInt(5, 0);
-		    ps.setInt(6, 8);
+		    ps.setInt(6, id_suscriptor);
 		    ps.setInt(7, nuevaPartida.getSala().getId_sala());
 		    ps.setString(8, "aaa");
 			
@@ -180,7 +176,7 @@ public class PartidaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id_partida, fecha, jugadores, descripcion, p.estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ?;";
+		String sql = "SELECT id_partida, fecha, jugadores, descripcion, p.estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ? ORDER BY fecha DESC;";
 		//String sql = "SELECT * FROM partida p WHERE p.id_suscriptor = ?;";
 		try {
 			ps = con.prepareStatement(sql);
@@ -260,6 +256,33 @@ public class PartidaDAO {
 		}
 		
 		return partidas;
+	}
+
+	public int getNumPartidasProgramadas(int id) {
+		int count = 0;
+		
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT COUNT(id_partida) AS partidas FROM partida WHERE id_suscriptor = ? AND estado='programada';";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				count = rs.getInt("partidas");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(rs, ps, con);
+		}
+		
+		return count;
 	}
 
 

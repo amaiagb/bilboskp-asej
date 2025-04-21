@@ -28,7 +28,6 @@ public class Suscriptor {
 		this.email = email;
 	}
 	
-	
 
 	public Suscriptor(int id, String nombre, String usuario, String contrasena, String email, 
 			LocalDate fecha_alta) {
@@ -41,13 +40,14 @@ public class Suscriptor {
 		this.fecha_alta = fecha_alta;
 	}
 	
-	public Suscriptor(String nombre, String usuario, String contrasena, String email, Rol rol) {
+	public Suscriptor(String nombre, String usuario, String contrasena, String email, Rol rol, LocalDate fecha_alta) {
 		super();
 		this.nombre = nombre;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.email = email;
 		this.rol = rol;
+		this.fecha_alta = fecha_alta;
 	}
 	
 	public int getId() {

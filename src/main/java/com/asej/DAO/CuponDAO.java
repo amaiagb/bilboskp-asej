@@ -105,7 +105,6 @@ public class CuponDAO {
 		
 		List<Integer> id_cupones = new ArrayList<>();
 		
-
         LocalDate fechaCompra = LocalDate.now();
         LocalDate fechaCaducidad = fechaCompra.plusDays(30);
 
@@ -113,13 +112,7 @@ public class CuponDAO {
         Date sqlFechaCompra = Date.valueOf(fechaCompra); 
         Date sqlFechaCaducidad = Date.valueOf(fechaCaducidad); 
 
-        
-		
 		String sql = "INSERT INTO cupon (fecha_compra, fecha_caducidad, estado, precio, fecha_devolucion, tipo) VALUES (?,?,?,?,?,?) ";
-		
-		
-		
-		
 		
 		try {
 			
@@ -163,10 +156,7 @@ public class CuponDAO {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 		
-		
 		String sql = "INSERT INTO historial_cupones (id_suscriptor, id_cupon) VALUES (?,?)";
-		
-		
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -188,6 +178,39 @@ public class CuponDAO {
 		}
 		
 		return false;
+	}
+
+	public List<Cupon> getCuponesDisponibles(int id) {
+		List<Cupon> cupones = new ArrayList<Cupon>();
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT c.id_cupon, c.fecha_compra, c.fecha_caducidad, c.fecha_devolucion, c.estado, c.tipo, c.precio FROM cupon c "
+				+ "INNER JOIN historial_cupones hc ON c.id_cupon = hc.id_cupon "
+				+ "INNER JOIN suscriptor s ON hc.id_suscriptor = s.id_suscriptor "
+				+ "WHERE s.id_suscriptor = ? AND c.estado = 'disponible'";
+		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				
+				Cupon cupon = new Cupon(rs.getInt("id_cupon"), rs.getDate("fecha_compra"), rs.getDate("fecha_caducidad"), rs.getDate("fecha_devolucion"), rs.getString("estado"), rs.getString("tipo"), rs.getFloat("precio"));
+				cupones.add(cupon);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		
+		return cupones;
 	}
 	
 }

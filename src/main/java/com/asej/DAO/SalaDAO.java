@@ -66,6 +66,7 @@ public class SalaDAO {
 		return salas;
 	}
 
+	// HAY QUE ARREGLAR ESTOS METODOS PARA GESTIONAR BIEN EL ESTADO
 	public boolean createOrUpdateSala(Sala sala) {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
@@ -89,7 +90,7 @@ public class SalaDAO {
 		            ps.setInt(4, sala.getId_sala());   // id_sala
 		        } else {
 		            // Si es un INSERT, setear estado al índice 3
-		            ps.setString(3, "Activado"); // estado para INSERT
+		            ps.setString(3, sala.getEstado()); // estado para INSERT
 		        }
 			if(ps.executeUpdate() > 0) {
 				return true;
@@ -164,17 +165,18 @@ public class SalaDAO {
 	public boolean desactivarSala(Sala s) {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
-		
+		System.out.println(s);
 		String sql = "UPDATE sala SET estado = ? WHERE id_sala = ?";
 		
 		try {
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1, "Inhabilitada");
+			ps.setString(1, "deshabilitada");
 			ps.setInt(2, s.getId_sala());
 
 			
 			if(ps.executeUpdate() > 0) {
+				
 				return true;
 			}else {
 				return false;
@@ -215,6 +217,29 @@ public class SalaDAO {
 		    }
 
 		    return sala;
+	}
+
+	public int countSalas() {
+		Connection con = AccesoBD.getConnection();
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    int numSalas = 0;
+
+	    String sql = "SELECT COUNT(id_sala) AS numSalas FROM sala WHERE LOWER(estado) = 'habilitada'";
+	    try {
+	        ps = con.prepareStatement(sql);
+	        rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	        	numSalas = rs.getInt("numSalas");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        AccesoBD.closeConnection(rs, ps, con);
+	    }
+
+	    return numSalas;
 	}
 
 	

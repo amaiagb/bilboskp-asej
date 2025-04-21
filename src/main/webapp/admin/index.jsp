@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/includes/idioma.jsp" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -64,7 +65,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary+ text-uppercase mb-1">
                                                Cupones Disponibles</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${fn:length(cuponesDisponibles)}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
@@ -82,7 +83,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                Partidas Jugadas</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${fn:length(ultimasPartidas)}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-gamepad fa-2x text-gray-300"></i>
@@ -100,7 +101,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Partidas Pendientes</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${numPartidasProgramadas}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>

@@ -80,6 +80,13 @@ public class Cupon {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
+
+	@Override
+	public String toString() {
+		return "Cupon [id_cupon=" + id_cupon + ", fecha_compra=" + fecha_compra + ", fecha_caducidad=" + fecha_caducidad
+				+ ", fecha_devolucion=" + fecha_devolucion + ", estado=" + estado + ", tipo=" + tipo + ", precio="
+				+ precio + "]";
+	}
 	
 	
 }

@@ -1,4 +1,3 @@
-<%@ include file="/WEB-INF/includes/idioma.jsp" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,7 +30,7 @@
                         <li class="nav-item"><a class="nav-link" href="index.html#portfolio">Salas de Escape</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.html#about">Reviews</a></li>
   
-                        <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.jsp">Iniciar Sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -39,29 +38,13 @@
    
     <div class="login-container">
         <form action="login" method="POST" class="login-form">
-            <h2>Iniciar sesión</h2>
+            <h2>Muchas gracias</h2>
            
             <div class="input-group">
-                <label for="usuario">Nombre de Usuario</label>
-                <input type="text"  name="usuario" required>
+                <p>La solicitud para dar de alta el centro educativo en BilboSKP ha sido regsitrada.</p>
+				<p>Será revisada por nuestro equipo y recibirás una respuesta por correo eléctrónico en cuanto esté aceptada.</p>
             </div>
-            <div class="input-group">
-                <label for="contrasena">Contraseña</label>
-                <input type="password" name="contrasena" required>
-            </div>
-            <button type="submit" class="login-btn">Iniciar sesión</button>
-            <div class="signup-link">
-                <p class="link">¿No tienes cuenta? <a href="registro.jsp">Regístrate</a></p>
-                <p class="link">¿Eres un centro? <a href="registro-centro.jsp">Regístrate como centro</a></p>
-                <c:choose>
-			        <c:when test="${param.error == '1'}">
-			            <p style="color:red;">Usuario o contraseña incorrectos.</p>
-			        </c:when>
-			        <c:when test="${param.error == '2'}">
-			            <p style="color:red;">El centro no ha sido aceptado en el sistema</p>
-			        </c:when>
-			    </c:choose>
-            </div>
+            
         </form>
     </div>
 </body>

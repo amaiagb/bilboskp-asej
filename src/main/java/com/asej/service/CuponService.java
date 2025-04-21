@@ -29,6 +29,10 @@ private CuponDAO cuponDAO;
 	public boolean actualizarHistorialCupones(int id_suscriptor, int id_cupon) {
 		return cuponDAO.actualizarHistorialCupones(id_suscriptor, id_cupon);
 	}
+
+	public List<Cupon> getCuponesDisponibles(int id) {
+		return cuponDAO.getCuponesDisponibles(id);
+	}
 	
 	
 }

@@ -24,24 +24,27 @@ public class InhabilitarSalaController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int salaId;
 
+		int salaId = Integer.parseInt(request.getParameter("id_sala"));
+		
+		/*
 		try {
-		    salaId = Integer.parseInt(request.getParameter("sala"));
+		    
+		    
 		} catch (NumberFormatException e) {
 		    request.setAttribute("error majo", "ID de sala inválido, revisa");
 		    request.getRequestDispatcher("listaSalas.jsp").forward(request, response);
 		    return;
 		}
-
+		 */
 		
 		Sala s = new Sala();
-		
 		s.setId_sala(salaId);
 		
 		if(salaService.desactivarSala(s)) {
 			System.out.println("sala inhabilitada magistralmente");
-			response.sendRedirect("listaSalas");
+			response.sendRedirect("/bilboskp-asej/listaSalas");
+			return;
 		}else {
 			List<Sala> listaSalas = salaService.getSalas();
 			

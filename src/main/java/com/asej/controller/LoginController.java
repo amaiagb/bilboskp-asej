@@ -69,50 +69,47 @@ public class LoginController extends HttpServlet {
 			//4. Comprobar el rol que tiene el suscriptor
 			
 			//4.1 Es un suscriptor de tipo centro
-			if("centro".equals(suscriptorLogin.getRol().getNombre())) {
+			if("centro".equalsIgnoreCase(suscriptorLogin.getRol().getNombre())) {
+				
+				// Comprobar que el centro está aceptado y no en estado 'pendiente'
 				Centro centro = centroService.getCentroBySuscriptor(suscriptorLogin);
-				
+				if("aceptado".equalsIgnoreCase(centro.getEstado())) {
 				//  Añadir centro a la sesión
-				request.getSession().setAttribute("suscriptor", centro);
-				System.out.println("centro: "+request.getSession().getAttribute("suscriptor"));
-				
+					request.getSession().setAttribute("suscriptor", centro);
+					System.out.println("centro: "+request.getSession().getAttribute("suscriptor"));
+				} 
+				// El centro aún no ha sido aceptado -> no logear, mostrar error
+				else {
+					
+					response.sendRedirect("login.jsp?error=2");
+					return;
+				}
+			
 			} //4.2 Es un suscriptor estándar
-			else if("suscriptor".equals(suscriptorLogin.getRol().getNombre())) {
+			else if("suscriptor".equalsIgnoreCase(suscriptorLogin.getRol().getNombre())) {
 				
 				// Añadir suscriptor a la sesión
 				request.getSession().setAttribute("suscriptor", suscriptorLogin);
 				System.out.println("suscriptor: "+request.getSession().getAttribute("suscriptor"));
 				
 			} //4.3 Es un admin
-			else if ("admin".equals(suscriptorLogin.getRol().getNombre())) {
+			else if ("admin".equalsIgnoreCase(suscriptorLogin.getRol().getNombre())) {
 				
 				// Añadir admin a la sesión
 				request.getSession().setAttribute("suscriptor", suscriptorLogin);
 				System.out.println("admin: "+request.getSession().getAttribute("suscriptor"));
-				response.sendRedirect("/bilboskp-asej/admin/superadmin/admin.jsp");
+				response.sendRedirect("/bilboskp-asej/inicioAdmin");
 				return;
 			}
-			//5.Obtener info de partidas y cupones del suscriptor
 			
-			List<Partida> partidas = partidaService.getPartidasById(suscriptorLogin.getId());
-			request.getSession().setAttribute("partidas", partidas);
-			
-			List<Cupon> cupones = cuponService.getCupones(suscriptorLogin.getId());
-			request.getSession().setAttribute("cupones", cupones);
-			
-			//6.Obtener Ultimas partidas jugadas
-			
-			List<Partida> ultimasPartidas = partidaService.getUltimasPartidasJugadasById(suscriptorLogin.getId());
-			request.getSession().setAttribute("ultimasPartidas", ultimasPartidas);
-			System.out.println("att ultimas partidas: "+request.getSession().getAttribute("ultimasPartidas"));
-			
-			//7. Crear cookie de suscriptor
+			//5. Crear cookie de suscriptor
 			
 			Cookie cookie = new Cookie("suscriptor", suscriptorLogin.getUsuario());
 			cookie.setMaxAge(60*60*24*7);
 			response.addCookie(cookie);
 			
-			response.sendRedirect("admin/index.jsp");
+			//6. Redirige al controller de inicio para que cargue los datos necesarios
+			response.sendRedirect("/bilboskp-asej/inicio");
 			
 		} else {
 			//3.2 Si devuelve un valor null -> no existe esa combinación de usuario y contrasena

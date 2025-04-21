@@ -1,21 +1,17 @@
 <%@ include file="/WEB-INF/includes/idioma.jsp" %>
-<%@page import="com.asej.model.Cupon"%>
-<%@page import="com.asej.model.Suscriptor"%>
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%ArrayList<Cupon> cupones = (ArrayList<Cupon>) request.getSession().getAttribute("cupones"); %>
-<%Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor"); %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Comprar cupones - BilboSKP</title>
+    <title>Suscripción - BilboSKP</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,70 +25,89 @@
 </head>
 
 <body id="page-top">
-
+	
+	<!-- Navbar -->
+        <!-- End of Navbar -->
+	
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
         <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
         <!-- End of Sidebar -->
-       
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-			<!-- Main Content -->           
+            <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
-                <%@ include file="/WEB-INF/includes/topbar.jsp" %>
+                 <%@ include file="/WEB-INF/includes/topbar.jsp" %>
                 <!-- End of Topbar -->
-                
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Comprar Cupones</h1>
-                    </div>
-                    <div>
-						<form action="/bilboskp-asej/comprarCupon" method="post">
-							<input type="number" name="numeroCupones" id="cantidad" min="1" max="999" value="1" placeholder="NÂº Cupones" required>
-							<button type="submit">Comprar</button>
-						</form>
-						<a href="index.jsp">Volver</a>
-					</div>
-
-                    
-                    <div class="row">
-                    
-
-                      
+                        <h1 class="h3 mb-0 text-gray-800">Suscripción</h1>
                     </div>
 
-                    
+					<!-- Implementar if para mostrar una info cuando es centro o cuando es suscriptor -->
+						<%-- 
 
-                    <div class="row">
-
-                        
-
-                       
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
+                        --%>
+                    <!-- Content Row -->
+                    <div class="row mx-1">
+						<div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Datos del Centro</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body ">
+                                <p><strong>Nombre: </strong> ${suscriptor.nombre_centro}</p>
+                                <p><strong>Localidad: </strong> ${suscriptor.localidad}</p>
+                                <p><strong>Número de alumnado: </strong> ${suscriptor.num_alumnado}</p>
+                                <p><strong>Fecha de alta: </strong> ${suscriptor.fecha_alta}</p>
                                 
+                                <!-- Implementar etapas educativas -->
+                                <%-- 
+                                <p><strong>Etapas Educativas: </strong></p>
+                                <ul>
+									<c:forEach items="${suscriptor.etapas}" var="etapa">
+                                		<li>${etapa.nombre}</li>
+                               		</c:forEach>
+                                </ul>
+                                 --%>
+                           		</div>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4 mx-1">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Persona de Contacto</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body ">
+                                <p><strong>Nombre: </strong> ${suscriptor.nombre}</p>
+                                <p><strong>Usuario: </strong> ${suscriptor.usuario}</p>
+                                <p><strong>Email: </strong> ${suscriptor.email}</p>
+                                
+                           		</div>
                             </div>
                         </div>
                     </div>
 
-                   
-                    <div class="row">
+                    <!-- Content Row -->
+                    <div class="row mx-1">
+                    <a href="" class="btn btn-primary mx-1">Cancelar suscripción</a>
+                        
+                    </div>
 
-                       
+            	</div> <!-- End Page Content -->
+            </div> <!-- End of Main Content -->
 
-                      
-                
-
-            </div>
-           
+            <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -100,12 +115,13 @@
                     </div>
                 </div>
             </footer>
-            
-        </div>
-        
+            <!-- End of Footer -->
 
-    </div>
+    	</div> <!-- End of Content Wrapper -->
     
+    </div> <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -148,18 +164,5 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-<script>
-    window.onload = function() {
-        const ahora = new Date();
-        // Asegurarse de formatear con ceros a la izquierda
-        const pad = num => String(num).padStart(2, '0');
-        const fechaMin = ahora.getFullYear() + "-" + 
-                         pad(ahora.getMonth()+1) + "-" +
-                         pad(ahora.getDate()) + "T" +
-                         pad(ahora.getHours()) + ":" +
-                         pad(ahora.getMinutes());
 
-        document.getElementById("fecha").min = fechaMin;
-    }
-</script>
 </html>

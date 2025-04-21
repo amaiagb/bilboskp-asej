@@ -42,4 +42,9 @@ public class SalaService {
 		return salaDAO.getSalaById(id);
 	}
 
+	public int countSalas() {
+		 
+		return salaDAO.countSalas();
+	}
+
 }

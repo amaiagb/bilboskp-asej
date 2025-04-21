@@ -26,10 +26,9 @@ private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Sala> listaSalas = salaService.getSalas();
 		
-		req.setAttribute("listaSalas", listaSalas);
-		System.out.println(listaSalas);
+		req.getSession().setAttribute("listaSalas", listaSalas);
 		
-        req.getRequestDispatcher("listaSalas.jsp").forward(req, resp);
+        resp.sendRedirect("/bilboskp-asej/admin/superadmin/listaSalas.jsp");
 
         
 		
