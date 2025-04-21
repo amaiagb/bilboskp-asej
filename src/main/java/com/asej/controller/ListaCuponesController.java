@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.asej.model.Cupon;
+import com.asej.model.Suscriptor;
 import com.asej.service.CuponService;
 
 @WebServlet("/listaCupones")
@@ -25,19 +26,23 @@ private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//Recuperar de sesión
-		int id_suscriptor = Integer.parseInt(req.getParameter("id_suscriptor"));
-		
+		//Recuperar de sesiï¿½n
+		Suscriptor suscriptor = (Suscriptor) req.getSession().getAttribute("suscriptor");
+        
+        int id_suscriptor = suscriptor.getId();
+        
 		List<Cupon> listaCupones = cuponService.getCupones(id_suscriptor);
 		
-		req.setAttribute("listaCupones", listaCupones);
-		System.out.println(listaCupones);
+//		req.setAttribute("listaCupones", listaCupones);
+//		System.out.println(listaCupones);
+//		
+//        req.getRequestDispatcher("admin/listaCupones.jsp").forward(req, resp);
 		
-//        if (req.getSession().getAttribute("usuario") != null) {
-//            req.getRequestDispatcher("/private/editarProducto.jsp").forward(req, resp);
-//        } else {
-            req.getRequestDispatcher("listaCupones.jsp").forward(req, resp);
-//        }
+		req.getSession().setAttribute("listaCupones", listaCupones);
+		
+		resp.sendRedirect("admin/listaCupones.jsp");
+            
+
         
 		
 	}

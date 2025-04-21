@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.asej.model.Suscriptor;
 import com.asej.service.CuponService;
 
 @WebServlet("/comprarCupon")
@@ -31,10 +32,15 @@ public class ComprarCuponController extends HttpServlet{
         
         int numeroCupones = Integer.parseInt(request.getParameter("numeroCupones"));
         
-        String nombreRol = request.getParameter("rol");
+        
         
         //Aqui hay que sacar el id_suscriptor de la informaci�n de la sesi�n.
-        int id_suscriptor = Integer.parseInt(obtenerIdSuscriptorDesdeCookie(request));
+       // int id_suscriptor = Integer.parseInt(obtenerIdSuscriptorDesdeCookie(request));
+        Suscriptor suscriptor = (Suscriptor) request.getSession().getAttribute("suscriptor");
+        
+        String nombreRol = suscriptor.getRol().getNombre();
+        
+        int id_suscriptor = suscriptor.getId();
         
         List<Integer> id_cupones = cuponService.createCupones(numeroCupones, nombreRol);
         	
@@ -47,49 +53,24 @@ public class ComprarCuponController extends HttpServlet{
         		
 		        	if (cuponService.actualizarHistorialCupones(id_suscriptor, id_cupon)) {
 		        		
-		        		request.setAttribute("numeroCupones", numeroCupones);
-		        		request.getRequestDispatcher("private/compraConfirmada.jsp").forward(request, response);
+		        		
 		        	} else {
 		        		historialActualizado = false;
 		                break;
 		        	}
         		}
+        		
+        		if (historialActualizado == true) {
+        			request.setAttribute("numeroCupones", numeroCupones);
+	        		//response.sendRedirect("private/compraConfirmada.jsp");
+	        		request.getRequestDispatcher("private/compraConfirmada.jsp").forward(request, response);
+        		} else {
+        			response.sendRedirect("error.jsp");
+        		}
         	
         	} else {
-            
-            response.sendRedirect("error.jsp");
-        	}	
+        		response.sendRedirect("error.jsp");
+        	}
     }
-	
-	private String obtenerIdSuscriptorDesdeCookie(HttpServletRequest request) {
-	    Cookie[] cookies = request.getCookies();
-
-	    if (cookies != null) {
-	        for (Cookie cookie : cookies) {
-	            if ("suscriptor".equals(cookie.getName())) {
-	                try {
-	                    String value = java.net.URLDecoder.decode(cookie.getValue(), "UTF-8");
-
-	                    // Simple way to extract "id_suscriptor"
-	                    String key = "id_suscriptor";
-	                    int index = value.indexOf(key);
-	                    if (index != -1) {
-	                        int start = index + key.length();
-	                        int end = value.indexOf(",", start); // or end of string if it's the last field
-	                        if (end == -1) {
-	                            end = value.indexOf("}", start);
-	                        }
-
-	                        return value.substring(start, end).trim();
-	                    }
-
-	                } catch (Exception e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	        }
-	    }
-	    return null;
-	}
 	
 }
