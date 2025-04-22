@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.asej.model.Sala;
+import com.asej.model.Suscriptor;
 import com.asej.model.Partida;
 import com.asej.service.SalaService;
 import com.asej.service.PartidaService;
@@ -29,6 +30,10 @@ public class IniciarOrganizarPartidaController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String partida = request.getParameter("partida");
+		Suscriptor suscriptor = (Suscriptor) request.getSession().getAttribute("suscriptor");
+		if (suscriptor != null) {
+		    request.getSession().setAttribute("idSuscriptor", suscriptor.getId());
+		}
 		
 //		if(usuario != null) {
 //			//quiero obtener el usuario de la BD

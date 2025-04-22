@@ -30,7 +30,7 @@ public class BorrarPartidaController extends HttpServlet{
 		try {
 		    partidaId = Integer.parseInt(request.getParameter("partida"));
 		} catch (NumberFormatException e) {
-		    request.setAttribute("error brother", "the ID de partida inválido, revisa");
+		    request.setAttribute("error brother", "the ID de partida invalido, revisa");
 		    request.getRequestDispatcher("listaPartidas.jsp").forward(request, response);
 		    return;
 		}
