@@ -48,7 +48,7 @@ public class RegistroSuscriptorController extends HttpServlet {
 		Rol rol = rolService.getRolByNombre("suscriptor");
 		nuevoSuscriptor.setRol(rol);
 		
-		//3. Comprobar si hay un suscriptor en la BD con ese usuario
+		//3. Crear cupon de bienvenida
 		/*
 		if(suscriptorService.getSuscriptorByUsuario(usuario) != null) {
 			
@@ -60,7 +60,7 @@ public class RegistroSuscriptorController extends HttpServlet {
 		if(suscriptorService.addSuscriptor(nuevoSuscriptor) > 0) {
 			
 			request.getSession().setAttribute("suscriptor", nuevoSuscriptor);
-			request.getRequestDispatcher("/bilboskp-asej/admin/index.jsp").forward(request, response);
+			response.sendRedirect("/bilboskp-asej/admin/index");
 			
 		} else {
 			

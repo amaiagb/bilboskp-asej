@@ -29,10 +29,10 @@ private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. Hacer consulta a BD para obtener todos los suscriptores
 		List<Suscriptor> suscriptores = suscriptorService.getSuscriptores();
-		System.out.println(suscriptores);
+		//System.out.println(suscriptores);
 		//2. Guardar en la request 
 		request.getSession().setAttribute("suscriptores", suscriptores);
-		System.out.println("request: "+request.getSession().getAttribute("suscriptores"));
+		//System.out.println("request: "+request.getSession().getAttribute("suscriptores"));
 		//3. Redirigir a jsp
 		response.sendRedirect("/bilboskp-asej/admin/superadmin/listaSuscriptores.jsp");
 		

@@ -57,7 +57,7 @@ public class SuscriptorDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id_suscriptor, nombre, usuario, contrasena, email, fecha_alta FROM suscriptor WHERE id=?;";		
+		String sql = "SELECT id_suscriptor, su.nombre, usuario, contrasena, email, fecha_alta, r.id_rol, r.nombre AS nombre_rol FROM suscriptor su INNER JOIN roles r ON r.id_rol = su.id_rol WHERE id_suscriptor=?;";		
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -73,6 +73,8 @@ public class SuscriptorDAO {
 				s.setContrasena(rs.getString("contrasena"));
 				s.setEmail(rs.getString("email"));
 				s.setFecha_alta(rs.getDate("fecha_alta").toLocalDate());
+				Rol rol = new Rol(rs.getInt("id_rol"), rs.getString("nombre_rol"));
+				s.setRol(rol);
 			}
 			
 		} catch (SQLException e) {
@@ -239,6 +241,21 @@ public class SuscriptorDAO {
 			e.printStackTrace();
 		}
 		return suscriptores;
+	}
+
+	public void deleteSuscriptor(Connection con, int id_suscriptor) {
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM suscriptor WHERE id_suscriptor = ? ;";		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id_suscriptor);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 	}
 
 }

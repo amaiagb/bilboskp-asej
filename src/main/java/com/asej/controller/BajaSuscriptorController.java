@@ -1,8 +1,6 @@
 package com.asej.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.asej.model.Centro;
-import com.asej.model.Rol;
+import com.asej.model.Suscriptor;
 import com.asej.service.CentroService;
 import com.asej.service.CuponService;
 import com.asej.service.RolService;
 import com.asej.service.SuscriptorService;
 
-@WebServlet(name = "denegarCentro", urlPatterns = { "/denegarCentro" })
-public class DenegarCentro extends HttpServlet {
+@WebServlet(name = "cancelarSuscriptor", urlPatterns = { "/cancelarSuscriptor" })
+public class BajaSuscriptorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CentroService centroService; 
 	SuscriptorService suscriptorService;
 	RolService rolService;
 	CuponService cuponService;
 	
-    public DenegarCentro() {
+    public BajaSuscriptorController() {
         super();
     }
 
@@ -43,33 +40,30 @@ public class DenegarCentro extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1. Guardar id_centro del post
-		int id_centro = Integer.parseInt(request.getParameter("id_centro"));
+		// 1. Guardar id_suscriptor
+		int id_suscriptor = Integer.parseInt(request.getParameter("id_suscriptor"));
+		System.out.println(id_suscriptor);
 		
-		// 2 Obtener id_suscriptor
-		int id_suscriptor = centroService.getCentroById(id_centro).getId();
+		// 2. Confirmar en la BD que es un suscriptor y no un centro
+		Suscriptor suscriptor = suscriptorService.getSuscriptorById(id_suscriptor);
+		System.out.println(suscriptor);
 		
-		// 3 Eliminar centro
-		if(centroService.deleteCentro(id_centro)) {
-			
-			// 4 Eliminar suscriptor asociado
+		if("suscriptor".equals(suscriptor.getRol().getNombre())) {
+		
+			//Dentro del service se realizan todos los deletes necesarios
 			if(suscriptorService.deleteSuscriptor(id_suscriptor)) {
 				
 				// 5 Redirigir
-				// Si el btn estaba en la pagina listaCentros.jsp
-				if("lista".equalsIgnoreCase(request.getParameter("origen"))) {
-					response.sendRedirect("/bilboskp-asej/listaCentros");
-				} 
-				// Si el btn estaba en la pagina listaCentrosPendientes.jsp 
-				else {
-					response.sendRedirect("/bilboskp-asej/centrosPendientes");
-				}
+				response.sendRedirect("/bilboskp-asej/listaSuscriptores");
 				
 			} else {
+				//Error en el delete
 				response.sendRedirect("/bilboskp-asej/admin/error.jsp");
 			}
+			
 		} else {
-			response.sendRedirect("/bilboskp-asej/admin/error.jsp");
+			//No es suscriptor -> no se puede borrar
 		}
+		
 	}
 }

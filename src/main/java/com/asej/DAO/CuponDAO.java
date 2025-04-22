@@ -212,6 +212,35 @@ public class CuponDAO {
 		
 		return cupones;
 	}
+
+	public void deleteHistorialBySuscriptorId(Connection con, int id_suscriptor) {
+		PreparedStatement ps = null;
+		String sql = "DELETE FROM historial_cupones WHERE id_suscriptor = ?;";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id_suscriptor);
+			ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteCuponesById(Connection con, int id_cupon) {
+		PreparedStatement ps = null;
+		String sql = "DELETE FROM cupon WHERE id_cupon = ?;";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id_cupon);
+			ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	

@@ -112,12 +112,14 @@
 											        <c:when test="${centro.estado == 'pendiente'}">
 											            <td>
                                                 	<form action="/bilboskp-asej/aprobarCentro" method="post">
+                                                	<input type="hidden" name="origen" value="lista">
                                                 		<input type="hidden" name="id_centro" value="${centro.id_centro }">
                                                 		<button type="submit" class="btn btn-info" >Aprobar</button>
                                                 	</form>
                                                 </td>
                                                 <td>
                                                 	<form action="/bilboskp-asej/denegarCentro" method="post">
+                                                		<input type="hidden" name="origen" value="lista">
                                                 		<input type="hidden" name="id_centro" value="${centro.id_centro }">
                                                 		<button type="submit" class="btn btn-secondary tx-dark">Denegar</button>
                                                 	</form>

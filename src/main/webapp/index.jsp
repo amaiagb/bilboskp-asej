@@ -31,10 +31,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Salas de Escape</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#portfolio">Salas de Escape</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#about">Reviews</a></li>
   
-                        <li class="nav-item"><a class="nav-link" href="login.jsp">Iniciar Sesi�n</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/login.jsp">Iniciar Sesión</a></li>
                     </ul>
                 </div>
             </div>

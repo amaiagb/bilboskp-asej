@@ -31,14 +31,13 @@ CREATE TABLE IF NOT EXISTS `centro_educativo` (
   PRIMARY KEY (`id_centro`) USING BTREE,
   KEY `FK_centro_educativo_suscriptor` (`id_suscriptor`),
   CONSTRAINT `FK_centro_educativo_suscriptor` FOREIGN KEY (`id_suscriptor`) REFERENCES `suscriptor` (`id_suscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla bilboskp.centro_educativo: ~3 rows (aproximadamente)
 INSERT INTO `centro_educativo` (`id_suscriptor`, `id_centro`, `nombre_centro`, `localidad`, `etapas_educativas`, `num_alumnado`, `estado`) VALUES
 	(8, 4, 'IES Castro', 'Castro Urdiales', 2, 100, 'aceptado'),
 	(11, 5, 'Centro San Luis', 'Bilbao', 4, 20, 'aceptado'),
-	(12, 6, 'IES Laudio', 'Llodio', 5, 30, 'aceptado'),
-	(18, 23, 'CEIP Barakaldo', 'Barakaldo', 4, 50, 'pendiente');
+	(12, 6, 'IES Laudio', 'Llodio', 5, 30, 'aceptado');
 
 -- Volcando estructura para tabla bilboskp.cupon
 CREATE TABLE IF NOT EXISTS `cupon` (
@@ -50,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `cupon` (
   `fecha_devolucion` date DEFAULT NULL,
   `tipo` varchar(50) NOT NULL,
   PRIMARY KEY (`id_cupon`)
-) ENGINE=InnoDB AUTO_INCREMENT=1302 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1307 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bilboskp.cupon: ~71 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskp.cupon: ~76 rows (aproximadamente)
 INSERT INTO `cupon` (`id_cupon`, `fecha_compra`, `fecha_caducidad`, `estado`, `precio`, `fecha_devolucion`, `tipo`) VALUES
 	(1, '2025-04-11', '2125-04-11', 'disponible', 0, NULL, 'arcoiris'),
 	(2, '2025-04-21', '2025-05-21', 'disponible', 0, NULL, 'centro'),
@@ -124,7 +123,12 @@ INSERT INTO `cupon` (`id_cupon`, `fecha_compra`, `fecha_caducidad`, `estado`, `p
 	(68, '2025-04-21', '2025-05-21', 'disponible', 0, NULL, 'centro'),
 	(69, '2025-04-21', '2025-05-21', 'disponible', 0, NULL, 'centro'),
 	(70, '2025-04-21', '2025-05-21', 'disponible', 0, NULL, 'centro'),
-	(71, '2025-04-21', '2025-05-21', 'disponible', 0, NULL, 'centro');
+	(71, '2025-04-21', '2025-05-21', 'disponible', 0, NULL, 'centro'),
+	(1302, '2025-04-22', '2025-05-22', 'disponible', 4.95, NULL, 'suscriptor'),
+	(1303, '2025-04-22', '2025-05-22', 'disponible', 4.95, NULL, 'suscriptor'),
+	(1304, '2025-04-22', '2025-05-22', 'disponible', 4.95, NULL, 'suscriptor'),
+	(1305, '2025-04-22', '2025-05-22', 'disponible', 4.95, NULL, 'suscriptor'),
+	(1306, '2025-04-22', '2025-05-22', 'disponible', 4.95, NULL, 'suscriptor');
 
 -- Volcando estructura para tabla bilboskp.historial_cupones
 CREATE TABLE IF NOT EXISTS `historial_cupones` (
@@ -132,8 +136,8 @@ CREATE TABLE IF NOT EXISTS `historial_cupones` (
   `id_cupon` int(11) NOT NULL,
   PRIMARY KEY (`id_suscriptor`,`id_cupon`),
   KEY `FK_historial_cupones_cupon` (`id_cupon`),
-  CONSTRAINT `FK_historial_cupones_cupon` FOREIGN KEY (`id_cupon`) REFERENCES `cupon` (`id_cupon`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_historial_cupones_suscriptor` FOREIGN KEY (`id_suscriptor`) REFERENCES `suscriptor` (`id_suscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_historial_cupones_cupon` FOREIGN KEY (`id_cupon`) REFERENCES `cupon` (`id_cupon`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `FK_historial_cupones_suscriptor` FOREIGN KEY (`id_suscriptor`) REFERENCES `suscriptor` (`id_suscriptor`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla bilboskp.historial_cupones: ~71 rows (aproximadamente)
@@ -225,12 +229,11 @@ CREATE TABLE IF NOT EXISTS `partida` (
   KEY `FK_partida_suscriptor` (`id_suscriptor`),
   KEY `FK_partida_sala` (`id_sala`),
   CONSTRAINT `FK_partida_sala` FOREIGN KEY (`id_sala`) REFERENCES `sala` (`id_sala`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_partida_suscriptor` FOREIGN KEY (`id_suscriptor`) REFERENCES `suscriptor` (`id_suscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_partida_suscriptor` FOREIGN KEY (`id_suscriptor`) REFERENCES `suscriptor` (`id_suscriptor`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bilboskp.partida: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskp.partida: ~1 rows (aproximadamente)
 INSERT INTO `partida` (`id_partida`, `fecha`, `jugadores`, `descripcion`, `estado`, `puntuacion`, `id_suscriptor`, `id_sala`, `codigo`) VALUES
-	(29, '2025-04-11 10:44:00', 7, '2 DAW', 'programada', 0, 9, 7, 'ickkck'),
 	(30, '2025-04-28 12:00:00', 5, '1 DAW', 'programada', 0, 12, 7, 'aaa');
 
 -- Volcando estructura para tabla bilboskp.roles
@@ -240,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id_rol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bilboskp.roles: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskp.roles: ~2 rows (aproximadamente)
 INSERT INTO `roles` (`id_rol`, `nombre`) VALUES
 	(1, 'admin'),
 	(2, 'suscriptor'),
@@ -255,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `sala` (
   PRIMARY KEY (`id_sala`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bilboskp.sala: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskp.sala: ~3 rows (aproximadamente)
 INSERT INTO `sala` (`id_sala`, `nombre`, `tipo`, `estado`) VALUES
 	(7, 'School Escape Room', 'centro', 'habilitada'),
 	(8, 'Expediente X', 'suscriptor', 'habilitada'),
@@ -276,16 +279,15 @@ CREATE TABLE IF NOT EXISTS `suscriptor` (
   UNIQUE KEY `username` (`usuario`) USING BTREE,
   KEY `FK_suscriptor_roles` (`id_rol`),
   CONSTRAINT `FK_suscriptor_roles` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla bilboskp.suscriptor: ~5 rows (aproximadamente)
 INSERT INTO `suscriptor` (`id_suscriptor`, `nombre`, `usuario`, `contrasena`, `email`, `fecha_alta`, `id_rol`) VALUES
 	(8, 'juan', 'juan', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'j@gmail.com', '2025-04-11', 3),
-	(9, 'iban', 'iban', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'i@gmail.com', '2025-04-11', 2),
 	(10, 'admin', 'admin', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'admin@gmail.com', '2025-04-21', 1),
 	(11, 'Alberto', 'alberto', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'alb@gmail.com', '2025-04-21', 3),
 	(12, 'Amaia', 'amaia', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'amaia@gmail.com', '2025-04-21', 3),
-	(18, 'Sergio', 'sergio', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'sergio@gmail.com', '2025-04-22', 3);
+	(22, 'Elena', 'elena', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'elena@gmail.com', '2025-04-22', 2);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
