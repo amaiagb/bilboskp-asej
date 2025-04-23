@@ -1,4 +1,5 @@
-<%@ include file="/WEB-INF/includes/idioma.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Jugar Partida - BilboSKP</title>
+    <title>Codigo - BilboSKP</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,7 +20,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/admin/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -28,9 +29,9 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-         <!-- Sidebar -->
+        <!-- Sidebar -->
         <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
-        <!-- End of Sidebar -->
+        
        
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -45,29 +46,20 @@
 
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Jugar Partida</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Introducir Codigo</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
                     </div>
+                    <div>
+						<form action="/bilboskp-asej/mirarCodigo" method="post">
+							<input type="text" name="codigo" placeholder="Codigo Partida" maxlength="20">
+							<button type="submit">Jugar</button>
+						</form>
+					</div>
 
                     
                     <div class="row">
-                    <h2>Descargar archivo ZIP</h2>
-
-					<form action="${pageContext.request.contextPath}/bilboskp-asej/descargarZip" method="get">
-					    <button type="submit">Descargar ZIP</button>
-					</form>
-					
-					
-					<div>
-						<ol>
-							<li>
-							    <form action="${pageContext.request.contextPath}/finalizarPartida" method="post" style="display:inline;">
-							        <button type="submit">Finalizar partida</button>
-							    </form>
-							</li>
-						</ol>
-					</div>
+                    
 
                       
                     </div>
@@ -151,5 +143,4 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-
 </html>
