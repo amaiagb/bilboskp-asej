@@ -1,9 +1,11 @@
 <%@page import="com.asej.model.Sala"%>
+<%@page import="com.asej.model.Cupon"%>
 <%@page import="com.asej.model.Suscriptor"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%ArrayList<Sala> salas = (ArrayList<Sala>) request.getSession().getAttribute("salas"); %>
+<%ArrayList<Cupon> cupones = (ArrayList<Cupon>) request.getSession().getAttribute("cupones"); %>
 <%Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor"); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +60,7 @@
                     <div>
 						<form action="/bilboskp-asej/organizar" method="post">
 							<input type="datetime-local" name="date" id="fecha" placeholder="Fecha y Hora" required>
-							<input type="number" name="jugadores" id="cantidad" min="1" max="999" value="1" placeholder="Nº Jugadores" required>
+							<input type="number" name="jugadores" id="cantidad" min="1" max="<%= cupones.size() %>" value="1" placeholder="Nº Jugadores" required>
 							<input type="text" name="descripcion" placeholder="Descripción" maxlength="100">
 							<select id="sala" name="sala">
 							<% for(Sala sala : salas){ %>

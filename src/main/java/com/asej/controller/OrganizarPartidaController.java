@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.asej.model.Partida;
 import com.asej.model.Sala;
+import com.asej.service.CuponService;
 import com.asej.model.Suscriptor;
 import com.asej.service.PartidaService;
 import com.asej.service.SalaService;
@@ -22,6 +23,7 @@ public class OrganizarPartidaController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     PartidaService partidaService;
     SalaService salaService;
+    CuponService cuponService;
     String codigo = generarCodigoAleatorio();
 
     @Override
@@ -29,6 +31,7 @@ public class OrganizarPartidaController extends HttpServlet {
         super.init(config);
         partidaService = new PartidaService();
         salaService = new SalaService();
+        cuponService = new CuponService();
     }
 
     @Override
@@ -38,6 +41,8 @@ public class OrganizarPartidaController extends HttpServlet {
             String jugadoresStr = req.getParameter("jugadores");
             String descripcion = req.getParameter("descripcion");
             String idSalaStr = req.getParameter("sala");
+            int numCupones = Integer.parseInt(req.getParameter("jugadores"));
+            
 
             if (fechaStr == null || jugadoresStr == null || descripcion == null || idSalaStr == null ||
                 fechaStr.isEmpty() || jugadoresStr.isEmpty() || descripcion.isEmpty() || idSalaStr.isEmpty()) {
@@ -94,6 +99,9 @@ public class OrganizarPartidaController extends HttpServlet {
 
             if (success) {
                 System.out.println("Partida creada correctamente.");
+                
+                cuponService.programarCupon(numCupones);
+                
                 resp.sendRedirect(req.getContextPath() + "/admin/organizarPartida.jsp");
             } else {
                 System.out.println("Error al crear la partida.");

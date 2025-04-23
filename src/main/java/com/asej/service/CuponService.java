@@ -34,5 +34,13 @@ private CuponDAO cuponDAO;
 		return cuponDAO.getCuponesDisponibles(id);
 	}
 	
+	public boolean usarCupon(int id_cupon) {
+		return cuponDAO.usarCupon(id_cupon);
+	}
+	
+	public boolean programarCupon(int numCupones) {
+		return cuponDAO.programarCupon(numCupones);
+	}
+	
 	
 }

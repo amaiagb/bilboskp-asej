@@ -12,19 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import com.asej.model.Sala;
 import com.asej.model.Suscriptor;
 import com.asej.model.Partida;
+import com.asej.model.Cupon;
 import com.asej.service.SalaService;
 import com.asej.service.PartidaService;
+import com.asej.service.CuponService;
 
 @WebServlet("/iniciarOrganizar")
 public class IniciarOrganizarPartidaController extends HttpServlet{
 	
 	SalaService salaService;
 	PartidaService partidaService;
+	CuponService cuponService;
 	
 	@Override
 	public void init() throws ServletException {
 		salaService = new SalaService();
 		partidaService = new PartidaService();
+		cuponService = new CuponService();
 	}
 	
 	@Override
@@ -45,6 +49,10 @@ public class IniciarOrganizarPartidaController extends HttpServlet{
 		List<Sala> salas = salaService.getSalas();
 		request.getSession().setAttribute("salas", salas);;	
 		System.out.println("las salas disponibles son: " + request.getSession().getAttribute("salas"));
+		
+		List<Cupon> cupones = cuponService.getCuponesDisponibles(suscriptor.getId());
+		request.getSession().setAttribute("cupones", cupones);
+		
 		
 //		request.getRequestDispatcher("/admin/organizarPartida.jsp").forward(request, response);
 		response.sendRedirect(request.getContextPath() + "/admin/organizarPartida.jsp");
