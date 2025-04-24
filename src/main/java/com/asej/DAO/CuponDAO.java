@@ -134,12 +134,13 @@ public class CuponDAO {
 		
 		
 		
-		String sql = "UPDATE cupon SET estado = 'en uso' WHERE estado = ? LIMIT 1";
+		String sql = "UPDATE cupon SET estado = 'en uso' WHERE estado = ? AND tipo = ? LIMIT 1";
 		
 		try {
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, "programado");
+			ps.setString(2, "centro");
 			
 			
 			if(ps.executeUpdate() > 0) {
@@ -164,12 +165,13 @@ public class CuponDAO {
 		
 		
 		
-		String sql = "UPDATE cupon SET estado = 'usado' WHERE estado = ? LIMIT 1";
+		String sql = "UPDATE cupon SET estado = 'usado' WHERE estado = ? AND tipo = ? LIMIT 1";
 		
 		try {
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, "en uso");
+			ps.setString(2, "centro");
 			
 			
 			if(ps.executeUpdate() > 0) {
