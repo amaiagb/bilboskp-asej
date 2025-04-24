@@ -33,14 +33,22 @@ private CuponDAO cuponDAO;
 	public List<Cupon> getCuponesDisponibles(int id) {
 		return cuponDAO.getCuponesDisponibles(id);
 	}
+	
+	public List<Cupon> getCuponesProgramados(int id) {
+		return cuponDAO.getCuponesProgramados(id);
+	}
 
 	public List<Cupon> getCuponesDevolviblesCentro(int id_suscriptor) {
 		 
 		return cuponDAO.getCuponesDevolviblesCentro(id_suscriptor);
 	}
 	
-	public boolean usarCupon(int id_cupon) {
-		return cuponDAO.usarCupon(id_cupon);
+	public boolean setCuponEnUso() {
+		return cuponDAO.setCuponEnUso();
+	}
+	
+	public boolean setCuponUsado() {
+		return cuponDAO.setCuponUsado();
 	}
 	
 	public boolean programarCupon(int numCupones) {

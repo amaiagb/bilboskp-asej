@@ -13,11 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import com.asej.model.Partida;
 import com.asej.service.PartidaService;
+import com.asej.service.CuponService;
 
 @WebServlet("/finalizarPartida")
 public class FinalizarPartidaController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private PartidaService partidaService;
+    private CuponService cuponService;
 
     public FinalizarPartidaController() {
         super();
@@ -25,6 +27,7 @@ public class FinalizarPartidaController extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         partidaService = new PartidaService();
+        cuponService = new CuponService();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,6 +45,8 @@ public class FinalizarPartidaController extends HttpServlet {
             if (actualizada) {
             	//esto es lo que dije en la reunion de quitarlo de la sesion, para que no buguuee, creo que con esto sirve
                 session.removeAttribute("partida");
+                
+                cuponService.setCuponUsado();
 
                 response.sendRedirect("/bilboskp-asej/admin/index.jsp");
             } else {
