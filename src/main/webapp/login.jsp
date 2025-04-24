@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/login.css">
     
 </head>
-<body>
+<body class="no-scroll-shrink">
     <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
             <div class="container">

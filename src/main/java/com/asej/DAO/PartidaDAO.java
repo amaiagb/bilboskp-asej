@@ -282,5 +282,37 @@ public class PartidaDAO {
 		return count;
 	}
 
+	public void deletePartidasBySuscriptor(int id_suscriptor) {
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM partida WHERE id_suscriptor = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id_suscriptor);
+			ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void deletePartidasBySuscriptor(Connection con, int id_suscriptor) {
+		PreparedStatement ps = null;
+		String sql = "DELETE FROM partida WHERE id_suscriptor = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id_suscriptor);
+			ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 
 }

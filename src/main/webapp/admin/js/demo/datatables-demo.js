@@ -1,5 +1,6 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
+console.log("¿Existe la tabla?", $('#dataTable').length);
   $('#dataTable').DataTable({
         "columnDefs": [
             {

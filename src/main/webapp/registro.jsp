@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/login.css">
     
 </head>
-<body>
+<body class="no-scroll-shrink">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-shrink fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.html"><img src="assets/img/logos/bilboSKP.png" alt="..." /></a>

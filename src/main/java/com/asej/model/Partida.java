@@ -1,8 +1,11 @@
 package com.asej.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Partida {
+public class Partida implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
     private int id_partida, jugadores, puntuacion;
     private LocalDateTime fecha; 
     private String descripcion, estado;

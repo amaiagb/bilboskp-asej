@@ -1,10 +1,12 @@
 package com.asej.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class Suscriptor {
-
+public class Suscriptor implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String nombre, usuario, contrasena, email;
 	private LocalDate fecha_alta;

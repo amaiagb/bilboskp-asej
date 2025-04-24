@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.asej.model.Centro;
+import com.asej.model.Rol;
 import com.asej.model.Suscriptor;
 
 public class CentroDAO {
@@ -166,8 +167,9 @@ public class CentroDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT nombre_centro, localidad, etapas_educativas, num_alumnado, id_suscriptor, estado FROM centro_educativo WHERE id_centro=?;";		
-		
+		String sql = "SELECT id_centro, nombre_centro, localidad, etapas_educativas, num_alumnado, c.id_suscriptor, c.estado, s.nombre, s.usuario,s.email,s.id_rol, s.fecha_alta "
+				+ "FROM centro_educativo c INNER JOIN suscriptor s ON s.id_suscriptor=c.id_suscriptor "
+				+ "WHERE id_centro = ?;";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, id_centro);
@@ -178,7 +180,12 @@ public class CentroDAO {
 				c = new Centro(id_centro, rs.getString("nombre_centro"), rs.getString("localidad"), rs.getInt("etapas_educativas"), rs.getInt("num_alumnado"));
 				c.setId(rs.getInt("id_suscriptor"));
 				c.setEstado(rs.getString("estado"));
-				
+				c.setFecha_alta(rs.getDate("fecha_alta").toLocalDate());
+				c.setEmail(rs.getString("email"));
+				c.setNombre(rs.getString("nombre"));
+				c.setUsuario(rs.getString("usuario"));
+				Rol rol = new Rol(rs.getInt("id_rol"), "centro");
+				c.setRol(rol);
 			}
 			
 		} catch (SQLException e) {
@@ -295,6 +302,28 @@ public class CentroDAO {
 		}
 		
 		return centros;
+	}
+
+	public boolean deleteCentro(Connection con, int id_centro) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "DELETE FROM centro_educativo  WHERE id_centro = ? ;";		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id_centro);
+			System.out.println("Ejecutando: " + sql + " con id_centro=" + id_centro);
+			if(ps.executeUpdate() > 0) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
 	}
 
 }

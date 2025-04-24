@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
-<body class="h-auto">
+<body class="h-auto no-scroll-shrink">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-shrink fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.jsp"><img src="assets/img/logos/bilboSKP.png" alt="..." /></a>

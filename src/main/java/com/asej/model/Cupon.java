@@ -1,9 +1,11 @@
 package com.asej.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Cupon {
-
+public class Cupon implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private int id_cupon;
 	private Date fecha_compra, fecha_caducidad, fecha_devolucion;
 	private String estado, tipo;

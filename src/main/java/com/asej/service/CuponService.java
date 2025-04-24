@@ -33,6 +33,11 @@ private CuponDAO cuponDAO;
 	public List<Cupon> getCuponesDisponibles(int id) {
 		return cuponDAO.getCuponesDisponibles(id);
 	}
+
+	public List<Cupon> getCuponesDevolviblesCentro(int id_suscriptor) {
+		 
+		return cuponDAO.getCuponesDevolviblesCentro(id_suscriptor);
+	}
 	
 	
 }

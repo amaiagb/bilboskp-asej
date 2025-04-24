@@ -243,7 +243,7 @@ public class SuscriptorDAO {
 		return suscriptores;
 	}
 
-	public void deleteSuscriptor(Connection con, int id_suscriptor) {
+	public boolean deleteSuscriptor(Connection con, int id_suscriptor) {
 		PreparedStatement ps = null;
 		
 		String sql = "DELETE FROM suscriptor WHERE id_suscriptor = ? ;";		
@@ -251,11 +251,16 @@ public class SuscriptorDAO {
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, id_suscriptor);
-			ps.executeUpdate();
+			if(ps.executeUpdate() > 0) {
+				return true;
+			} else {
+				return false;
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
+		return false; 
 	}
 
 }

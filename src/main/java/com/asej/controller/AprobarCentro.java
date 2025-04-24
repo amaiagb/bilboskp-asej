@@ -62,7 +62,14 @@ public class AprobarCentro extends HttpServlet {
 				}
 			}
 			// 6. Redirigir
-			response.sendRedirect("/bilboskp-asej/centrosPendientes");
+			// Si el btn estaba en la pagina listaCentros.jsp
+			if("lista".equalsIgnoreCase(request.getParameter("origen"))) {
+				response.sendRedirect("/bilboskp-asej/listaCentros");
+			} 
+			// Si el btn estaba en la pagina listaCentrosPendientes.jsp 
+			else {
+				response.sendRedirect("/bilboskp-asej/centrosPendientes");
+			}
 		}
 	}
 }

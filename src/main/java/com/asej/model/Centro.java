@@ -1,8 +1,10 @@
 package com.asej.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Centro extends Suscriptor {
+public class Centro extends Suscriptor implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	private int id_centro;
 	private String nombre_centro, localidad;

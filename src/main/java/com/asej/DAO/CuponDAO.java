@@ -241,6 +241,41 @@ public class CuponDAO {
 		}
 		
 	}
+
+	public List<Cupon> getCuponesDevolviblesCentro(int id_suscriptor) {
+
+		List<Cupon> cupones = null;
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT c.id_cupon, c.fecha_compra, c.fecha_caducidad, c.fecha_devolucion, c.estado, c.tipo, c.precio FROM cupon c "
+				+ "INNER JOIN historial_cupones hc ON c.id_cupon = hc.id_cupon "
+				+ "INNER JOIN suscriptor s ON hc.id_suscriptor = s.id_suscriptor "
+				+ "WHERE s.id_suscriptor = ? AND (c.estado = 'disponible' OR c.estado = 'programado')";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id_suscriptor);
+			rs = ps.executeQuery();
+			
+			cupones = new ArrayList<Cupon>();
+			
+			while (rs.next()) {
+				
+				Cupon cupon = new Cupon(rs.getInt("id_cupon"), rs.getDate("fecha_compra"), rs.getDate("fecha_caducidad"), rs.getDate("fecha_devolucion"), rs.getString("estado"), rs.getString("tipo"), rs.getFloat("precio"));
+				cupones.add(cupon);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(rs, ps, con);
+		}
+		
+		return cupones;
+		
+	}
 	
 	
 	
