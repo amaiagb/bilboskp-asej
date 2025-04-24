@@ -311,6 +311,7 @@ public class PartidaDAO {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
 		
 	public static List<Partida> getPartidasByIdYSala(int id_suscriptor, int id_sala) {
 		  List<Partida> partidas = new ArrayList<>();
