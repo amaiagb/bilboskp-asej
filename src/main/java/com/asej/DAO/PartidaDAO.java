@@ -312,6 +312,105 @@ public class PartidaDAO {
 			e.printStackTrace();
 		}
 		
+	public static List<Partida> getPartidasByIdYSala(int id_suscriptor, int id_sala) {
+		  List<Partida> partidas = new ArrayList<>();
+		    Connection con = AccesoBD.getConnection();
+		    PreparedStatement ps = null;
+		    ResultSet rs = null;
+
+		    String sql = "SELECT * FROM partida WHERE id_suscriptor = ? AND id_sala = ? ORDER BY fecha DESC";
+
+		    try {
+		        ps = con.prepareStatement(sql);
+		        ps.setInt(1, id_suscriptor);
+		        ps.setInt(2, id_sala);
+
+		        rs = ps.executeQuery();
+
+		        SalaDAO salaDAO = new SalaDAO();
+
+		        while (rs.next()) {
+		            Partida partida = new Partida();
+		            partida.setId_partida(rs.getInt("id_partida"));
+		            partida.setFecha(rs.getTimestamp("fecha").toLocalDateTime());
+		            partida.setPuntuacion(rs.getInt("puntuacion"));
+		            partida.setSala(salaDAO.getSalaById(rs.getInt("id_sala")));
+		            partidas.add(partida);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        AccesoBD.closeConnection(rs, ps, con);
+		    }
+
+		    return partidas;
+		}
+
+	public static Partida mirarCodigo(String codigo) {
+		 Connection con = AccesoBD.getConnection();
+		    PreparedStatement ps = null;
+		    ResultSet rs = null;
+		    Partida p = null;
+
+		    String sql = "SELECT p.*, s.id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p " +
+		                 "INNER JOIN sala s ON p.id_sala = s.id_sala " +
+		                 "WHERE p.codigo = ?";
+
+		    try {
+		        ps = con.prepareStatement(sql);
+		        ps.setString(1, codigo);
+		        rs = ps.executeQuery();
+
+		        if (rs.next()) {
+		            p = new Partida();
+		            p.setId_partida(rs.getInt("id_partida"));
+		            p.setFecha(rs.getTimestamp("fecha").toLocalDateTime());
+		            p.setJugadores(rs.getInt("jugadores"));
+		            p.setDescripcion(rs.getString("descripcion"));
+		            p.setEstado(rs.getString("estado"));
+		            p.setPuntuacion(rs.getInt("puntuacion"));
+
+		            Sala sala = new Sala();
+		            sala.setId_sala(rs.getInt("id_sala"));
+		            sala.setNombre(rs.getString("nombre_sala"));
+		            sala.setTipo(rs.getString("tipo"));
+		            p.setSala(sala);
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        AccesoBD.closeConnection(rs, ps, con);
+		    }
+
+		    return p;
+		}
+
+	public static boolean actualizarPartida(Partida partida) {
+		Connection con = AccesoBD.getConnection();
+	    PreparedStatement ps = null;
+
+	    String sql = "UPDATE partida SET fecha = ?, jugadores = ?, descripcion = ?, id_sala = ?, puntuacion = ?, estado = ? WHERE id_partida = ?";
+
+	    try {
+	        ps = con.prepareStatement(sql);
+
+	        ps.setTimestamp(1, Timestamp.valueOf(partida.getFecha()));
+	        ps.setInt(2, partida.getJugadores());
+	        ps.setString(3, partida.getDescripcion());
+	        ps.setInt(4, partida.getSala().getId_sala());
+	        ps.setInt(5, partida.getPuntuacion());
+	        ps.setString(6, partida.getEstado());
+	        ps.setInt(7, partida.getId_partida());
+
+	        return ps.executeUpdate() > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        AccesoBD.closeConnection(null, ps, con);
+	    }
+	    return false;
 	}
 
 

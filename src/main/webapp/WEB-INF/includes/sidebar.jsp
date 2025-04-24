@@ -43,7 +43,7 @@
                         <h6 class="collapse-header">Partida:</h6>
                         <a class="collapse-item" href="/bilboskp-asej/iniciarOrganizar">Organizar Partida</a>
                         <a class="collapse-item" href="/bilboskp-asej/listaPartidas">Lista de Partidas</a>
-                        <a class="collapse-item" href="/bilboskp-asej/admin/jugarPartida.jsp">Jugar Partidas</a>
+                        <a class="collapse-item" href="/bilboskp-asej/admin/codigo.jsp">Jugar Partidas</a>
                     </div>
                 </div>
             </li>
@@ -69,7 +69,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="/bilboskp-asej/ranking">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Ranking</span></a>
+                    <span>Ranking</span>
+                </a>
+                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Ranking:</h6>
+                        <a class="collapse-item" href="/bilboskp-asej/ranking"">Ver Ranking</a>                        
+                    </div>
+                </div>
+                
             </li>
 
             <!-- Divider -->

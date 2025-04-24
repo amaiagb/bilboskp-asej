@@ -95,6 +95,67 @@ public class CuponDAO {
 		
 		return false;
 	}
+	
+	public boolean programarCupon(int numCupones) {
+		
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		
+		String sql = "UPDATE cupon SET estado = 'programado' WHERE estado = ? LIMIT ?";
+		
+		try {
+			
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, "disponible");
+			ps.setInt(2, numCupones);
+			
+			
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		
+		return false;
+	}
+	
+	public boolean usarCupon(int id_cupon) {
+		
+		Connection con = AccesoBD.getConnection();
+		PreparedStatement ps = null;
+		
+		
+		
+		String sql = "UPDATE cupon SET estado = 'usado' WHERE id_cupon = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, id_cupon);
+			
+			
+			if(ps.executeUpdate() > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			AccesoBD.closeConnection(null, ps, con);
+		}
+		
+		return false;
+	}
 
 	
 	public List<Integer> createCupones(int numeroCupones, String nombreRol) {

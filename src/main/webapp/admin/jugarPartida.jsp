@@ -52,6 +52,22 @@
 
                     
                     <div class="row">
+                    <h2>Descargar archivo ZIP</h2>
+
+					<form action="${pageContext.request.contextPath}/bilboskp-asej/descargarZip" method="get">
+					    <button type="submit">Descargar ZIP</button>
+					</form>
+					
+					
+					<div>
+						<ol>
+							<li>
+							    <form action="${pageContext.request.contextPath}/finalizarPartida" method="post" style="display:inline;">
+							        <button type="submit">Finalizar partida</button>
+							    </form>
+							</li>
+						</ol>
+					</div>
 
                       
                     </div>

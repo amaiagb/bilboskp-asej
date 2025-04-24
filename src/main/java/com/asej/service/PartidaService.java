@@ -51,4 +51,21 @@ public class PartidaService {
 		return partidaDao.getNumPartidasProgramadas(id);
 	}
 
+	public List<Partida> getPartidasByIdYSala(int id_suscriptor, int id_sala) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.getPartidasByIdYSala(id_suscriptor, id_sala);
+	}
+
+	public Partida mirarCodigo(String codigo) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.mirarCodigo(codigo);
+	}
+
+	public boolean actualizarPartida(Partida partida) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.actualizarPartida(partida);
+	}
+
+
+
 }

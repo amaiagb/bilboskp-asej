@@ -1,12 +1,4 @@
-<%@page import="com.asej.model.Sala"%>
-<%@page import="com.asej.model.Cupon"%>
-<%@page import="com.asej.model.Suscriptor"%>
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%ArrayList<Sala> salas = (ArrayList<Sala>) request.getSession().getAttribute("salas"); %>
-<%ArrayList<Cupon> cupones = (ArrayList<Cupon>) request.getSession().getAttribute("cupones"); %>
-<%Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor"); %>
+<%@ include file="/WEB-INF/includes/idioma.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +10,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Organizar partida - BilboSKP</title>
+    <title>Ranking</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="${pageContext.request.contextPath}/admin/css/sb-admin-2.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/admin/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -38,10 +30,9 @@
 
         <!-- Sidebar -->
         <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
-        
+        <!-- End of Sidebar -->
        
         <div id="content-wrapper" class="d-flex flex-column">
-
            
             <div id="content">
 
@@ -49,34 +40,58 @@
                  <%@ include file="/WEB-INF/includes/topbar.jsp" %>
                 <!-- End of Topbar -->
                 
-                <div class="container-fluid">
+            	<div class="container-fluid">
 
-                    
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Organizar Partida</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Ranking</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
                     </div>
-                    <div>
-						<form action="/bilboskp-asej/organizar" method="post">
-							<input type="datetime-local" name="date" id="fecha" placeholder="Fecha y Hora" required>
-							<input type="number" name="jugadores" id="cantidad" min="1" max="<%= cupones.size() %>" value="1" placeholder="Nº Jugadores" required>
-							<input type="text" name="descripcion" placeholder="Descripción" maxlength="100">
-							<select id="sala" name="sala">
-							<% for(Sala sala : salas){ %>
-								<option value="<%= sala.getId_sala() %>"><%= sala.getNombre() %></option>
-							<%} %>
-							</select>
-							<button type="submit">Crear</button>
-						</form>
-						<a href="index.jsp">Volver</a>
-					</div>
 
                     
                     <div class="row">
-                    
+                        <!-- DataTables -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Ranking</h6>
+                            </div>
+                            <div class="card-body">
+                            <form method="get" action="/bilboskp-asej/ranking" class="mb-4">
+								<label for="sala">Filtrar por sala:</label>
+								<select name="sala" id="sala" class="form-control w-25 d-inline mx-2">
+								    <option value="">Todas las salas</option>
+								    <c:forEach items="${listaSalas}" var="sala">
+										<option value="${sala.id_sala}" <c:if test="${sala.id_sala == salaSeleccionada}">selected</c:if>>${sala.nombre}</option>
+									</c:forEach>
 
-                      
+								    </select>
+								    <button type="submit" class="btn btn-primary">Filtrar</button>
+								</form>
+                            
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Puntuaci�n</th>
+                                                <th>Sala</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                        <c:forEach items="${listaPartidas}" var="partida">
+                                        	<tr>
+                                                <td>${partida.fecha}</td>
+                                                <td>${partida.puntuacion}</td>
+                                                <td>${partida.sala.nombre}</td>
+                                            </tr>
+                                        </c:forEach>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     
@@ -141,35 +156,22 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/js/demo/chart-area-demo.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/js/demo/chart-pie-demo.js"></script>
 
 </body>
-<script>
-    window.onload = function() {
-        const ahora = new Date();
-        // Asegurarse de formatear con ceros a la izquierda
-        const pad = num => String(num).padStart(2, '0');
-        const fechaMin = ahora.getFullYear() + "-" + 
-                         pad(ahora.getMonth()+1) + "-" +
-                         pad(ahora.getDate()) + " T" +
-                         pad(ahora.getHours()) + ":" +
-                         pad(ahora.getMinutes());
 
-        document.getElementById("fecha").min = fechaMin;
-    }
-</script>
 </html>
