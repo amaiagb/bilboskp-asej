@@ -34,8 +34,13 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
-        <!-- End of Sidebar -->
+		<c:if test="${tipoSuscriptor == 'centro'}">
+			<%@ include file="/WEB-INF/includes/sidebar.jsp"%>
+		</c:if>
+		<c:if test="${tipoSuscriptor == 'suscriptor'}">
+			<%@ include file="/WEB-INF/includes/sidebarSuscriptor.jsp"%>
+		</c:if>
+		<!-- End of Sidebar -->
        
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
