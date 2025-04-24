@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/includes/idioma.jsp" %>
 <%@page import="com.asej.model.Sala"%>
 <%@page import="com.asej.model.Cupon"%>
 <%@page import="com.asej.model.Suscriptor"%>
@@ -37,9 +38,15 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
-        
-       
+		<c:if test="${tipoSuscriptor == 'centro'}">
+			<%@ include file="/WEB-INF/includes/sidebar.jsp"%>
+		</c:if>
+		<c:if test="${tipoSuscriptor == 'suscriptor'}">
+			<%@ include file="/WEB-INF/includes/sidebarSuscriptor.jsp"%>
+		</c:if>
+		<!-- End of Sidebar -->
+		
+		
         <div id="content-wrapper" class="d-flex flex-column">
 
            

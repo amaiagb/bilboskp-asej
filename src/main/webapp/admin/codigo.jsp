@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/includes/idioma.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,7 +31,13 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <%@ include file="/WEB-INF/includes/sidebar.jsp" %>
+		<c:if test="${tipoSuscriptor == 'centro'}">
+			<%@ include file="/WEB-INF/includes/sidebar.jsp"%>
+		</c:if>
+		<c:if test="${tipoSuscriptor == 'suscriptor'}">
+			<%@ include file="/WEB-INF/includes/sidebarSuscriptor.jsp"%>
+		</c:if>
+		<!-- End of Sidebar -->
         
        
         <div id="content-wrapper" class="d-flex flex-column">

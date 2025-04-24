@@ -76,6 +76,7 @@ public class LoginController extends HttpServlet {
 				if("aceptado".equalsIgnoreCase(centro.getEstado())) {
 				//  Añadir centro a la sesión
 					request.getSession().setAttribute("suscriptor", centro);
+					request.getSession().setAttribute("tipoSuscriptor", "centro");
 					System.out.println("centro: "+request.getSession().getAttribute("suscriptor"));
 				} 
 				// El centro aún no ha sido aceptado -> no logear, mostrar error
@@ -90,6 +91,7 @@ public class LoginController extends HttpServlet {
 				
 				// Añadir suscriptor a la sesión
 				request.getSession().setAttribute("suscriptor", suscriptorLogin);
+				request.getSession().setAttribute("tipoSuscriptor", "suscriptor");
 				System.out.println("suscriptor: "+request.getSession().getAttribute("suscriptor"));
 				
 			} //4.3 Es un admin
@@ -97,6 +99,7 @@ public class LoginController extends HttpServlet {
 				
 				// Añadir admin a la sesión
 				request.getSession().setAttribute("suscriptor", suscriptorLogin);
+				request.getSession().setAttribute("tipoSuscriptor", "admin");
 				System.out.println("admin: "+request.getSession().getAttribute("suscriptor"));
 				response.sendRedirect("/bilboskp-asej/inicioAdmin");
 				return;
