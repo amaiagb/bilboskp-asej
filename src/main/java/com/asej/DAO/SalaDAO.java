@@ -89,7 +89,7 @@ public class SalaDAO {
 					ps.setString(3, "Activado");
 		            ps.setInt(4, sala.getId_sala());   // id_sala
 		        } else {
-		            // Si es un INSERT, setear estado al índice 3
+		            // Si es un INSERT, setear estado al ï¿½ndice 3
 		            ps.setString(3, sala.getEstado()); // estado para INSERT
 		        }
 			if(ps.executeUpdate() > 0) {
@@ -242,5 +242,29 @@ public class SalaDAO {
 	    return numSalas;
 	}
 
-	
+	 public static Sala obtenerSalaPorNombre(String nombreSala) {
+	        Connection con = AccesoBD.getConnection();
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+
+	        String sql = "SELECT * FROM sala WHERE nombre = ?";  
+
+	        try {
+	            ps = con.prepareStatement(sql);
+	            ps.setString(1, nombreSala);
+	            rs = ps.executeQuery();
+
+	            if (rs.next()) {
+	                Sala sala = new Sala();
+	                sala.setId_sala(rs.getInt("id_sala"));
+	                sala.setNombre(rs.getString("nombre"));
+	                return sala;
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            AccesoBD.closeConnection(rs, ps, con);
+	        }
+	        return null;  
+	    }
 }

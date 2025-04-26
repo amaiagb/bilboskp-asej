@@ -8,44 +8,50 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.asej.model.Partida;
-import com.asej.model.Suscriptor;
 import com.asej.service.CuponService;
 import com.asej.service.PartidaService;
 
 @WebServlet("/mirarCodigo")
 public class MirarCodigoController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private PartidaService partidaService;
-	private CuponService cuponService;
+    private static final long serialVersionUID = 1L;
+    private PartidaService partidaService;
+    private CuponService cuponService;
 
-	public MirarCodigoController() {
-		super();
-	}
+    public MirarCodigoController() {
+        super();
+    }
 
-	public void init(ServletConfig config) throws ServletException {
-		partidaService = new PartidaService();
-		cuponService = new CuponService();
-	}
+    public void init(ServletConfig config) throws ServletException {
+        partidaService = new PartidaService();
+        cuponService = new CuponService();
+    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String codigo = request.getParameter("codigo");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String codigo = request.getParameter("codigo");
 
-		if (codigo == null || codigo.trim().isEmpty()) {
-			response.sendRedirect("login.jsp?error=1");
-			return;
-		}
+        if (codigo == null || codigo.trim().isEmpty()) {
+            response.sendRedirect("login.jsp?error=1");
+            return;
+        }
 
-		Partida partida = partidaService.mirarCodigo(codigo);
-		System.out.println("Partida encontrada: " + partida);
+        Partida partida = partidaService.mirarCodigo(codigo);
+        System.out.println("Partida encontrada: " + partida);
 
-		if (partida != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("partida", partida);
-			cuponService.setCuponEnUso();
-			
-			response.sendRedirect("admin/jugarPartida.jsp");
-		} else {
-			response.sendRedirect("login.jsp?error=1");
-		}
-	}
+        if (partida != null) {
+            if ("finalizada".equalsIgnoreCase(partida.getEstado())) {
+                request.getSession().setAttribute("partidaFinalizada", "Partida ya jugada");
+                response.sendRedirect("/bilboskp-asej/admin/codigo.jsp");
+                return;
+            }
+
+            HttpSession session = request.getSession();
+            session.setAttribute("partida", partida);
+            cuponService.setCuponEnUso();
+
+            response.sendRedirect("/bilboskp-asej/admin/jugarPartida.jsp");
+        } else {
+            response.sendRedirect("login.jsp?error=1");
+        }
+    }
 }
+

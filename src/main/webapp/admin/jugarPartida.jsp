@@ -57,10 +57,10 @@
 
                     
                     <div class="row">
-                    <h2>Descargar archivo ZIP</h2>
+                    <h2>Descargar Escape Room</h2>
 
-					<form action="${pageContext.request.contextPath}/bilboskp-asej/descargarZip" method="get">
-					    <button type="submit">Descargar ZIP</button>
+					<form action="/bilboskp-asej/descargarJuego" method="get">
+					    <button type="submit">Descargar Juego</button>
 					</form>
 					
 					

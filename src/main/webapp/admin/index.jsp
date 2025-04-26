@@ -141,8 +141,9 @@
 											width="100%" cellspacing="0">
 											<thead>
 												<tr>
-													<th>Fecha</th>
+
 													<c:if test="${tipoSuscriptor == 'centro'}">
+												        <th>Fecha</th>
 														<th>Descripción</th>
 														<th>Jugadores</th>
 													</c:if>
@@ -154,8 +155,8 @@
 												<c:forEach items="${sessionScope.ultimasPartidas}"
 													var="partida" varStatus="loop">
 													<tr class="foreach">
-														<td>${partida.fecha}</td>
 														<c:if test="${tipoSuscriptor == 'centro'}">
+															<td>${partida.fecha}</td>
 															<td>${partida.descripcion}</td>
 															<td>${partida.jugadores}</td>
 														</c:if>

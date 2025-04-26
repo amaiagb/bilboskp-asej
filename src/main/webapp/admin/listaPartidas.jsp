@@ -13,13 +13,13 @@
     <title>Partidas - BilboSKP</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/admin/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -60,6 +60,16 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Listado de Partidas</h6>
                             </div>
                             <div class="card-body">
+                             <form method="get" action="/bilboskp-asej/listaPartidas" class="mb-4">
+								<label for="partida">Filtrar por estado:</label>
+								<select name="estado" id="estado" class="form-control w-25 d-inline mx-2">
+								    <option value="">Todas las partidas</option>
+								    <option value="programada" ${param.estado == 'programada' ? 'selected' : ''}>Programada</option>
+								    <option value="finalizada" ${param.estado == 'finalizada' ? 'selected' : ''}>Finalizada</option>
+								</select>
+
+								    <button type="submit" class="btn btn-primary">Filtrar</button>
+								</form>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
@@ -68,7 +78,6 @@
                                                 <th>Descripción</th>
                                                 <th>Jugadores</th>
                                                 <th>Estado</th>
-                                                <th>Puntuación</th>
                                                 <th>Sala</th>
                                             </tr>
                                         </thead>
@@ -80,7 +89,6 @@
                                                 <td>${partida.descripcion}</td>
                                                 <td>${partida.jugadores}</td>
                                                 <td>${partida.estado}</td>
-                                                <td>${partida.puntuacion}</td>
                                                 <td>${partida.sala.nombre}</td>
                                                 <td>
 	                                                <form action="/bilboskp-asej/borrarPartida" method="post">
@@ -138,21 +146,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/js/demo/chart-area-demo.js"></script>
+    <script src="${pageContext.request.contextPath}/admin/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

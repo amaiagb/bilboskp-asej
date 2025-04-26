@@ -64,11 +64,20 @@
 						</form>
 					</div>
 
-                    
+                    <!-- Aquí va el mensaje de notificación -->
+                    <c:if test="${not empty sessionScope.partidaFinalizada}">
+                        <div class="alert alert-info mt-3">
+                            ${sessionScope.partidaFinalizada}
+                        </div>
+                        <!-- Limpiar la sesión para evitar que el mensaje persista después de la recarga -->
+                        <c:remove var="partidaFinalizada"/>
+                    </c:if>
+
                     <div class="row">
                     
 
                       
+
                     </div>
 
                     
@@ -77,7 +86,6 @@
 
                         
 
-                       
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 
@@ -86,12 +94,13 @@
                     </div>
 
                    
+
                     <div class="row">
 
                        
 
                       
-                
+                 
 
             </div>
            

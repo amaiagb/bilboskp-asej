@@ -76,7 +76,12 @@
 							</select>
 							<button type="submit">Crear</button>
 						</form>
-						<a href="index.jsp">Volver</a>
+						<div>
+						    <c:if test="${not empty errorFecha}">
+						        ${errorFecha}
+						    </c:if>
+						</div>
+						
 					</div>
 
                     
@@ -168,15 +173,14 @@
 <script>
     window.onload = function() {
         const ahora = new Date();
-        // Asegurarse de formatear con ceros a la izquierda
         const pad = num => String(num).padStart(2, '0');
-        const fechaMin = ahora.getFullYear() + "-" + 
-                         pad(ahora.getMonth()+1) + "-" +
-                         pad(ahora.getDate()) + " T" +
-                         pad(ahora.getHours()) + ":" +
-                         pad(ahora.getMinutes());
+        const fechaFormateada = "D:" + ahora.getFullYear() + "-" +
+                                pad(ahora.getMonth() + 1) + "-" +
+                                pad(ahora.getDate()) + " H:" +
+                                pad(ahora.getHours()) + ":" +
+                                pad(ahora.getMinutes());
 
-        document.getElementById("fecha").min = fechaMin;
+        document.getElementById("fecha").value = fechaFormateada;
     }
 </script>
 </html>

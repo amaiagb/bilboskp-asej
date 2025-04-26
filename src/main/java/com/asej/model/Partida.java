@@ -14,11 +14,7 @@ public class Partida implements Serializable{
     public Partida() {
         super();
     }
-
-
-
-  
-
+    
 	public Partida(int jugadores, LocalDateTime fecha, String descripcion, Sala sala) {
 		super();
 		this.jugadores = jugadores;

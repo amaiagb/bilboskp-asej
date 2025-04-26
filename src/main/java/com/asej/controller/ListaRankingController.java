@@ -39,19 +39,19 @@ private static final long serialVersionUID = 1L;
 
 	    if (salaParam != null && !salaParam.isEmpty()) {
 	        int id_sala = Integer.parseInt(salaParam);
-	        listaPartidas = partidaService.getPartidasByIdYSala(id_suscriptor, id_sala); // necesitas este método
+	        listaPartidas = partidaService.getPartidasByIdYSala(id_suscriptor, id_sala); 
 	        salaSeleccionada = id_sala;
 	    } else {
-	        listaPartidas = partidaService.getPartidasById(id_suscriptor);
+	        listaPartidas = partidaService.getPartidasByIdBajo(id_suscriptor);
 	    }
 
 	    List<Sala> listaSalas = salaService.getSalas();
 
-	    req.setAttribute("listaPartidas", listaPartidas);
+	    req.setAttribute("listaRanking", listaPartidas);
 	    req.setAttribute("listaSalas", listaSalas);
 	    req.setAttribute("salaSeleccionada", salaSeleccionada);
 
-	    req.getRequestDispatcher("admin/ranking.jsp").forward(req, resp); // mejor que redirect
+	    req.getRequestDispatcher("admin/ranking.jsp").forward(req, resp); 
 	}
 
 }

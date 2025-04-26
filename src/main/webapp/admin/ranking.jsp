@@ -78,15 +78,17 @@
                                         <thead>
                                             <tr>
                                                 <th>Fecha</th>
+                                                <th>Descripción</th>
                                                 <th>Puntuación</th>
                                                 <th>Sala</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
-                                        <c:forEach items="${listaPartidas}" var="partida">
+                                        <c:forEach items="${listaRanking}" var="partida">
                                         	<tr>
                                                 <td>${partida.fecha}</td>
+                                                <td>${partida.descripcion}</td>
                                                 <td>${partida.puntuacion}</td>
                                                 <td>${partida.sala.nombre}</td>
                                             </tr>
