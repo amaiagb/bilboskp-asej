@@ -71,13 +71,6 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Ranking</span>
                 </a>
-                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Ranking:</h6>
-                        <a class="collapse-item" href="/bilboskp-asej/ranking"">Ver Ranking</a>                        
-                    </div>
-                </div>
                 
             </li>
 

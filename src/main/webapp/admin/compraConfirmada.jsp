@@ -15,7 +15,7 @@
 <title>Suscripción - BilboSKP</title>
 
 <!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+<link href="/bilboskp-asej/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -60,77 +60,33 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Suscripción</h1>
+						<h1 class="h3 mb-0 text-gray-800">Comprar Cupones</h1>
 					</div>
 
-					
-					<c:if test="${tipoSuscriptor == 'centro'}">
-						
 
-					</c:if>
-					<c:if test="${tipoSuscriptor == 'suscriptor'}">
-						
-
-
-					</c:if>
-					
 					<!-- Content Row -->
 					<div class="row mx-1">
-						<c:if test="${tipoSuscriptor == 'centro'}">
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">Datos del
-									Centro</h6>
+								<h6 class="m-0 font-weight-bold text-primary">Compra confirmada</h6>
 							</div>
 							<div class="card-body">
 								<div class="card-body ">
+									<%
+									// Recuperamos el número de cupones del formulario
+									String numeroCuponesStr = request.getParameter("numeroCupones");
+									int numeroCupones = Integer.parseInt(numeroCuponesStr);
+
+									// Muestra el número de cupones comprados
+									%>
 									<p>
-										<strong>Nombre: </strong> ${suscriptor.nombre_centro}
-									</p>
-									<p>
-										<strong>Localidad: </strong> ${suscriptor.localidad}
-									</p>
-									<p>
-										<strong>Número de alumnado: </strong>
-										${suscriptor.num_alumnado}
-									</p>
-									<p>
-										<strong>Fecha de alta: </strong> ${suscriptor.fecha_alta}
+										Has comprado
+										<%=numeroCupones%>
+										cupones.
 									</p>
 								</div>
 							</div>
 						</div>
-						</c:if>
-						<div class="card shadow mb-4 mx-1">
-							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">${tipoSuscriptor == 'centro' ? "Persona de Contacto" : "Datos de Suscriptor"}</h6>
-							</div>
-							<div class="card-body">
-								<div class="card-body ">
-									<p>
-										<strong>Nombre: </strong> ${suscriptor.nombre}
-									</p>
-									<p>
-										<strong>Usuario: </strong> ${suscriptor.usuario}
-									</p>
-									<p>
-										<strong>Email: </strong> ${suscriptor.email}
-									</p>
-									<c:if test="${tipoSuscriptor == 'suscriptor'}">
-									<p>
-										<strong>Fecha de alta: </strong> ${suscriptor.fecha_alta}
-									</p>
-									</c:if>
-
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Content Row -->
-					<div class="row mx-1">
-						<a href="/bilboskp-asej/cancelarSuscriptor" class="btn btn-primary mx-1">Cancelar suscripción</a>
-
 					</div>
 
 				</div>
@@ -183,21 +139,21 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/bilboskp-asej/admin/vendor/jquery/jquery.min.js"></script>
+	<script src="/bilboskp-asej/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="/bilboskp-asej/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
+	<script src="/bilboskp-asej/admin/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	<script src="vendor/chart.js/Chart.min.js"></script>
+	<script src="/bilboskp-asej/admin/vendor/chart.js/Chart.min.js"></script>
 
 	<!-- Page level custom scripts -->
-	<script src="js/demo/chart-area-demo.js"></script>
-	<script src="js/demo/chart-pie-demo.js"></script>
+	<script src="/bilboskp-asej/admin/js/demo/chart-area-demo.js"></script>
+	<script src="/bilboskp-asej/admin/js/demo/chart-pie-demo.js"></script>
 
 </body>
 
