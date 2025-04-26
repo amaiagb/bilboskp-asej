@@ -319,7 +319,7 @@ public class PartidaDAO {
 		    PreparedStatement ps = null;
 		    ResultSet rs = null;
 
-		    String sql = "SELECT * FROM partida WHERE id_suscriptor = ? AND id_sala = ? ORDER BY fecha DESC";
+		    String sql = "SELECT * FROM partida WHERE id_suscriptor = ? AND id_sala = ? AND estado='finalizada' ORDER BY puntuacion DESC";
 
 		    try {
 		        ps = con.prepareStatement(sql);
