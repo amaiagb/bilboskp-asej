@@ -10186,6 +10186,9 @@ a:focus {
   background-color: #dddfeb;
 }
 
+#sidebarToggleTop i {
+    color: #5a5c69 !important;
+}
 .topbar .navbar-search {
   width: 25rem;
 }

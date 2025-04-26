@@ -61,7 +61,7 @@ public class PartidaDAO {
 	        ps.setTimestamp(1, Timestamp.valueOf(nuevaPartida.getFecha()));			
 	        ps.setInt(2, nuevaPartida.getJugadores());
 	        ps.setString(3, nuevaPartida.getDescripcion());
-	        ps.setString(4, "programado");
+	        ps.setString(4, "programada");
 	        ps.setInt(5, 0);
 	        ps.setInt(6, idSuscriptor); 
 	        ps.setInt(7, nuevaPartida.getSala().getId_sala());
@@ -217,7 +217,7 @@ public class PartidaDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT id_partida, fecha, jugadores, descripcion, p.estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ? AND p.estado = 'terminada' ORDER BY fecha ASC;";
+		String sql = "SELECT id_partida, fecha, jugadores, descripcion, p.estado, puntuacion, p.id_sala AS id_sala, s.nombre AS nombre_sala, s.tipo FROM partida p inner join sala s ON s.id_sala = p.id_sala WHERE id_suscriptor = ? AND p.estado = 'finalizada' ORDER BY fecha ASC;";
 		
 		try {
 			ps = con.prepareStatement(sql);

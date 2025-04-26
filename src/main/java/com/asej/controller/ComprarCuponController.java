@@ -63,7 +63,7 @@ public class ComprarCuponController extends HttpServlet{
         		if (historialActualizado == true) {
         			request.setAttribute("numeroCupones", numeroCupones);
 	        		//response.sendRedirect("private/compraConfirmada.jsp");
-	        		request.getRequestDispatcher("private/compraConfirmada.jsp").forward(request, response);
+	        		request.getRequestDispatcher("/admin/compraConfirmada.jsp").forward(request, response);
         		} else {
         			response.sendRedirect("error.jsp");
         		}

@@ -62,6 +62,7 @@ public class InicioController extends HttpServlet {
 				//2.3 Numero de Partidas programadas
 				
 				int numPartidasProgramadas = partidaService.getNumPartidasProgramadas(suscriptor.getId());
+				System.out.println("numPartidasProgramadas: "+numPartidasProgramadas);
 				request.getSession().setAttribute("numPartidasProgramadas", numPartidasProgramadas);
 				System.out.println("inicio: "+request.getSession().getAttribute("numPartidasProgramadas"));
 					

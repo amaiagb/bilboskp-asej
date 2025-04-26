@@ -54,6 +54,11 @@ private CuponDAO cuponDAO;
 	public boolean programarCupon(int numCupones) {
 		return cuponDAO.programarCupon(numCupones);
 	}
+
+	public int createCuponBienvenida() {
+		
+		return cuponDAO.createCuponBienvenida();
+	}
 	
 	
 }
