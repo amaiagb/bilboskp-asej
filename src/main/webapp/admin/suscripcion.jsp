@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Suscripción - BilboSKP</title>
+<title><fmt:message key="suscripcion"/> - BilboSKP</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -60,7 +60,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Suscripción</h1>
+						<h1 class="h3 mb-0 text-gray-800"><fmt:message key="suscripcion"/></h1>
 					</div>
 
 					
@@ -79,23 +79,22 @@
 						<c:if test="${tipoSuscriptor == 'centro'}">
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">Datos del
-									Centro</h6>
+								<h6 class="m-0 font-weight-bold text-primary"><fmt:message key="tabla.suscripcion.datos"/></h6>
 							</div>
 							<div class="card-body">
 								<div class="card-body ">
 									<p>
-										<strong>Nombre: </strong> ${suscriptor.nombre_centro}
+										<strong><fmt:message key="nombre"/>: </strong> ${suscriptor.nombre_centro}
 									</p>
 									<p>
-										<strong>Localidad: </strong> ${suscriptor.localidad}
+										<strong><fmt:message key="localidad"/>: </strong> ${suscriptor.localidad}
 									</p>
 									<p>
-										<strong>Número de alumnado: </strong>
+										<strong><fmt:message key="numalumnado"/>: </strong>
 										${suscriptor.num_alumnado}
 									</p>
 									<p>
-										<strong>Fecha de alta: </strong> ${suscriptor.fecha_alta}
+										<strong><fmt:message key="fecha.alta"/>: </strong> ${suscriptor.fecha_alta}
 									</p>
 								</div>
 							</div>
@@ -103,22 +102,22 @@
 						</c:if>
 						<div class="card shadow mb-4 mx-1">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">${tipoSuscriptor == 'centro' ? "Persona de Contacto" : "Datos de Suscriptor"}</h6>
+								<h6 class="m-0 font-weight-bold text-primary"><fmt:message key="${tipoSuscriptor == 'centro' ? 'persona.contacto' : 'datos.suscriptor'}" /></h6>
 							</div>
 							<div class="card-body">
 								<div class="card-body ">
 									<p>
-										<strong>Nombre: </strong> ${suscriptor.nombre}
+										<strong><fmt:message key="nombre"/>: </strong> ${suscriptor.nombre}
 									</p>
 									<p>
-										<strong>Usuario: </strong> ${suscriptor.usuario}
+										<strong><fmt:message key="nombredeusuario"/>: </strong> ${suscriptor.usuario}
 									</p>
 									<p>
 										<strong>Email: </strong> ${suscriptor.email}
 									</p>
 									<c:if test="${tipoSuscriptor == 'suscriptor'}">
 									<p>
-										<strong>Fecha de alta: </strong> ${suscriptor.fecha_alta}
+										<strong><fmt:message key="fecha.alta"/>: </strong> ${suscriptor.fecha_alta}
 									</p>
 									</c:if>
 
@@ -129,7 +128,7 @@
 
 					<!-- Content Row -->
 					<div class="row mx-1">
-						<a href="/bilboskp-asej/cancelarSuscriptor" class="btn btn-primary mx-1">Cancelar suscripción</a>
+						<a href="/bilboskp-asej/cancelarSuscriptor" class="btn btn-primary mx-1"><fmt:message key="cancelar"/> <fmt:message key="suscripcion"/></a>
 
 					</div>
 
@@ -142,7 +141,7 @@
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2021</span>
+						<span>Copyright &copy; ASEJ 2025</span>
 					</div>
 				</div>
 			</footer>

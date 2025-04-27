@@ -50,7 +50,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Ranking</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
+                                class="fas fa-download fa-sm text-white-50"></i> Report<fmt:message key="reportar"/></a>
                     </div>
 
                     
@@ -62,25 +62,25 @@
                             </div>
                             <div class="card-body">
                             <form method="get" action="/bilboskp-asej/ranking" class="mb-4">
-								<label for="sala">Filtrar por sala:</label>
+								<label for="sala"><fmt:message key="filtrarporsala"/></label>
 								<select name="sala" id="sala" class="form-control w-25 d-inline mx-2">
-								    <option value="">Todas las salas</option>
+								    <option value=""><fmt:message key="todassalas"/></option>
 								    <c:forEach items="${listaSalas}" var="sala">
 										<option value="${sala.id_sala}" <c:if test="${sala.id_sala == salaSeleccionada}">selected</c:if>>${sala.nombre}</option>
 									</c:forEach>
 
 								    </select>
-								    <button type="submit" class="btn btn-primary">Filtrar</button>
+								    <button type="submit" class="btn btn-primary"><fmt:message key="filtrar"/></button>
 								</form>
                             
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Fecha</th>
-                                                <th>Descripción</th>
-                                                <th>Puntuación</th>
-                                                <th>Sala</th>
+                                                <th><fmt:message key="tabla.fecha"/></th>
+                                                <th><fmt:message key="tabla.descripcion"/></th>
+                                                <th><fmt:message key="tabla.puntuacion"/></th>
+                                                <th><fmt:message key="tabla.sala"/></th>
                                             </tr>
                                         </thead>
                                         
@@ -128,7 +128,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy;ASEJ 2025</span>
                     </div>
                 </div>
             </footer>

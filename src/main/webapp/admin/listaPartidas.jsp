@@ -48,16 +48,16 @@
                 <div class="container-fluid">
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Lista de Partidas</h1>
+                        <h1 class="h3 mb-0 text-gray-800"><fmt:message key="sidebar.listaP"/></h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
+                            <i class="fas fa-download fa-sm text-white-50"></i> Report<fmt:message key="reportar"/></a>
                     </div>
                     
                     <div class="row">
                         <!-- DataTables -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Listado de Partidas</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"><fmt:message key="historial.partidas"/></h6>
                             </div>
                             <div class="card-body">
                              <form method="get" action="/bilboskp-asej/listaPartidas" class="mb-4">
@@ -74,11 +74,11 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Fecha</th>
-                                                <th>Descripción</th>
-                                                <th>Jugadores</th>
-                                                <th>Estado</th>
-                                                <th>Sala</th>
+                                                <th><fmt:message key="tabla.fecha"/></th>
+                                                <th><fmt:message key="tabla.descripcion"/></th>
+                                                <th><fmt:message key="tabla.jugadores"/></th>
+                                                <th><fmt:message key="tabla.estado"/></th>
+                                                <th><fmt:message key="tabla.sala"/></th>
                                             </tr>
                                         </thead>
                                         
@@ -93,7 +93,7 @@
                                                 <td>
 	                                                <form action="/bilboskp-asej/borrarPartida" method="post">
 														<input type="hidden" value="${partida.id_partida}" name="partida">
-														<button type="submit">Borrar</button>
+														<button type="submit"><fmt:message key="borrar"/></button>
 													</form>
 												</td>
                                             </tr>
@@ -111,7 +111,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; ASEJ 2025</span>
                     </div>
                 </div>
             </footer>

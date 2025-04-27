@@ -114,7 +114,7 @@ public class SuscriptorDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("getSuscriptorByUsuario: "+s);
 		return s;
 	}
 

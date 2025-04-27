@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>BilboSKP - Salas de Escape Online</title>
+        <title>BilboSKP - <fmt:message key="salasdeescape"/> Online</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -26,16 +26,16 @@
             <div class="container">
                 <a class="navbar-brand" href="#page-top"><img src="assets/img/logos/bilboSKP.png" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
+                    <fmt:message key="menu"/>
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-						<li class="nav-item"><a class="nav-link" href="/bilboskp-asej/meterCodigo.jsp">Unirse</a></li>                
-                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#portfolio">Salas de Escape</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#about">Reviews</a></li>
-  
-                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/login.jsp">Iniciar Sesión</a></li>
+
+						<li class="nav-item"><a class="nav-link" href="/bilboskp-asej/meterCodigo.jsp"><fmt:message key="unirse"/></a></li>    
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#portfolio"><fmt:message key="salasdeescape"/></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#about"><fmt:message key="resenas"/></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/login.jsp"><fmt:message key="iniciarsesion"/></li>
                         
                     </ul>
                 </div>
@@ -44,9 +44,9 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Las mejores salas de escape virtuales</div>
-                <div class="masthead-heading text-uppercase">Una experiencia inmersiva</div>
-                <a href="login.jsp" class="btn btn-primary btn-xl text-uppercase" type="submit">Iniciar Sesi�n</a>
+                <div class="masthead-subheading"><fmt:message key="index.main.headingUp"/></div>
+                <div class="masthead-heading text-uppercase"><fmt:message key="index.main.headingDown"/></div>
+                <a href="login.jsp" class="btn btn-primary btn-xl text-uppercase" type="submit"><fmt:message key="iniciarsesion"/></a>
             </div>
         </header>
        
@@ -54,7 +54,7 @@
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Nuestras Salas</h2>
+                    <h2 class="section-heading text-uppercase"><fmt:message key="index.main.nuestrassalas"/></h2>
                    
                 </div>
                 <div class="row">
@@ -64,7 +64,7 @@
                             <!-- 
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
                             -->
-                            <a class="portfolio-link" href="sala-bullying.html">
+                            <a class="portfolio-link" href="/bilboskp-asej/sala-bullying.jsp">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
@@ -72,7 +72,7 @@
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">School Escape Room</div>
-                                <div class="portfolio-caption-subheading text-muted">Escape room contra el bullying</div>
+                                <div class="portfolio-caption-subheading text-muted"><fmt:message key="index.main.juego1.descripcion"/></div>
                             </div>
                         </div>
                     </div>
@@ -86,8 +86,8 @@
                                 <img class="img-fluid borroso" src="assets/img/portfolio/sala2.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Sala 2</div>
-                                <div class="portfolio-caption-subheading text-muted">Próximamente</div>
+                                <div class="portfolio-caption-heading">Escape The Lost Pyramid</div>
+                                <div class="portfolio-caption-subheading text-muted"><fmt:message key="index.main.juego2.descripcion"/></div>
                             </div>
                         </div>
                     </div>
@@ -101,8 +101,8 @@
                                 <img class="img-fluid borroso" src="assets/img/portfolio/sala3.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Sala 3</div>
-                                <div class="portfolio-caption-subheading text-muted">Próximamente</div>
+                                <div class="portfolio-caption-heading">Sherlock Holmes & Moriarty</div>
+                                <div class="portfolio-caption-subheading text-muted"><fmt:message key="index.main.juego3.descripcion"/></div>
                             </div>
                         </div>
                     </div>
@@ -115,8 +115,8 @@
         <section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Comentarios</h2>
-                    <h3 class="section-subheading text-muted">Aquí podras ver algunos de nuestros comentarios.</h3>
+                    <h2 class="section-heading text-uppercase"><fmt:message key="index.main.resenas.heading"/></h2>
+                    <h3 class="section-subheading text-muted"><fmt:message key="index.main.resenas.subheading"/></h3>
                 </div>
                 <ul class="timeline">
                     <li>
@@ -124,9 +124,9 @@
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>23-01-2025</h4>
-                                <h4 class="subheading">Ana</h4>
+                                <h4 class="subheading">Anna</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">¡Fue increíble! Como detective, me encanta resolver enigmas, pero los desafíos en Bilbo SKP fueron un nivel completamente nuevo. Las pistas eran inteligentes y bien pensadas. El ambiente estaba tan bien diseñado que realmente me sentí como si estuviera en medio de una investigación real. ¡Definitivamente volveré para probar todas las salas!</p></div>
+                            <div class="timeline-body"><p class="text-muted"><fmt:message key="index.main.resenas.Anna"/></p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
@@ -136,7 +136,7 @@
                                 <h4>02-03-2025</h4>
                                 <h4 class="subheading">Carlos</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Nunca pensé que un juego pudiera poner a prueba tanto mi mente y mi capacidad de trabajo en equipo. En Bilbo SKP, cada decisión cuenta y cada segundo es crucial. Me impresionó la calidad de los puzzles y cómo todo está perfectamente conectado. Fue una experiencia impresionante que me dejó con ganas de más. ¡Totalmente recomendado para grupos que disfrutan del desafío!</p></div>
+                            <div class="timeline-body"><p class="text-muted"><fmt:message key="index.main.resenas.Carlos"/></p></div>
                         </div>
                     </li>
                     <li>
@@ -146,7 +146,7 @@
                                 <h4>14-03-2025</h4>
                                 <h4 class="subheading">David</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Soy ingeniero y me encantan los retos mentales. El diseño de las pruebas y la creatividad de los enigmas en Bilbo SKP me dejaron asombrado. Es evidente que han puesto mucho esfuerzo en crear experiencias que no solo sean divertidas, sino también desafiantes para todo tipo de mentes. Lo mejor es que nunca sabes qué esperar, ¡y eso lo hace aún más emocionante!</p></div>
+                            <div class="timeline-body"><p class="text-muted"><fmt:message key="index.main.resenas.David"/></p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
@@ -154,19 +154,19 @@
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>30-03-2025</h4>
-                                <h4 class="subheading">Laura</h4>
+                                <h4 class="subheading">Heather</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Mi grupo y yo pasamos un rato fantástico en Bilbo SKP. Las sorpresas que nos tenían preparadas en cada sala fueron impresionantes. Es un lugar donde cada rincón está lleno de misterio, y realmente te sumerges en la aventura. Nos sentimos parte de la historia, ¡y el nivel de dificultad fue perfecto para mantenernos enganchados todo el tiempo!</p></div>
+                            <div class="timeline-body"><p class="text-muted"><fmt:message key="index.main.resenas.Heather"/></p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image">
                             <h4>
-                                Be Part
+                                <fmt:message key="index.main.resenas.bolafinal1"/>
                                 <br />
-                                Of Our
+                                <fmt:message key="index.main.resenas.bolafinal2"/>
                                 <br />
-                                Story!
+                                <fmt:message key="index.main.resenas.bolafinal3"/>
                             </h4>
                         </div>
                     </li>
@@ -240,8 +240,8 @@
         <section class="page-section" id="contact">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Contáctanos</h2>
-                    <h3 class="section-subheading text-muted">Aquí podrás contactar con nosotros.</h3>
+                    <h2 class="section-heading text-uppercase"><fmt:message key="index.main.contactanos"/></h2>
+                    <h3 class="section-subheading text-muted"><fmt:message key="index.main.subcontactanos"/></h3>
                 </div>
                 <!-- * * * * * * * * * * * * * * *-->
                 <!-- * * SB Forms Contact Form * *-->
@@ -255,26 +255,26 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Nombre *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">Requiere nombre.</div>
+                                <input class="form-control" id="name" type="text" placeholder="<fmt:message key="index.contact.nombre"/> *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="name:required"><fmt:message key="index.contact.nombre"/> <fmt:message key="requerido"/></div>
                             </div>
                             <div class="form-group">
                                 <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder=" Email *" data-sb-validations="required,email" />
-                                <div class="invalid-feedback" data-sb-feedback="email:required">Requiere email.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email no valido.</div>
+                                <input class="form-control" id="email" type="email" placeholder="Email *" data-sb-validations="required,email" />
+                                <div class="invalid-feedback" data-sb-feedback="email:required">Email <fmt:message key="requerido"/></div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email <fmt:message key="novalido"/></div>
                             </div>
                             <div class="form-group mb-md-0">
                                 <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Telefono *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">Requiere numero de telefono.</div>
+                                <input class="form-control" id="phone" type="tel" placeholder="<fmt:message key="index.contact.telefono"/> *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="phone:required"><fmt:message key="index.contact.telefono"/> <fmt:message key="requerido"/></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
                                 <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Mensaje *" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">Requiere mensaje.</div>
+                                <textarea class="form-control" id="message" placeholder="<fmt:message key="index.contact.mensaje"/> *" data-sb-validations="required"></textarea>
+                                <div class="invalid-feedback" data-sb-feedback="message:required"><fmt:message key="index.contact.mensaje"/> <fmt:message key="index.contact.requerido"/></div>
                             </div>
                         </div>
                     </div>
@@ -294,9 +294,9 @@
                     <!---->
                     <!-- This is what your users will see when there is-->
                     <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error al enviar el mensaje!</div></div>
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3"><fmt:message key="index.contact.enviarmensaje.error"/></div></div>
                     <!-- Submit Button-->
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Enviar Mensaje</button></div>
+                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit"><fmt:message key="index.contact.enviarmensaje"/></button></div>
                 </form>
             </div>
         </section>
@@ -304,15 +304,15 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; ASEJ 2025</div>
                     <div class="col-lg-4 my-3 my-lg-0">
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-end">
-                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                        <a class="link-dark text-decoration-none me-3" href="#!"><fmt:message key="index.footer.politicaprivacidad"/></a>
+                        <a class="link-dark text-decoration-none" href="#!"><fmt:message key="index.footer.terminosuso"/></a>
                     </div>
                 </div>
             </div>
