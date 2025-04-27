@@ -55,7 +55,7 @@
             <div class="container">
                 <div class="masthead-subheading"><fmt:message key="index.main.headingUp"/></div>
                 <div class="masthead-heading text-uppercase"><fmt:message key="index.main.headingDown"/></div>
-                <a href="login.jsp" class="btn btn-primary btn-xl text-uppercase" type="submit"><fmt:message key="iniciarsesion"/></a>
+                <a href="login.jsp" class="btn btn-primary btn-xl text-uppercase text-dark" type="submit"><fmt:message key="iniciarsesion"/></a>
             </div>
         </header>
        

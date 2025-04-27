@@ -58,7 +58,7 @@ public class FinalizarPartidaSuscriptorController extends HttpServlet {
                 	System.out.println("bbbbbbbbbbbbbbbbbbbbbb");
                     session.removeAttribute("salaSeleccionada");  
                     cuponService.setCuponUsado(); 
-                    response.sendRedirect("/bilboskp-asej/admin/index.jsp");
+                    response.sendRedirect("/bilboskp-asej/inicio");
                 } else {
                     response.sendRedirect("error.jsp");
                 }
