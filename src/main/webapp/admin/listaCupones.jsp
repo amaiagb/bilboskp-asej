@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title><fmt:message key="cupones"/> - BilboSKP</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -56,17 +56,17 @@
                 <div class="container-fluid">
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Cupones</h1>
+                        <h1 class="h3 mb-0 text-gray-800"><fmt:message key="cupones"/></h1>
                     </div>
                     <div>
 						
 						<table>
 								<tr>
-									<th>Fecha de compra</th>
-									<th>Fecha de caducidad</th>
-									<th>Estado</th>
-									<th>Precio</th>
-									<th>Fecha de devolución</th>
+									<th><fmt:message key="tabla.fecha.compra"/></th>
+									<th><fmt:message key="tabla.fecha.caducidad"/></th>
+									<th><fmt:message key="tabla.estado"/></th>
+									<th><fmt:message key="precio"/></th>
+									<th><fmt:message key="tabla.fecha.devolucion"/></th>
 								</tr>
 								<%if(listaCupones != null){ %>
 									<%for(Cupon c : listaCupones){ %>
@@ -76,7 +76,7 @@
 											<td><%= c.getEstado() %></td>
 											<td><%= c.getPrecio() %></td>
 											<td><% if (c.getFecha_devolucion() == null) {%>
-												No devuelto
+												<fmt:message key="tabla.nodevuelto"/>
 											<%} else {%>
 											<%= c.getFecha_devolucion() %>
 											<% } %>
@@ -87,18 +87,18 @@
 											<td>
 												<form action="../devolverCupon" method="post">
 													<input type="hidden" value="<%= c.getId_cupon()%>" name="id_cupon">
-													<button type="submit">Devolver</button>
+													<button type="submit"><fmt:message key="devolver"/></button>
 												</form>
 											</td>
 										</tr>
 									<%} %>
 								<%}else{ %>
 									<tr>
-										<td colspan="5">No hay cupones</td>
+										<td colspan="5"><fmt:message key="tabla.nocupones"/></td>
 									</tr>
 								<%} %>
 							</table>
-						<a href="index.jsp">Volver</a>
+						<a href="index.jsp"><fmt:message key="volver"/></a>
 					</div>
 
                     
@@ -135,7 +135,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; ASEJ 2025</span>
                     </div>
                 </div>
             </footer>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Login - BilboSKP</title>
+    <title><fmt:message key="iniciarsesion"/> - BilboSKP</title>
     <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -24,41 +24,41 @@
             <div class="container">
                 <a class="navbar-brand" href="/bilboskp-asej/index.jsp"><img src="assets/img/logos/bilboSKP.png" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
+                    <fmt:message key="menu"/>
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#portfolio">Salas de Escape</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#about">Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#portfolio"><fmt:message key="salasdeescape"/></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#about"><fmt:message key="resenas"/></a></li>
   
-                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/login.jsp">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/login.jsp"><fmt:message key="iniciarsesion"/></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     <div class="login-container">
         <form action="login" method="POST" class="login-form">
-            <h2>Iniciar sesión</h2>
+            <h2><fmt:message key="iniciarsesion"/></h2>
            
             <div class="input-group">
-                <label for="usuario">Nombre de Usuario</label>
+                <label for="usuario"><fmt:message key="nombredeusuario"/></label>
                 <input type="text"  name="usuario" required>
             </div>
             <div class="input-group">
-                <label for="contrasena">Contraseña</label>
+                <label for="contrasena"><fmt:message key="contraseña"/></label>
                 <input type="password" name="contrasena" required>
             </div>
-            <button type="submit" class="login-btn">Iniciar sesión</button>
+            <button type="submit" class="login-btn"><fmt:message key="iniciarsesion"/></button>
             <div class="signup-link">
-                <p class="link">¿No tienes cuenta? <a href="registro.jsp">Regístrate</a></p>
-                <p class="link">¿Eres un centro? <a href="registro-centro.jsp">Regístrate como centro</a></p>
+                <p class="link"><fmt:message key="login.nocuenta"/> <a href="registro.jsp"><fmt:message key="login.registrate"/></a></p>
+                <p class="link"><fmt:message key="login.erescentro"/> <a href="registro-centro.jsp"><fmt:message key="login.registrate.centro"/></a></p>
                 <c:choose>
 			        <c:when test="${param.error == '1'}">
-			            <p style="color:red;">Usuario o contraseña incorrectos.</p>
+			            <p style="color:red;"><fmt:message key="login.mensaje.error1"/></p>
 			        </c:when>
 			        <c:when test="${param.error == '2'}">
-			            <p style="color:red;">El centro no ha sido aceptado en el sistema</p>
+			            <p style="color:red;"><fmt:message key="login.mensaje.error2"/></p>
 			        </c:when>
 			    </c:choose>
             </div>

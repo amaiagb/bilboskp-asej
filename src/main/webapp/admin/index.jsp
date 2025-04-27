@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/includes/idioma.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../WEB-INF/includes/idioma.jsp" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,8 +12,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<jsp:include page="/WEB-INF/includes/idioma.jsp"/>
 
-<title>Inicio - BilboSKP</title>
+<title><fmt:message key="inicio"/> - BilboSKP</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -61,7 +63,7 @@
 						<!-- Page Heading -->
 						<div
 							class="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+							<h1 class="h3 mb-0 text-gray-800"><fmt:message key="inicio"/></h1>
 						</div>
 
 						<!-- Content Row -->
@@ -75,7 +77,7 @@
 											<div class="col mr-2">
 												<div
 													class="text-xs font-weight-bold text-primary+ text-uppercase mb-1">
-													Cupones Disponibles</div>
+													<fmt:message key="cupones.disponibles" /></div>
 												<div class="h5 mb-0 font-weight-bold text-gray-800">${fn:length(cuponesDisponibles)}</div>
 											</div>
 											<div class="col-auto">
@@ -94,7 +96,7 @@
 												<div class="col mr-2">
 													<div
 														class="text-xs font-weight-bold text-success text-uppercase mb-1">
-														Partidas Jugadas</div>
+														<fmt:message key="partidas.jugadas"/></div>
 													<div class="h5 mb-0 font-weight-bold text-gray-800">${fn:length(ultimasPartidas)}</div>
 												</div>
 												<div class="col-auto">
@@ -113,7 +115,7 @@
 												<div class="col mr-2">
 													<div
 														class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-														Partidas Pendientes</div>
+														<fmt:message key="partidas.pendientes"/></div>
 													<div class="h5 mb-0 font-weight-bold text-gray-800">${numPartidasProgramadas}</div>
 												</div>
 												<div class="col-auto">
@@ -132,8 +134,7 @@
 							<!-- DataTables -->
 							<div class="card shadow mb-4 col-xl-9 col-md-6">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Últimas
-										partidas jugadas</h6>
+									<h6 class="m-0 font-weight-bold text-primary"><fmt:message key="admin.index.ultimaspartidas"/></h6>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -141,14 +142,13 @@
 											width="100%" cellspacing="0">
 											<thead>
 												<tr>
-
 													<c:if test="${tipoSuscriptor == 'centro'}">
-												        <th>Fecha</th>
-														<th>Descripción</th>
-														<th>Jugadores</th>
+														<th><fmt:message key="tabla.fecha"/></th>
+														<th><fmt:message key="tabla.descripcion"/></th>
+														<th><fmt:message key="tabla.jugadores"/></th>
 													</c:if>
-													<th>Puntuación</th>
-													<th>Sala</th>
+														<th><fmt:message key="tabla.puntuacion"/></th>
+														<th><fmt:message key="tabla.sala"/></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -183,7 +183,7 @@
 				<footer class="sticky-footer bg-white">
 					<div class="container my-auto">
 						<div class="copyright text-center my-auto">
-							<span>Copyright &copy; Your Website 2021</span>
+							<span>Copyright &copy; ASEJ 2025</span>
 						</div>
 					</div>
 				</footer>

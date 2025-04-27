@@ -14,13 +14,23 @@
             </a>
 
             <!-- Divider -->
+            <li class="nav-item">
+            	<form action="" method="get" class="d-flex" style="width: auto;">
+					<select name="lang" class="form-select text-black border-0" onchange="this.form.submit()">
+						<option value="es" ${lang == 'es' ? 'selected' : ''}>Español</option>
+    					<option value="en" ${lang == 'en' ? 'selected' : ''}>English</option>
+					</select>
+				</form>
+            </li>
+            
+            
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="/bilboskp-asej/inicio">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Inicio</span></a>
+                    <span><fmt:message key="inicio"/></span></a>
             </li>
 
             <!-- Divider -->
@@ -28,7 +38,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Juego
+                <fmt:message key="juego"/>
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -36,14 +46,16 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-play"></i>
-                    <span>Partidas</span>
+                    <span><fmt:message key="juego"/>s</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Partida:</h6>
-                        <a class="collapse-item" href="/bilboskp-asej/iniciarOrganizar">Organizar Partida</a>
-                        <a class="collapse-item" href="/bilboskp-asej/listaPartidas">Lista de Partidas</a>
-                        <a class="collapse-item" href="/bilboskp-asej/admin/codigo.jsp">Jugar Partida</a>
+
+                        <h6 class="collapse-header"><fmt:message key="juego"/>:</h6>
+                        <a class="collapse-item" href="/bilboskp-asej/iniciarOrganizar"><fmt:message key="sidebar.organizar"/></a>
+                        <a class="collapse-item" href="/bilboskp-asej/listaPartidas"><fmt:message key="sidebar.listaP"/></a>
+                        <a class="collapse-item" href="/bilboskp-asej/admin/codigo.jsp"><fmt:message key="sidebar.jugar"/></a>
+
                     </div>
                 </div>
             </li>
@@ -53,14 +65,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-ticket-alt"></i>
-                    <span>Cupones</span>
+                    <span><fmt:message key="cupones"/></span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Cupones:</h6>
-                        <a class="collapse-item" href="/bilboskp-asej/admin/comprarCupones.jsp">Comprar cupones</a>
-                        <a class="collapse-item" href="/bilboskp-asej/listaCupones">Lista de Cupones</a>
+                        <h6 class="collapse-header"><fmt:message key="cupones"/>:</h6>
+                        <a class="collapse-item" href="/bilboskp-asej/admin/comprarCupones.jsp"><fmt:message key="sidebar.comprar"/></a>
+                        <a class="collapse-item" href="/bilboskp-asej/listaCupones"><fmt:message key="sidebar.listaC"/></a>
                         
                     </div>
                 </div>
@@ -79,7 +91,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-              Mi cuenta
+              <fmt:message key="micuenta"/>
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -88,7 +100,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/bilboskp-asej/admin/suscripcion.jsp">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Suscripción</span></a>
+                    <span><fmt:message key="suscripcion"/></span></a>
             </li>
 
             <!-- Divider -->
