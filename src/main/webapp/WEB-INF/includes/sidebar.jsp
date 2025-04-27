@@ -12,16 +12,6 @@
                 </div>
                  
             </a>
-
-            <!-- Divider -->
-            <li class="nav-item">
-            	<form action="" method="get" class="d-flex" style="width: auto;">
-					<select name="lang" class="form-select text-black border-0" onchange="this.form.submit()">
-						<option value="es" ${lang == 'es' ? 'selected' : ''}>Español</option>
-    					<option value="en" ${lang == 'en' ? 'selected' : ''}>English</option>
-					</select>
-				</form>
-            </li>
             
             
             <hr class="sidebar-divider my-0">
