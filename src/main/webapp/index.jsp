@@ -19,6 +19,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/custom.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -35,7 +36,15 @@
 						<li class="nav-item"><a class="nav-link" href="/bilboskp-asej/meterCodigo.jsp"><fmt:message key="unirse"/></a></li>    
                         <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#portfolio"><fmt:message key="salasdeescape"/></a></li>
                         <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/index.jsp#about"><fmt:message key="resenas"/></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/login.jsp"><fmt:message key="iniciarsesion"/></li>
+                        <li class="nav-item"><a class="nav-link" href="/bilboskp-asej/login.jsp"><fmt:message key="iniciarsesion"/></a></li>
+                        <li class="nav-item">
+			            	<form action="" method="get" class="d-flex" style="width: auto;">
+								<select name="lang" class="form-select custom-select-language" onchange="this.form.submit()">
+									<option value="es" ${lang == 'es' ? 'selected' : ''}>Español</option>
+			    					<option value="en" ${lang == 'en' ? 'selected' : ''}>English</option>
+								</select>
+							</form>
+			            </li>
                         
                     </ul>
                 </div>
