@@ -9,9 +9,5 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5"/>
-	<classpathentry kind="lib" path="C:/Users/JUAN PUERTAS/Downloads/jakarta.activation-2.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/JUAN PUERTAS/Downloads/jakarta.mail-2.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/proyectos/Nueva carpeta/Pagame Juan/Pagame Juan/gson-2.10.1.jar"/>
-	<classpathentry kind="lib" path="C:/proyectos/Nueva carpeta/Pagame Juan/Pagame Juan/stripe-java-20.114.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

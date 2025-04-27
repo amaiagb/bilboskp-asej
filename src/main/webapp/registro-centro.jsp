@@ -46,15 +46,15 @@
                     <label for="localidad">Localidad</label>
                     <input type="text"  name="localidad" required>
                 </div>
-                <!-- 
-                <div class="input-group">
-                    <label for="etapas_educativas">Etapas Educativas</label>
-                    <input type="text"  name="etapas_educativas" required>
-                </div>
-                 -->
+                 
+                
+                 
                 <div class="input-group">
                     <label for="num_alumnado">Número de Alumnado</label>
                     <input type="number" name="num_alumnado" required>
+                </div>
+                <div class="input-group">
+                    <input type="hidden"  name="etapas_educativas" value="0">
                 </div>
             </div>
             <!-- Segundo bloque: Datos del personal de contacto -->

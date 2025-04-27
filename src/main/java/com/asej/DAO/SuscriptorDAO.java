@@ -46,7 +46,6 @@ public class SuscriptorDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("DAO, usuario logeado: "+s);
 		return s;
 	}
 	
@@ -114,7 +113,6 @@ public class SuscriptorDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("getSuscriptorByUsuario: "+s);
 		return s;
 	}
 

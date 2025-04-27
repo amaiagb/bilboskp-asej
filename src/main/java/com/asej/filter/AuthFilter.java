@@ -40,11 +40,9 @@ public class AuthFilter implements Filter {
 		//buscar la cookie usuario
 		for(Cookie c : cookies) {
 			
-			//System.out.println("Filtro: cookies "+c.getName());
 			if("suscriptor".equals(c.getName())) {
 				//si existe, buscar el usuario en la BD
 				Suscriptor s = suscriptorService.getSuscriptorByUsuario(c.getValue());
-				System.out.println("authFilter: "+s);
 				//si es un suscriptor estandar
 				if("suscriptor".equals(s.getRol().getNombre())) {
 					//añadir a la sesion
@@ -62,7 +60,6 @@ public class AuthFilter implements Filter {
 			}
 			
 		}
-		//System.out.println("Filtro: Cookie "+req.getSession().getAttribute("suscriptor"));
 		if(req.getSession().getAttribute("suscriptor")!=null) {
 			chain.doFilter(request, response);
 		}else {

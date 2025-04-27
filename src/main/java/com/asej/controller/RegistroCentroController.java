@@ -53,8 +53,7 @@ public class RegistroCentroController extends HttpServlet {
 		LocalDate fecha_alta =LocalDate.now();
 		String nombre_centro = request.getParameter("nombre_centro");
 		String localidad = request.getParameter("localidad");
-		//int etapas_educativas = Integer.parseInt(request.getParameter("etapas_educativas"));
-		int etapas_educativas = 0;
+		int etapas_educativas = Integer.parseInt(request.getParameter("etapas_educativas"));
 		int num_alumnado = Integer.parseInt(request.getParameter("num_alumnado"));
 		
 		//2. Crear instancia de Centro 
