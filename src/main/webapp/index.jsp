@@ -63,7 +63,7 @@
                             <!-- 
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
                             -->
-                            <a class="portfolio-link" href="sala-bullying.html">
+                            <a class="portfolio-link" href="/bilboskp-asej/sala-bullying.jsp">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>

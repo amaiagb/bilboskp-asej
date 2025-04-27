@@ -33,16 +33,7 @@ public class AuthFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		
-		// Excluir archivos
-		/*
-		String uri = req.getRequestURI();
-	    if (uri.endsWith("/admin/solicitudPendiente.jsp")) {
-	        chain.doFilter(request, response); // deja pasar sin filtrar
-	        return;
-	    }
-		*/
-		
+				
 		//recoger las cookies
 		Cookie[] cookies = req.getCookies();
 		
@@ -53,17 +44,19 @@ public class AuthFilter implements Filter {
 			if("suscriptor".equals(c.getName())) {
 				//si existe, buscar el usuario en la BD
 				Suscriptor s = suscriptorService.getSuscriptorByUsuario(c.getValue());
-				
+				System.out.println("authFilter: "+s);
 				//si es un suscriptor estandar
 				if("suscriptor".equals(s.getRol().getNombre())) {
 					//añadir a la sesion
 					req.getSession().setAttribute("suscriptor", s);
+					req.getSession().setAttribute("tipoSuscriptor", "suscriptor");
 				}//si es un suscriptor de tipo centro
 				else if("centro".equals(s.getRol().getNombre())) {
 					//recuperar datos del centro
 					Centro centro = centroService.getCentroBySuscriptor(s);
 					//añadir a la sesion
 					req.getSession().setAttribute("suscriptor", centro);
+					req.getSession().setAttribute("tipoSuscriptor", "centro");
 				}
 				
 			}
