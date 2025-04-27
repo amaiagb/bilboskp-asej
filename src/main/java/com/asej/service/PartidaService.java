@@ -1,5 +1,6 @@
 package com.asej.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.asej.DAO.PartidaDAO;
@@ -64,6 +65,31 @@ public class PartidaService {
 	public boolean actualizarPartida(Partida partida) {
 		// TODO Auto-generated method stub
 		return PartidaDAO.actualizarPartida(partida);
+	}
+
+	public List<Partida> getPartidasByIdBajo(int id_suscriptor) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.getPartidasByIdBajo(id_suscriptor);
+	}
+
+	public boolean existePartidaEnFecha(LocalDateTime fecha) {
+		// TODO Auto-generated method stub
+		 try {
+		        return partidaDao.existePartidaEnFecha(fecha);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        return false;
+		    }
+	}
+
+	public List<Partida> getPartidasByIdYEstado(int id_suscriptor, String estado) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.getPartidasByIdYEstado(id_suscriptor, estado);
+	}
+
+	public boolean crearPartidaSuscriptor(Partida nuevaPartida, int idSuscriptor) {
+		// TODO Auto-generated method stub
+		return PartidaDAO.crearPartidaSuscriptor(nuevaPartida, idSuscriptor);
 	}
 
 

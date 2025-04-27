@@ -20,7 +20,7 @@ Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor");
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Comprar cupones - BilboSKP</title>
+<title><fmt:message key="sidebar.comprar"/> - BilboSKP</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -65,7 +65,7 @@ Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor");
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Comprar Cupones</h1>
+						<h1 class="h3 mb-0 text-gray-800"><fmt:message key="sidebar.comprar"/></h1>
 					</div>
 					<div>
 						<!-- 
@@ -79,13 +79,13 @@ Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor");
 						<form action="/bilboskp-asej/comprarCupon" method="post"
 							id="formComprarCupon" class="form-inline">
 							<div class="form-group mr-2">
-								<label for="cantidad" class="mr-2">Cantidad</label> <input
+								<label for="cantidad" class="mr-2"><fmt:message key="cantidad"/></label> <input
 									type="number" class="form-control" name="numeroCupones"
 									id="cantidad" min="1" value="1" required>
 							</div>
 
 							<div class="form-group mr-2">
-								<label for="precio" class="mr-2">Precio (€)</label>
+								<label for="precio" class="mr-2"><fmt:message key="precio"/> (€)</label>
 								<c:if test="${tipoSuscriptor == 'centro'}">
 									<input type="text" class="form-control" id="precio" value="0" readonly>
 								</c:if>
@@ -101,7 +101,7 @@ Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor");
 									type="text" class="form-control" id="total" readonly>
 							</div>
 
-							<button type="submit" class="btn btn-primary">Comprar</button>
+							<button type="submit" class="btn btn-primary"><fmt:message key="comprar"/></button>
 						</form>
 					</div>
 
@@ -116,7 +116,7 @@ Suscriptor suscriptor = (Suscriptor) request.getAttribute("suscriptor");
 					<footer class="sticky-footer bg-white">
 						<div class="container my-auto">
 							<div class="copyright text-center my-auto">
-								<span>Copyright &copy; Your Website 2021</span>
+								<span>Copyright &copy; ASEJ 2025</span>
 							</div>
 						</div>
 					</footer>

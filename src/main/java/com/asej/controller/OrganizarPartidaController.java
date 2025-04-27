@@ -3,13 +3,13 @@ package com.asej.controller;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.asej.model.Partida;
 import com.asej.model.Sala;
@@ -17,6 +17,7 @@ import com.asej.service.CuponService;
 import com.asej.model.Suscriptor;
 import com.asej.service.PartidaService;
 import com.asej.service.SalaService;
+import com.asej.controller.MandarMailController; 
 
 @WebServlet("/organizar")
 public class OrganizarPartidaController extends HttpServlet {
@@ -41,8 +42,8 @@ public class OrganizarPartidaController extends HttpServlet {
             String jugadoresStr = req.getParameter("jugadores");
             String descripcion = req.getParameter("descripcion");
             String idSalaStr = req.getParameter("sala");
-            int numCupones = Integer.parseInt(req.getParameter("jugadores"));
-            
+
+            int numCupones = Integer.parseInt(jugadoresStr);
 
             if (fechaStr == null || jugadoresStr == null || descripcion == null || idSalaStr == null ||
                 fechaStr.isEmpty() || jugadoresStr.isEmpty() || descripcion.isEmpty() || idSalaStr.isEmpty()) {
@@ -52,41 +53,41 @@ public class OrganizarPartidaController extends HttpServlet {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime fecha = LocalDateTime.parse(fechaStr, formatter);
+
             if (fecha.isBefore(LocalDateTime.now())) {
-                System.out.println("Fecha inválida: la fecha es en el pasado.");
                 resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             int jugadores = Integer.parseInt(jugadoresStr);
             if (jugadores < 1 || jugadores > 99999) {
-                System.out.println("Número de jugadores no válido.");
                 resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             if (descripcion.length() > 100) {
-                System.out.println("Descripción demasiado larga.");
                 resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
             int idSala = Integer.parseInt(idSalaStr);
             if (idSala <= 0) {
-                System.out.println("ID de sala no válido.");
                 resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
 
-            // recoge el id de la sesion, creo que esto le he duplicado, pero prefiero asegurarme en cad apaso
             Integer idSuscriptor = (Integer) req.getSession().getAttribute("idSuscriptor");
             if (idSuscriptor == null) {
-                System.out.println("No se encontró el suscriptor en la sesión.");
                 resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
                 return;
             }
-            
-            
+
+            boolean existePartida = partidaService.existePartidaEnFecha(fecha);
+            if (existePartida) {
+                req.setAttribute("errorFecha", "Ya existe una partida creada para ese día.");
+                resp.sendRedirect(req.getContextPath() + "/admin/organizarPartida.jsp");
+                return;
+            }
 
             Sala sala = new Sala();
             sala.setId_sala(idSala);
@@ -96,15 +97,27 @@ public class OrganizarPartidaController extends HttpServlet {
             Partida nuevaPartida = new Partida(jugadores, fecha, descripcion, sala);
             boolean success = partidaService.addPartida(nuevaPartida, idSuscriptor, codigo);
 
-
             if (success) {
-                System.out.println("Partida creada correctamente.");
-                
                 cuponService.programarCupon(numCupones);
-                
+
+                HttpSession session = req.getSession();
+                Suscriptor suscriptor = (Suscriptor) session.getAttribute("suscriptor");
+
+                if (suscriptor != null) {
+                    String destinatario = suscriptor.getEmail();
+                    String asunto = "Partida organizada exitosamente";
+                    String mensaje = "La partida ha sido organizada correctamente.\n\n" +
+                                     "Fecha: " + fechaStr + "\n" +
+                                     "Jugadores: " + jugadoresStr + "\n" +
+                                     "Descripción: " + descripcion + "\n" +
+                                     "Sala: " + sala + "\n" +
+                                     "Código de la partida: " + codigo;
+
+                    MandarMailController.mandarCorreo(destinatario, asunto, mensaje);
+                }
+
                 resp.sendRedirect(req.getContextPath() + "/admin/organizarPartida.jsp");
             } else {
-                System.out.println("Error al crear la partida.");
                 resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
             }
 
@@ -112,9 +125,9 @@ public class OrganizarPartidaController extends HttpServlet {
             e.printStackTrace();
             resp.sendRedirect("error.jsp?from=organizarPartida.jsp");
         }
-    }
     
-    //metodo para crear el codigo, lo iba a poner en el service, pero me parece mejor aqui o pot lo menos mas facil pa mi:)
+    }
+
     private String generarCodigoAleatorio() {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder codigo = new StringBuilder();
@@ -124,6 +137,4 @@ public class OrganizarPartidaController extends HttpServlet {
         }
         return codigo.toString();
     }
-
-
 }

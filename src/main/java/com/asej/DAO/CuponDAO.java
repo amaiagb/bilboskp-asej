@@ -69,13 +69,14 @@ public class CuponDAO {
 		LocalDate fechaDevolucion = LocalDate.now();
 		Date sqlFechaDevolucion = Date.valueOf(fechaDevolucion);
 
-		String sql = "UPDATE cupon SET estado = 'devuelto', fecha_devolucion = ? WHERE id_cupon = ?";
+		String sql = "UPDATE cupon SET estado = 'devuelto', fecha_devolucion = ? WHERE id_cupon = ? AND estado = ?";
 
 		try {
 			ps = con.prepareStatement(sql);
 
 			ps.setDate(1, sqlFechaDevolucion);
 			ps.setInt(2, id_cupon);
+			ps.setString(3, "disponible");
 
 			if (ps.executeUpdate() > 0) {
 				return true;
@@ -97,7 +98,7 @@ public class CuponDAO {
 		Connection con = AccesoBD.getConnection();
 		PreparedStatement ps = null;
 
-		// hay que añadir el id_suscriptor porque si no esta cambiando los cupones que
+		// hay que aï¿½adir el id_suscriptor porque si no esta cambiando los cupones que
 		// encuentre primero en toda la BD sean de quien sean
 		String sql = "UPDATE cupon SET estado = 'programado' WHERE estado = ? LIMIT ?";
 

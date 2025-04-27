@@ -15,32 +15,32 @@ import com.asej.service.PartidaService;
 
 @WebServlet("/listaPartidas")
 public class ListaPartidasController extends HttpServlet {
-private static final long serialVersionUID = 1L;
-	
-	PartidaService partidaService;
-	
-	@Override
-	public void init() throws ServletException {
-		partidaService = new PartidaService();
-	}
+    private static final long serialVersionUID = 1L;
+    
+    PartidaService partidaService;
+    
+    @Override
+    public void init() throws ServletException {
+        partidaService = new PartidaService();
+    }
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Suscriptor s = (Suscriptor) (req.getSession().getAttribute("suscriptor"));
 		int id_suscriptor = s.getId();
 		
-		List<Partida> listaPartidas = partidaService.getPartidasById(id_suscriptor);
+		String estadoParam = req.getParameter("estado"); 
+		List<Partida> listaPartidas;
+		
+		if (estadoParam != null && !estadoParam.isEmpty()) {
+		    listaPartidas = partidaService.getPartidasByIdYEstado(id_suscriptor, estadoParam);
+		} else {
+		    listaPartidas = partidaService.getPartidasById(id_suscriptor);
+		}
 		
 		req.getSession().setAttribute("listaPartidas", listaPartidas);
-		System.out.println(listaPartidas);
+		req.setAttribute("estadoSeleccionado", estadoParam);
 		
-//        if (req.getSession().getAttribute("usuario") != null) {
-//            req.getRequestDispatcher("/private/editarProducto.jsp").forward(req, resp);
-//        } else {
-            //req.getRequestDispatcher("listaPartidas.jsp").forward(req, resp);
-		
-            resp.sendRedirect("admin/listaPartidas.jsp");
-//        }
-        
-		
-	}
+		req.getRequestDispatcher("admin/listaPartidas.jsp").forward(req, resp);  
+	}   
 }
+

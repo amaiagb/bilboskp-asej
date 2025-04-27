@@ -47,4 +47,9 @@ public class SalaService {
 		return salaDAO.countSalas();
 	}
 
+	public Sala obtenerSalaPorNombre(String nombreSala) {
+		// TODO Auto-generated method stub
+		return SalaDAO.obtenerSalaPorNombre(nombreSala);
+	}
+
 }

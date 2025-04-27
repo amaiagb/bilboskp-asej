@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Organizar partida - BilboSKP</title>
+    <title><fmt:message key="sidebar.organizar"/> - BilboSKP</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -60,23 +60,30 @@
 
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Organizar Partida</h1>
+                        <h1 class="h3 mb-0 text-gray-800"><fmt:message key="sidebar.organizar"/></h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
+                                class="fas fa-download fa-sm text-white-50"></i> Report<fmt:message key="reportar"/></a>
                     </div>
                     <div>
 						<form action="/bilboskp-asej/organizar" method="post">
 							<input type="datetime-local" name="date" id="fecha" placeholder="Fecha y Hora" required>
 							<input type="number" name="jugadores" id="cantidad" min="1" max="<%= cupones.size() %>" value="1" placeholder="Nº Jugadores" required>
-							<input type="text" name="descripcion" placeholder="Descripción" maxlength="100">
+							<input type="text" name="descripcion" placeholder="<fmt:message key="descripcion"/>" maxlength="100">
 							<select id="sala" name="sala">
 							<% for(Sala sala : salas){ %>
 								<option value="<%= sala.getId_sala() %>"><%= sala.getNombre() %></option>
 							<%} %>
 							</select>
-							<button type="submit">Crear</button>
+							<button type="submit"><fmt:message key="crear"/></button>
 						</form>
-						<a href="index.jsp">Volver</a>
+
+						<div>
+						    <c:if test="${not empty errorFecha}">
+						        ${errorFecha}
+						    </c:if>
+						</div>
+						
+
 					</div>
 
                     
@@ -113,7 +120,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; ASEJ 2025</span>
                     </div>
                 </div>
             </footer>
@@ -168,15 +175,14 @@
 <script>
     window.onload = function() {
         const ahora = new Date();
-        // Asegurarse de formatear con ceros a la izquierda
         const pad = num => String(num).padStart(2, '0');
-        const fechaMin = ahora.getFullYear() + "-" + 
-                         pad(ahora.getMonth()+1) + "-" +
-                         pad(ahora.getDate()) + " T" +
-                         pad(ahora.getHours()) + ":" +
-                         pad(ahora.getMinutes());
+        const fechaFormateada = "D:" + ahora.getFullYear() + "-" +
+                                pad(ahora.getMonth() + 1) + "-" +
+                                pad(ahora.getDate()) + " H:" +
+                                pad(ahora.getHours()) + ":" +
+                                pad(ahora.getMinutes());
 
-        document.getElementById("fecha").min = fechaMin;
+        document.getElementById("fecha").value = fechaFormateada;
     }
 </script>
 </html>

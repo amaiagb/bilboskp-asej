@@ -53,22 +53,31 @@
 
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Introducir Codigo</h1>
+                        <h1 class="h3 mb-0 text-gray-800"><fmt:message key="codigo.introducircodigo"/></h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Reportar</a>
+                                class="fas fa-download fa-sm text-white-50"></i> Report<fmt:message key="reportar"/></a>
                     </div>
                     <div>
 						<form action="/bilboskp-asej/mirarCodigo" method="post">
-							<input type="text" name="codigo" placeholder="Codigo Partida" maxlength="20">
-							<button type="submit">Jugar</button>
+							<input type="text" name="codigo" placeholder="<fmt:message key="codigo.codigopartida"/>" maxlength="20">
+							<button type="submit"><fmt:message key="jugar"/></button>
 						</form>
 					</div>
 
-                    
+                    <!-- Aquí va el mensaje de notificación -->
+                    <c:if test="${not empty sessionScope.partidaFinalizada}">
+                        <div class="alert alert-info mt-3">
+                            ${sessionScope.partidaFinalizada}
+                        </div>
+                        <!-- Limpiar la sesión para evitar que el mensaje persista después de la recarga -->
+                        <c:remove var="partidaFinalizada"/>
+                    </c:if>
+
                     <div class="row">
                     
 
                       
+
                     </div>
 
                     
@@ -77,7 +86,6 @@
 
                         
 
-                       
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 
@@ -86,19 +94,20 @@
                     </div>
 
                    
+
                     <div class="row">
 
                        
 
                       
-                
+                 
 
             </div>
            
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; ASEJ 2025</span>
                     </div>
                 </div>
             </footer>
